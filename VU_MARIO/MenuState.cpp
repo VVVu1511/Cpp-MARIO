@@ -89,12 +89,14 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
     text2.setFillColor(sf::Color(252, 222, 202));
    
     if (ev->type == sf::Event::MouseButtonPressed) {
+        
         sf::Vector2i position = sf::Mouse::getPosition(*window);
 
         sf::Vector2f float_position((float)position.x, (float)position.y);
 
         if (button.getGlobalBounds().contains(float_position)) {
             button.setFillColor(sf::Color(255, 255, 255, 128));
+            this->active = false;
         }
 
         else if (button2.getGlobalBounds().contains(float_position)) {
@@ -105,10 +107,15 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
             button3.setFillColor(sf::Color(255, 255, 255, 128));
         }
     }
+
     if (ev->type == sf::Event::MouseButtonReleased) {
         button.setFillColor(sf::Color(211, 78, 76));
         button2.setFillColor(sf::Color(211, 78, 76));
         button3.setFillColor(sf::Color(211, 78, 76));
+    }
+
+    if (ev->type == sf::Event::MouseWheelScrolled) {
+        
     }
 
     window->draw(shape);

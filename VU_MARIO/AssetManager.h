@@ -183,7 +183,9 @@ private:
 
 
 public:
+	static void destroy();
 	static AssetManager* getInstance();
+
 	AssetManager();
 	~AssetManager();
 

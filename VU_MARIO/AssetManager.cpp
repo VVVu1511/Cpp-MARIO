@@ -53,37 +53,41 @@ void AssetManager::loadPlayableCharacters(){
     }
 }
 
-
 AssetManager* AssetManager::getInstance() {
-    if (!instance) {
+    if (instance == nullptr) {
         instance = new AssetManager;
         instance->load();
     }
     return instance;
 }
 
-AssetManager::AssetManager(){}
+void AssetManager::destroy(){
 
+    delete instance->blocks;
 
-AssetManager::~AssetManager(){
-    delete instance;
-    
-    delete blocks;
-
-    for (const sf::Texture* item : items) {
+    for (const sf::Texture* item : instance->items) {
         delete item;
     }
 
-    for (const sf::Texture* playable_character : playable_characters) {
+    for (const sf::Texture* playable_character : instance->playable_characters) {
         delete playable_character;
     }
 
-    for (const sf::Texture* non_playable_character : nonplayable_characters) {
+    for (const sf::Texture* non_playable_character : instance->nonplayable_characters) {
         delete non_playable_character;
     }
 
+    delete instance;
 
     instance = nullptr;
+}
+
+AssetManager::AssetManager(){
+}
+
+
+AssetManager::~AssetManager(){
+    
 
 }
 

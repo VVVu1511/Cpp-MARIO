@@ -60,13 +60,14 @@ Item* Item::createItem(ItemType type, sf::Vector2f position){
         result->animation.addStrategy({ new AutomaticStrategy(temp.first,temp.second,1.0 / 60)});
 
         position.y -= floatRect.getSize().y;
+
         result->position = position;
-        
+
         result->baseGround = position.y;
 
         result->alive = true;
-
     }
+    
 
     return result;
 }
@@ -95,7 +96,6 @@ void Item::update(const float& deltaTime, std::vector<Observer*>& observers){
     else {
         this->position.y = this->baseGround - this->shape.getSize().y;
     }
-
     
     this->sprite.setPosition(this->position);
     this->shape.setPosition(this->position);

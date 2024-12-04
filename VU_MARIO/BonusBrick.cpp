@@ -21,7 +21,7 @@ ItemType BonusBrick::getRandomItem(){
 }
 
 BonusBrick::BonusBrick(){
-	type = getRandomItem();
+	this->type = getRandomItem();
 }
 
 BonusBrick::~BonusBrick(){}
@@ -47,6 +47,7 @@ bool BonusBrick::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& p
 			}
 			
 			this->die();
+
 		}
 
 		return true;

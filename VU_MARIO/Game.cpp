@@ -2,7 +2,9 @@
 #include "GameState.h"
 #include "MenuState.h"
 #include "PlayingState.h"
+#include "AssetManager.h"
 #include <iostream>
+#include "GameOverState.h"
 
 void Game::chooseState(){
     
@@ -42,26 +44,27 @@ void Game::chooseState(){
 
 Game::Game(){
     currentState = nullptr;
-    state = StateOfGame::playing;
+    state = StateOfGame::menu;
 }
 
 void Game::run(){
 	
+
     window = new sf::RenderWindow(sf::VideoMode(1200,576), "MARIO BROS 1985!");
 	
     window->setFramerateLimit(60);
 
-    if (!this->font.loadFromFile("../fonts/SuperMario256.ttf")) {
+    if (!this->font.loadFromFile("../fonts/VeniteAdoremus-rgRBA.ttf")) {
         std::cout << "Can not load file!";
     }
 
-    
-
     ev = new sf::Event;
 	
+    AssetManager::getInstance();
+
     while (window->isOpen()) {
         
-        this->chooseState();
+        /*this->chooseState();*/
 
         while (window->pollEvent(*ev)) {
             if (ev->type == sf::Event::Closed) {
@@ -78,10 +81,13 @@ void Game::run(){
 
         window->clear(sf::Color(92,148,252));
         
+        this->currentState = new GameOverState;
         this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 
         window->display();
     }
+
+    AssetManager::destroy();
 }
 
 Game::~Game(){

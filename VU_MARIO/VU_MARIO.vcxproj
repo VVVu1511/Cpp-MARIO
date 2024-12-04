@@ -151,6 +151,7 @@
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Flower.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GoodMushroom.cpp" />
     <ClCompile Include="Goomba.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Flower.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GoodMushroom.h" />
     <ClInclude Include="Goomba.h" />

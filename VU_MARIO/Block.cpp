@@ -186,9 +186,24 @@ bool Block::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& positi
 
 bool Block::beingHitByNonPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers,float& speed){
     
-    if (beingHitByPlayable(bounds, position,observers)) {
-        speed *= -1.001;
-        return true;
+    sf::FloatRect m_bounds = this->shape.getGlobalBounds();
+
+    if (bounds.intersects(m_bounds)) {
+        if (bounds.top + bounds.height > m_bounds.top) {
+            if (bounds.left + bounds.width <= m_bounds.left + 1.f) {
+                position.x = m_bounds.left - bounds.width - 5.f;
+                speed *= -1.001;
+            }
+
+            else if (bounds.left >= m_bounds.left + m_bounds.width - 1.f) {
+                position.x = m_bounds.left + m_bounds.width + 5.f;
+                speed *= -1.001;
+            }
+
+            return true;
+        }
+        
+        
     }
 
     return false;

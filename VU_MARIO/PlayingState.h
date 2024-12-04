@@ -7,6 +7,7 @@
 #include "NonPlayableCharacter.h"
 #include "Block.h"
 #include "Item.h"
+#include<random>
 
 
 class Observer;
@@ -21,7 +22,7 @@ private:
 	int coin = 0;
 	int lives = 2;
 	int mapNum = 1;
-	int time = 400;
+	float time = 400;
 	int score = 0;
 	
 	View view;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Block.h"
 #include "Animation.h"
+#include <random>
 
 class AnimationStrategy;
 enum class ItemType;

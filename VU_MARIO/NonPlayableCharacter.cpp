@@ -35,7 +35,7 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(NonPlayableCharacter
 	{
 		std::pair<sf::Texture*, std::vector<sf::IntRect>> images = AssetManager::getInstance()->getNonPlayableCharacter(type);
 		
-		result->initVariables(position, {new LimitedTimeStrategy(images.first,images.second,1.0 / 60),new KeyPressStrategy(images.first,images.second,1.0 / 60) }, images);
+		result->initVariables(position, {new LimitedTimeStrategy(images.first,images.second,1.0 / 60),new AutomaticStrategy(images.first,images.second,1.0 / 60) }, images);
 	}
 
 	return result;
@@ -44,9 +44,14 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(NonPlayableCharacter
 void NonPlayableCharacter::move(const float& deltaTime){
 	this->position.x += this->speed;
 
-	if(this->speed < 0) this->animation.moveleft(deltaTime, this->sprite);
-	
-	else this->animation.moveright(deltaTime, this->sprite);
+	animation.changeAutomatically(deltaTime, this->sprite);
+
+	if (this->speed < 0) {
+		sprite.setScale(-1.f, 1.f);
+	}
+	else {
+		sprite.setScale(1.f, 1.f);
+	}
 
 }
 
@@ -63,7 +68,15 @@ bool NonPlayableCharacter::beingHitByNonPlayable(const sf::FloatRect& bounds, fl
 
 	if (bounds.intersects(m_bounds)) {
 		o_speed *= -1.001;
-		this->speed *= -1.001;
+		this->speed *= -1.002;
+		
+		if (m_bounds.left < bounds.left) {
+			this->position.x = bounds.left - this->shape.getSize().x - 2.f;
+		}
+
+		else if(m_bounds.left > bounds.left) {
+			this->position.x = bounds.left + bounds.width + 2.f;
+		}
 		
 		return true;
 	}
