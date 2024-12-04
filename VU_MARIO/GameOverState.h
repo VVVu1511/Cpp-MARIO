@@ -5,10 +5,13 @@
 class GameOverState : public GameState{
 private:
 	sf::Text text;
+	bool isCreated = false;
+	float expiredTime = 2;
 public:
 	GameOverState();
 	~GameOverState();
-	virtual void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font);
-	virtual bool isActive();
+	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font) override;
+	bool isActive() override;
+
 };
 

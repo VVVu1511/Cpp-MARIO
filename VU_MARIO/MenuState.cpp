@@ -1,12 +1,20 @@
 #include "MenuState.h"
 #include <iostream>
 
+
+
 MenuState::MenuState(){
     this->active = true;
 }
 
 void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
-    
+
+    if (!isCreated) {
+        this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
+        isCreated = true;
+    }
+
+
     std::string content = "SUPER";
     std::string content2 = "MARIO BROS";
     std::string content3 = "PLAY";
@@ -135,6 +143,8 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
     window->draw(button2_text);
 
     window->draw(button3_text);
+
+    view.setForWindow(window);
 	
 	//draw
 

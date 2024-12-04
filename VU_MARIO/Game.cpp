@@ -19,6 +19,9 @@ void Game::chooseState(){
             state = StateOfGame::playing;
             break;
         case StateOfGame::playing:
+            state = StateOfGame::gameover;
+            break;
+        case StateOfGame::gameover:
             state = StateOfGame::menu;
             break;
         }
@@ -31,15 +34,14 @@ void Game::chooseState(){
     case StateOfGame::playing:
         currentState = new PlayingState;
         break;
+
         /*case StateOfGame::changingMap:
             currentState = new MenuState;
-            break;
-        case StateOfGame::gameover:
-            currentState = new MenuState;
-            break;
-        }*/
+            break;*/
+    case StateOfGame::gameover:
+        currentState = new GameOverState;
+        break;
     }
-
 }
 
 Game::Game(){
@@ -49,7 +51,6 @@ Game::Game(){
 
 void Game::run(){
 	
-
     window = new sf::RenderWindow(sf::VideoMode(1200,576), "MARIO BROS 1985!");
 	
     window->setFramerateLimit(60);
@@ -64,24 +65,25 @@ void Game::run(){
 
     while (window->isOpen()) {
         
-        /*this->chooseState();*/
+        this->chooseState();
 
         while (window->pollEvent(*ev)) {
             if (ev->type == sf::Event::Closed) {
                 window->close();
             }
+            
             if (ev->type == sf::Event::KeyPressed) {
                 if (ev->key.code == sf::Keyboard::Escape) {
                     window->close();
                 }
             }
+
         }
 
         deltaTime = clock.restart().asSeconds();
 
         window->clear(sf::Color(92,148,252));
         
-        this->currentState = new GameOverState;
         this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 
         window->display();

@@ -9,6 +9,7 @@
 #include "PlayableCharacterObserver.h"
 #include <vector>
 
+
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
 	
 	this->cleanObserverForEachLive(observers);

@@ -1,9 +1,10 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "PlayableCharacter.h"
-
 #include<vector>
 
 class View {
+
 private:
 	sf::View view;
 	

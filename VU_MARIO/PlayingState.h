@@ -2,7 +2,6 @@
 #include "GameState.h"
 #include "PlayingStateObserver.h"
 #include "Collision.h"
-#include "View.h"
 #include "PlayableCharacter.h"
 #include "NonPlayableCharacter.h"
 #include "Block.h"
@@ -25,7 +24,6 @@ private:
 	float time = 400;
 	int score = 0;
 	
-	View view;
 
 	std::vector<PlayableCharacter*>all_playable_characters;
 	std::vector<NonPlayableCharacter*>all_non_playable_characters;
@@ -33,7 +31,6 @@ private:
 	std::vector<Item*>all_items;
 	
 	Collision collision;
-
 	bool isMapCreated = false;
 	
 	

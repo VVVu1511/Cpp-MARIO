@@ -1,5 +1,6 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include "View.h"
 
 enum class StateOfGame {
 	menu = 1,
@@ -14,6 +15,8 @@ class GameState{
 
 protected:
 	bool active = false;
+	View view;
+
 public:
 	GameState();
 	virtual ~GameState() = default;
