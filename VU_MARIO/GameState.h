@@ -1,6 +1,12 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 
+enum class StateOfGame {
+	menu = 1,
+	playing = 2,
+	changingMap = 3,
+	gameover = 4,
+};
 
 class Observer;
 

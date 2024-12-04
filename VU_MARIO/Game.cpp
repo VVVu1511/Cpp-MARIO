@@ -1,11 +1,52 @@
 #include "Game.h"
+#include "GameState.h"
 #include "MenuState.h"
 #include "PlayingState.h"
 #include <iostream>
 
+void Game::chooseState(){
+    
+    if (currentState != nullptr) {
+        if (currentState->isActive()) return;
+
+        delete currentState;
+        currentState = nullptr;
+
+        switch (state) {
+        case StateOfGame::menu:
+            state = StateOfGame::playing;
+            break;
+        case StateOfGame::playing:
+            state = StateOfGame::menu;
+            break;
+        }
+    }
+
+    switch (state) {
+    case StateOfGame::menu:
+        currentState = new MenuState;
+        break;
+    case StateOfGame::playing:
+        currentState = new PlayingState;
+        break;
+        /*case StateOfGame::changingMap:
+            currentState = new MenuState;
+            break;
+        case StateOfGame::gameover:
+            currentState = new MenuState;
+            break;
+        }*/
+    }
+
+}
+
+Game::Game(){
+    currentState = nullptr;
+    state = StateOfGame::playing;
+}
+
 void Game::run(){
 	
-    
     window = new sf::RenderWindow(sf::VideoMode(1200,576), "MARIO BROS 1985!");
 	
     window->setFramerateLimit(60);
@@ -14,11 +55,14 @@ void Game::run(){
         std::cout << "Can not load file!";
     }
 
-    this->currentState = new PlayingState;
+    
 
     ev = new sf::Event;
 	
     while (window->isOpen()) {
+        
+        this->chooseState();
+
         while (window->pollEvent(*ev)) {
             if (ev->type == sf::Event::Closed) {
                 window->close();
@@ -32,18 +76,9 @@ void Game::run(){
 
         deltaTime = clock.restart().asSeconds();
 
-
         window->clear(sf::Color(92,148,252));
         
-        if (this->currentState->isActive())
-        {
-            this->currentState->execute(this->window, this->observers, this->currentState, this->deltaTime, this->ev, this->font);
-        }
-        else {
-            delete this->currentState;
-
-            this->currentState = new MenuState;
-        }
+        this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 
         window->display();
     }

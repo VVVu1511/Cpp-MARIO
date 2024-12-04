@@ -3,6 +3,7 @@
 
 class GameState;
 class Observer;
+enum class StateOfGame;
 
 class Game {
 private:
@@ -13,8 +14,12 @@ private:
 	GameState* currentState;
 	std::vector<Observer*>observers;
 	sf::Font font;
+	StateOfGame state;
 
+	void chooseState();
 public:
+	Game();
+	
 	void run();
 	~Game();
 };
