@@ -57,7 +57,6 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 	}
 
 	for (Item* item : items) {
-		item->reset();
 		for (Block* block : blocks) {
 			if (item->standInView(view) && block->standInView(view)) {
 				ItemAndBlock(item, block, deltaTime, observers);

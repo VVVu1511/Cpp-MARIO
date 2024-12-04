@@ -69,7 +69,7 @@ Item* Item::createItem(ItemType type, sf::Vector2f position){
     }
     
 
-    return result;
+    return result;  
 }
 
 void Item::move(){}
