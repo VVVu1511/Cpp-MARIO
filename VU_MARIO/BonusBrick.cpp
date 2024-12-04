@@ -16,9 +16,8 @@ ItemType BonusBrick::getRandomItem(){
 	else if (randValue < 60) {
 		return ItemType::mushroom; 
 	}
-	else {
-		return ItemType::coin; 
-	}
+	
+	return ItemType::coin; 
 }
 
 BonusBrick::BonusBrick(){

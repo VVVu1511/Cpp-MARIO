@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "MenuState.h"
 #include "PlayingState.h"
+#include <iostream>
 
 void Game::run(){
 	
@@ -8,6 +9,10 @@ void Game::run(){
     window = new sf::RenderWindow(sf::VideoMode(1200,576), "MARIO BROS 1985!");
 	
     window->setFramerateLimit(60);
+
+    if (!this->font.loadFromFile("../fonts/SuperMario256.ttf")) {
+        std::cout << "Can not load file!";
+    }
 
     this->currentState = new PlayingState;
 
@@ -27,8 +32,9 @@ void Game::run(){
 
         deltaTime = clock.restart().asSeconds();
 
+
         window->clear(sf::Color(92,148,252));
-        this->currentState->execute(window,this->observers,this->currentState,deltaTime,ev);
+        this->currentState->execute(this->window,this->observers,this->currentState,this->deltaTime,this->ev,this->font);
         window->display();
     }
 }

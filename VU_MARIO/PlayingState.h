@@ -38,16 +38,17 @@ private:
 	
 	void createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState);
 	void update(sf::RenderWindow* window, std::vector<Observer*>& observers, const float& deltaTime);
-	void drawMap(sf::RenderWindow* window);
+	void drawMap(sf::RenderWindow* window, const sf::Font& font);
 	void temporaryCleanUp();
 	void ultimateCleanUp();
+	void drawAttributes(sf::RenderWindow* window,const sf::Font& font);
 
-	void RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime);
+	void RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font);
 public:
 	PlayingState();
 	~PlayingState();
 	
-	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev);
+	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font);
 	void addCoin();
 	void addScore(int score);
 	void decreaseLives();

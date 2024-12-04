@@ -1,6 +1,14 @@
 #include "View.h"
 #include <iostream>
 
+void View::setForAttributes(std::vector<sf::Text>& texts){
+	int size = texts.size();
+
+	for (int i = 0; i < size; i++) {
+		texts[i].setPosition(texts[i].getPosition().x + view.getCenter().x - 600.f,texts[i].getPosition().y);
+	}
+}
+
 View::View() {
 	
 }
@@ -30,6 +38,7 @@ void View::update(std::vector<PlayableCharacter*> playable, sf::RenderWindow* wi
 	for (PlayableCharacter* character : playable) {
 		character->standInView(view);
 	}
+	
 
 }
 
@@ -37,13 +46,16 @@ void View::setForWindow(sf::RenderWindow* window){
 	window->setView(view);
 }
 
-bool View::containObjectAt(const sf::Vector2f& position){
-	sf::FloatRect bounds(
+bool View::containObjectAt(const sf::FloatRect& bounds){
+	sf::FloatRect m_bounds(
 		view.getCenter().x - view.getSize().x / 2,
 		view.getCenter().y - view.getSize().y / 2,
 		view.getSize().x,
 		view.getSize().y
 	);
 
-	return bounds.contains(position);
+	if (bounds.left > m_bounds.left + m_bounds.width) return false;
+	else if (bounds.left + bounds.width < m_bounds.left) return false;
+
+	return true;
 }

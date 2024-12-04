@@ -136,7 +136,7 @@ void Block::update(const float& deltaTime, std::vector<Observer*>& observers) {
 
 
 bool Block::standInView(View view){
-    return view.containObjectAt(this->position);
+    return view.containObjectAt(this->shape.getGlobalBounds());
 }
 
 void Block::twinkle(const float& deltaTime){}
@@ -176,9 +176,8 @@ bool Block::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& positi
 
         else {
             position.y = m_bounds.top + m_bounds.height;
-            return true;
         }
-
+        return true;
         
     }
     return false;

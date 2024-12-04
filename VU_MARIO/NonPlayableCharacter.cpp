@@ -78,7 +78,7 @@ void NonPlayableCharacter::update(const float& deltaTime, std::vector<Observer*>
 }
 
 bool NonPlayableCharacter::standInView(View view){
-	return view.containObjectAt(this->position);
+	return view.containObjectAt(this->shape.getGlobalBounds());
 }
 
 bool NonPlayableCharacter::beingStoodOnByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers){

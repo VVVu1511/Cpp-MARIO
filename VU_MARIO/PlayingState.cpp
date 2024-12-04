@@ -7,6 +7,7 @@
 #include "Collision.h"
 #include "PlayingStateObserver.h"
 #include "PlayableCharacterObserver.h"
+#include<vector>
 
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
 	AssetManager* instance = AssetManager::getInstance();
@@ -70,14 +71,11 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 }
 
 void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& observers, const float& deltaTime){
-
 	for (Block* block : all_blocks) {
 		if (block->standInView(view)) {
 			block->update(deltaTime, observers);
 		}
 	}
-
-	
 
 	for (Item* item : all_items) {
 		if (item->standInView(view)) {
@@ -85,15 +83,11 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 		}
 	}
 
-	
-
 	for (NonPlayableCharacter* non_playable : all_non_playable_characters) {
 		if (non_playable->standInView(view)) {
 			non_playable->update(deltaTime, observers);
 		}
-	}
-	
-	
+	}	
 	
 	for (PlayableCharacter* playable : all_playable_characters) {
 		playable->update(deltaTime,observers);
@@ -106,7 +100,7 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	view.update(all_playable_characters, window);
 }
 
-void PlayingState::drawMap(sf::RenderWindow* window){
+void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 	
 	for (Block* block : this->all_blocks) {
 		if (block->standInView(view)) {
@@ -131,6 +125,8 @@ void PlayingState::drawMap(sf::RenderWindow* window){
 	}
 
 	view.setForWindow(window);
+
+	this->drawAttributes(window, font);
 }
 
 void PlayingState::temporaryCleanUp(){
@@ -185,6 +181,53 @@ void PlayingState::ultimateCleanUp(){
 	}
 }
 
+void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font){
+	std::string coins_value = "COIN: " + std::to_string(coin);
+	std::string lives_value = "LIVES: " + std::to_string(lives);
+	std::string mapNum_value = "";
+	std::string time_value = "TIME: " + std::to_string(time);
+	std::string score_value = "SCORE: " + std::to_string(score);
+
+	switch (mapNum) {
+	case 1:
+		mapNum_value = "WORLD 1-1";
+		break;
+	case 2:
+		mapNum_value = "WORLD 1-2";
+		break;
+	case 3:
+		mapNum_value = "WORLD 1-3";
+		break;
+	default:
+		break;
+	}
+
+	std::vector<sf::Text>attribute_text{5};
+	
+	attribute_text[0].setString(coins_value);
+	attribute_text[1].setString(lives_value);
+	attribute_text[2].setString(mapNum_value);
+	attribute_text[3].setString(time_value);
+	attribute_text[4].setString(score_value);
+
+	float offsetX = 50.f;
+
+	for (int i = 0; i < 5; i++) {
+		attribute_text[i].setFillColor(sf::Color(236, 234, 226));
+		attribute_text[i].setFont(font);
+		attribute_text[i].setCharacterSize(40);
+		attribute_text[i].setPosition(sf::Vector2f(offsetX, 30.f));
+
+		offsetX += attribute_text[i].getGlobalBounds().width + 20.f;
+	}
+
+	view.setForAttributes(attribute_text);
+
+	for (int i = 0; i < 5; i++) {
+		window->draw(attribute_text[i]);
+	}
+}
+
 PlayingState::PlayingState(){
 	this->active = true;
 }
@@ -193,7 +236,7 @@ PlayingState::~PlayingState(){
 	this->ultimateCleanUp();
 }
 
-void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime){
+void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
 
 	if (this->isMapCreated == false) {
 		this->createMap(window,observers,gameState);
@@ -202,13 +245,13 @@ void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>&
 
 	this->update(window,observers,deltaTime);
 	
-	this->drawMap(window);
+	this->drawMap(window,font);
 
 	this->temporaryCleanUp();
 }
 
-void PlayingState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev){
-	this->RealExecute(window, observers, (PlayingState*)gameState, deltaTime);
+void PlayingState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
+	this->RealExecute(window, observers, (PlayingState*)gameState, deltaTime,font);
 }
 
 void PlayingState::addCoin(){

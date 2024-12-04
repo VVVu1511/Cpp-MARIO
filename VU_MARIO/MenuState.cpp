@@ -1,7 +1,7 @@
 #include "MenuState.h"
 #include <iostream>
 
-void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev){
+void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
     
     std::string content = "SUPER";
     std::string content2 = "MARIO BROS";
@@ -11,7 +11,7 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
 
     sf::Text text, text2;
     sf::RectangleShape shape(sf::Vector2f(600.f, 300.f));
-    sf::Font font;
+    
 
     sf::RectangleShape button(sf::Vector2f(600.f, 50.f));
     button.setPosition(300.f, 360.f);
@@ -59,10 +59,6 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
     button3_text.setFont(font);
 
     button3_text.setFillColor(sf::Color(252, 222, 202));
-
-    if (!font.loadFromFile("../fonts/SuperMario256.ttf")) {
-        std::cout << "Can not read file!";
-    }
 
     shape.setPosition(sf::Vector2f(300.f, 50.f));
 

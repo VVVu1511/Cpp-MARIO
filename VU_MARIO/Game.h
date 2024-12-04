@@ -12,6 +12,7 @@ private:
 	sf::Event* ev;
 	GameState* currentState;
 	std::vector<Observer*>observers;
+	sf::Font font;
 
 public:
 	void run();

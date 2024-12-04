@@ -110,7 +110,7 @@ void Item::twinkle(const float& deltaTime){
 }
 
 bool Item::standInView(View view){
-    return view.containObjectAt(this->position);
+    return view.containObjectAt(this->shape.getGlobalBounds());
 }
 
 void Item::beingHitByBlock(const sf::FloatRect& bounds, std::vector<Observer*>& observers) {

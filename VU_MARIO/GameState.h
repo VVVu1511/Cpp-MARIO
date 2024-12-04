@@ -10,7 +10,7 @@ protected:
 public:
 	GameState();
 	virtual ~GameState() = default;
-	virtual void execute(sf::RenderWindow* window,std::vector<Observer*>&observers,GameState* gameState, const float& deltaTime, const sf::Event* ev) = 0;
+	virtual void execute(sf::RenderWindow* window,std::vector<Observer*>&observers,GameState* gameState, const float& deltaTime, const sf::Event* ev,const sf::Font& font) = 0;
 
 };
 
