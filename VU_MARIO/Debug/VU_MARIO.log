@@ -1,26 +1,6 @@
-﻿  Game.cpp
-  PlayingState.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(152,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(160,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(176,20): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe
+﻿  NonPlayableCharacter.cpp
+D:\MARIO\VU_MARIO\NonPlayableCharacter.cpp(38,91): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\MARIO\VU_MARIO\NonPlayableCharacter.cpp(38,149): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\MARIO\VU_MARIO\NonPlayableCharacter.cpp(65,14): warning C4305: '*=': truncation from 'double' to 'float'
+D:\MARIO\VU_MARIO\NonPlayableCharacter.cpp(66,18): warning C4305: '*=': truncation from 'double' to 'float'
+  VU_MARIO.vcxproj -> D:\MARIO\Debug\VU_MARIO.exe

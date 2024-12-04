@@ -35,7 +35,7 @@ void BonusBrick::twinkle(const float& deltaTime){
 	else shape.setFillColor(sf::Color(255, 255, 255, 255));
 }
 
-bool BonusBrick::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers){
+int BonusBrick::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers){
 	
 	sf::FloatRect m_bounds = this->shape.getGlobalBounds();
 

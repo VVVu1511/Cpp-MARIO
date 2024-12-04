@@ -24,7 +24,9 @@ protected:
 	Animation animation;
 
 	void initVariables(sf::Vector2f position, std::vector<AnimationStrategy*> animationStrategy, std::pair<sf::Texture*, std::vector<sf::IntRect>> images);
-
+	
+	//
+	bool is_mid_air = 1;
 public:
 
 	Character();

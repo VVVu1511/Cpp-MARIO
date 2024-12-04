@@ -13,6 +13,8 @@ private:
 	bool isBig;
 	bool isSuper;
 	bool isFire;
+	// 
+	bool is_spamming_W = false;
 public:
 	static PlayableCharacter* createCharacter(PlayableCharacterType type,sf::Vector2f position);
 	

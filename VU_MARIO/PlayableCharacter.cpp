@@ -27,7 +27,11 @@ void PlayableCharacter::shoot(){
 }
 
 void PlayableCharacter::hit(Block* block, std::vector<Observer*>& observers){
-	block->beingHitByPlayable(this->shape.getGlobalBounds(),this->position,observers);
+	int collided = block->beingHitByPlayable(this->shape.getGlobalBounds(),this->position,observers);
+	if (collided == 1)
+		Vx = 0;
+	else if (collided == 2)
+		Vy = 0;
 }
 
 bool PlayableCharacter::findMinForView(float& minX){
@@ -98,22 +102,21 @@ void PlayableCharacter::setCenterForView(sf::View& view){
 }
 
 void PlayableCharacter::move(const float& deltaTime){
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) ) {
-		this->position.y -= 10.f;
-		
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !this->is_mid_air) {
+		Vy = -22;
+		this->is_mid_air = true;
 		animation.jump(deltaTime, sprite);
-		
 	}
-
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		this->position.x += 5.f;
+		Vx += (Vx < 4) ? 2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveright(deltaTime, sprite);
 		}
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		this->position.x -= 5.f;
+		/*this->position.x -= 5.f;*/
+		Vx += (Vx > -4) ? -2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveleft(deltaTime, sprite);
 		}
@@ -128,7 +131,7 @@ void PlayableCharacter::move(const float& deltaTime){
 
 void PlayableCharacter::update(const float& deltaTime, std::vector<Observer*>& observers){
 	this->move(deltaTime);
-	
+	//std::cout << "Vx : " << Vx << "\t" << "Vy: " << Vy << "\n";
 	Character::update(deltaTime,observers);
 }
 

@@ -74,7 +74,7 @@ void Game::run(){
             }
         }
 
-        deltaTime = clock.restart().asSeconds();
+        deltaTime = clock.restart().asSeconds() * 30;
 
         window->clear(sf::Color(92,148,252));
         

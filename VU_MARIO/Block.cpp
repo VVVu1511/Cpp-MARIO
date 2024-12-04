@@ -19,6 +19,7 @@
 #include "Observer.h"
 #include "View.h"
 #include "Stick.h"
+#include <iostream>
 
 Block::Block(){}
 
@@ -162,31 +163,57 @@ void Block::beingStoodOnByCharacter(float& baseGround, const sf::FloatRect& boun
     }
 }
 
-bool Block::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers) {
+int Block::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers) {
     sf::FloatRect m_bounds = shape.getGlobalBounds();
 
     if (bounds.intersects(m_bounds)) {
         if (bounds.left + bounds.width <= m_bounds.left + 5.f) {
             position.x = m_bounds.left - bounds.width;
+            return 1;
         }
         
         else if (bounds.left >= m_bounds.left + m_bounds.width - 5.f) {
             position.x = m_bounds.left + m_bounds.width;
+            return 1;
         }
 
         else {
             position.y = m_bounds.top + m_bounds.height;
+            return 2;
         }
-        return true;
+        std::cout << "true\n";
+        //return true;
         
     }
-    return false;
+    return 0;
 }
 
 
 bool Block::beingHitByNonPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers,float& speed){
-    
+    sf::FloatRect m_bounds = shape.getGlobalBounds();
+
+
     if (beingHitByPlayable(bounds, position,observers)) {
+        std::cout << "hitting wall\n";
+        //if (speed < 0)
+        //{
+        //    std::cout << "bumped to the right\n";
+        //    position.x = m_bounds.left + this->shape.getGlobalBounds().width;
+        //}
+        //else if (speed > 0) {
+        //    std::cout << "bumped to the left\n";
+        //    position.x = m_bounds.left - bounds.width;
+        //}
+
+        if (bounds.left + bounds.width <= m_bounds.left + 5.f) {
+            position.x = m_bounds.left - bounds.width;
+
+        }
+
+        else if (bounds.left >= m_bounds.left + m_bounds.width - 5.f) {
+            position.x = m_bounds.left + m_bounds.width;
+
+        }
         speed *= -1.001;
         return true;
     }

@@ -43,7 +43,7 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(NonPlayableCharacter
 
 void NonPlayableCharacter::move(const float& deltaTime){
 	this->position.x += this->speed;
-
+	Vx = 0;
 	if(this->speed < 0) this->animation.moveleft(deltaTime, this->sprite);
 	
 	else this->animation.moveright(deltaTime, this->sprite);
@@ -64,7 +64,10 @@ bool NonPlayableCharacter::beingHitByNonPlayable(const sf::FloatRect& bounds, fl
 	if (bounds.intersects(m_bounds)) {
 		o_speed *= -1.001;
 		this->speed *= -1.001;
-		
+		//
+		if (speed > 0)
+			this->position.x = bounds.getPosition().x + bounds.width;
+		//
 		return true;
 	}
 	return false;

@@ -7,6 +7,20 @@
 #include "Animation.h"
 #include "AssetManager.h"
 
+void tickDownToZero(float& speed, float amount)
+{
+	if (speed > 0)
+	{
+		speed -= amount;
+		speed = (speed < 0) ? 0 : speed;
+	}
+	else if (speed < 0)
+	{
+		speed += amount;
+		speed = (speed > 0) ? 0 : speed;
+	}
+}
+
 void Character::initVariables(sf::Vector2f position, std::vector<AnimationStrategy*> animationStrategy, std::pair<sf::Texture*, std::vector<sf::IntRect>> images){
 	
 	position.y -= images.second[0].getSize().y;
@@ -47,13 +61,17 @@ bool Character::isDead()
 }
 
 void Character::update(const float& deltaTime, std::vector<Observer*>& observers){
-	Vy = 0;
-
+	if (this->position.y > 1000)
+		this->die();
+	this->position.x += Vx;
+	this->position.y += Vy * deltaTime;
 	if (this->position.y < this->baseGround - this->shape.getSize().y) {
-		this->position.y += 5.f;
+
 	}
-	else {
+	else { // this sets player on ground, so make sure Vy = 0 here
 		this->position.y = this->baseGround - this->shape.getSize().y;
+		Vy = 0;
+		is_mid_air = false;
 	}
 
 	if (this->sprite.getScale().x == -1.f) this->sprite.setPosition(sf::Vector2f(this->position.x + this->shape.getSize().x,this->position.y));
@@ -61,6 +79,9 @@ void Character::update(const float& deltaTime, std::vector<Observer*>& observers
 	else this->sprite.setPosition(this->position);
 
 	this->shape.setPosition(this->position);
+
+	Vy += (Vy < 10) ? 1.0 : 0;
+	tickDownToZero(Vx, 1.5 * deltaTime);
 }
 
 void Character::draw(sf::RenderWindow* window){

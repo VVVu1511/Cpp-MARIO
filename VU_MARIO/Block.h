@@ -39,7 +39,7 @@ public:
 
 
 	virtual void beingStoodOnByCharacter(float& baseGround, const sf::FloatRect& bounds);
-	virtual bool beingHitByPlayable(const sf::FloatRect& bounds,sf::Vector2f& position, std::vector<Observer*>& observers);
+	virtual int beingHitByPlayable(const sf::FloatRect& bounds,sf::Vector2f& position, std::vector<Observer*>& observers);
 	virtual bool beingHitByNonPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers, float& speed);
 
 };
