@@ -11,7 +11,9 @@ void PlayableCharacterObserver::addPlayingState(PlayingState* gamestate)
 
 void PlayableCharacterObserver::addPlayableCharacter(PlayableCharacter* character)
 {
-	this->characters.push_back(character);
+	if (character) {
+		this->characters.push_back(character);
+	}
 }
 
 void PlayableCharacterObserver::killEnemies(){
@@ -22,19 +24,25 @@ void PlayableCharacterObserver::collectCoins(){}
 
 void PlayableCharacterObserver::collectFlower(){
 	for (PlayableCharacter* character : characters) {
-		character->collectFlower();
+		if (character) {
+			character->collectFlower();
+		}
 	}
 }
 
 void PlayableCharacterObserver::collectGoodMushroom(){
 	for (PlayableCharacter* character : characters) {
-		character->collectGoodMushroom();
+		if (character) {
+			character->collectGoodMushroom();
+		}
 	}
 }
 
 void PlayableCharacterObserver::collectStar(){
 	for (PlayableCharacter* character : characters) {
-		character->collectStar();
+		if (character) {
+			character->collectStar();
+		}
 	}
 }
 

@@ -11,7 +11,8 @@ class View;
 class Item{
 
 protected:
-	bool alive = true;
+	
+	bool alive;
 
 	sf::Vector2f position;
 	sf::Sprite sprite;

@@ -10,6 +10,9 @@
 #include<vector>
 
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
+	
+	this->cleanObserverForEachLive(observers);
+
 	AssetManager* instance = AssetManager::getInstance();
 	
 	observers.push_back(new PlayingStateObserver);
@@ -71,6 +74,20 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 }
 
 void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& observers, const float& deltaTime){
+	bool canPlay = false;
+
+	for (PlayableCharacter* playable : all_playable_characters) {
+		if (!playable->isDead()) {
+			canPlay = true;
+			break;
+		}
+	}
+	
+	if (!canPlay) {
+		this->decreaseLives();
+		return;
+	}
+	
 	for (Block* block : all_blocks) {
 		if (block->standInView(view)) {
 			block->update(deltaTime, observers);
@@ -103,25 +120,27 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 	
 	for (Block* block : this->all_blocks) {
-		if (block->standInView(view)) {
+		if (block && block->standInView(view)) {
 			block->draw(window);
 		}
 	}
 
 	for (Item* item : this->all_items) {
-		if (item->standInView(view)) {
+		if (item && item->standInView(view)) {
 			item->draw(window);
 		}
 	}
 
 	for (NonPlayableCharacter* non_playable : this->all_non_playable_characters) {
-		if (non_playable->standInView(view)) {
+		if (non_playable && non_playable->standInView(view)) {
 			non_playable->draw(window);
 		}
 	}
 
 	for (PlayableCharacter* playable : this->all_playable_characters) {
-		playable->draw(window);
+		if (playable) {
+			playable->draw(window);
+		}
 	}
 
 	view.setForWindow(window);
@@ -166,19 +185,36 @@ void PlayingState::temporaryCleanUp(){
 void PlayingState::ultimateCleanUp(){
 	for (PlayableCharacter* character : all_playable_characters) {
 		delete character;
+		character = nullptr;
 	}
 
 	for (NonPlayableCharacter* character : all_non_playable_characters) {
 		delete character;
+		character = nullptr;
 	}
 
 	for (Block* block : all_blocks) {
 		delete block;
+		block = nullptr;
 	}
 
 	for (Item* item : all_items) {
 		delete item;
+		item = nullptr;
 	}
+
+	all_playable_characters.clear();
+	all_non_playable_characters.clear();
+	all_blocks.clear();
+	all_items.clear();
+}
+
+void PlayingState::cleanObserverForEachLive(std::vector<Observer*>& observers){
+	for (Observer* observer : observers) {
+		delete observer;
+		observer = nullptr;
+	}
+	observers.clear();
 }
 
 void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font){
@@ -264,9 +300,13 @@ void PlayingState::addScore(int score){
 
 void PlayingState::decreaseLives(){
 	this->lives--;
-	if (lives == 0) {
+	
+	if (lives <= 0) {
 		this->active = false;
+		return;
 	}
+
+	this->restart();
 }
 
 void PlayingState::changeMap(){

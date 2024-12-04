@@ -1,6 +1,10 @@
 #include "MenuState.h"
 #include <iostream>
 
+MenuState::MenuState(){
+    this->active = true;
+}
+
 void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
     
     std::string content = "SUPER";
@@ -132,4 +136,8 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
 	//button play , press --> check selection
 
 	//press--> state = PlayingState
+}
+
+bool MenuState::isActive(){
+    return this->active;
 }

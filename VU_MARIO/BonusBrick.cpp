@@ -46,8 +46,6 @@ bool BonusBrick::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& p
 				observer->hitBonusBrick(sf::Vector2f(this->position.x,this->baseGround + this->shape.getSize().y), type);
 			}
 			
-			this->position.y -= 15.f;
-			
 			this->die();
 		}
 

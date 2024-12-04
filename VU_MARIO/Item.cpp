@@ -40,8 +40,6 @@ Item* Item::createItem(ItemType type, sf::Vector2f position){
     {
         AssetManager* instance = AssetManager::getInstance();
         
-        
-
         std::pair<sf::Texture*, std::vector<sf::IntRect>> temp = instance->getItem(type);
         
         sf::IntRect intRect = temp.second[0];
@@ -65,6 +63,8 @@ Item* Item::createItem(ItemType type, sf::Vector2f position){
         result->position = position;
         
         result->baseGround = position.y;
+
+        result->alive = true;
 
     }
 

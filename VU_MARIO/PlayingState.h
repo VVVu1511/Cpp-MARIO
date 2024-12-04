@@ -19,7 +19,7 @@ class PlayingState : public GameState{
 private:
 	
 	int coin = 0;
-	int lives = 10;
+	int lives = 2;
 	int mapNum = 1;
 	int time = 400;
 	int score = 0;
@@ -41,6 +41,7 @@ private:
 	void drawMap(sf::RenderWindow* window, const sf::Font& font);
 	void temporaryCleanUp();
 	void ultimateCleanUp();
+	void cleanObserverForEachLive(std::vector<Observer*>& observers);
 	void drawAttributes(sf::RenderWindow* window,const sf::Font& font);
 
 	void RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font);
@@ -54,7 +55,7 @@ public:
 	void decreaseLives();
 	void changeMap();
 	void restart();
-	bool isActive();
+	bool isActive() override;
 	void hitBonusBrick(const sf::Vector2f& position, ItemType type);
 };
 

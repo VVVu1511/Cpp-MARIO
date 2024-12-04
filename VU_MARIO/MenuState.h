@@ -8,6 +8,8 @@ class MenuState : public GameState{
 private:
 	
 public:
+	MenuState();
 	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font);
+	bool isActive() override;
 };
 

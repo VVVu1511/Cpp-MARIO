@@ -34,7 +34,17 @@ void Game::run(){
 
 
         window->clear(sf::Color(92,148,252));
-        this->currentState->execute(this->window,this->observers,this->currentState,this->deltaTime,this->ev,this->font);
+        
+        if (this->currentState->isActive())
+        {
+            this->currentState->execute(this->window, this->observers, this->currentState, this->deltaTime, this->ev, this->font);
+        }
+        else {
+            delete this->currentState;
+
+            this->currentState = new MenuState;
+        }
+
         window->display();
     }
 }
