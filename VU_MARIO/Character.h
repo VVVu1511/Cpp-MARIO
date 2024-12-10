@@ -26,7 +26,8 @@ protected:
 	void initVariables(sf::Vector2f position, std::vector<AnimationStrategy*> animationStrategy, std::pair<sf::Texture*, std::vector<sf::IntRect>> images);
 	
 	//
-	bool is_mid_air = 1;
+	bool is_mid_air = 0;
+	bool is_max_jump_speed = 0;
 public:
 
 	Character();

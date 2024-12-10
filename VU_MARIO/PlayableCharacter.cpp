@@ -102,31 +102,49 @@ void PlayableCharacter::setCenterForView(sf::View& view){
 }
 
 void PlayableCharacter::move(const float& deltaTime){
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !this->is_mid_air) {
-		Vy = -22;
+	
+	bool doneST = false;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (!this->is_mid_air || !this->is_max_jump_speed ) ) {
+		//Vy += -15;
+		Vy += -3;
+		if (Vy <= -14)
+		{
+			Vy = -14;
+			this->is_max_jump_speed = true;
+		}
 		this->is_mid_air = true;
 		animation.jump(deltaTime, sprite);
+		doneST = true;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		Vx += (Vx < 4) ? 2 * deltaTime : 0;
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->is_mid_air)
+	{
+		this->is_max_jump_speed = true;
+	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		Vx += (Vx < 5) ? 2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveright(deltaTime, sprite);
 		}
+		doneST = true;
 	}
 
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		/*this->position.x -= 5.f;*/
-		Vx += (Vx > -4) ? -2 * deltaTime : 0;
+		Vx += (Vx > -5) ? -2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveleft(deltaTime, sprite);
 		}
+		doneST = true;
 	}
-	else {
-		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
-			animation.doNothing(this->sprite);
-		}
+	
+	if (!doneST && this->position.y >= this->baseGround - this->shape.getSize().y) {
+		animation.doNothing(this->sprite);
+	}
 		
-	}
+	
 }
 
 void PlayableCharacter::update(const float& deltaTime, std::vector<Observer*>& observers){

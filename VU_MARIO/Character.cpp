@@ -72,6 +72,7 @@ void Character::update(const float& deltaTime, std::vector<Observer*>& observers
 		this->position.y = this->baseGround - this->shape.getSize().y;
 		Vy = 0;
 		is_mid_air = false;
+		is_max_jump_speed = false;
 	}
 
 	if (this->sprite.getScale().x == -1.f) this->sprite.setPosition(sf::Vector2f(this->position.x + this->shape.getSize().x,this->position.y));
@@ -80,7 +81,7 @@ void Character::update(const float& deltaTime, std::vector<Observer*>& observers
 
 	this->shape.setPosition(this->position);
 
-	Vy += (Vy < 10) ? 1.0 : 0;
+	Vy += (Vy < 10) ? 0.75 * deltaTime : 0;
 	tickDownToZero(Vx, 1.5 * deltaTime);
 }
 
