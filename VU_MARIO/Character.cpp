@@ -66,7 +66,8 @@ void Character::update(const float& deltaTime, std::vector<Observer*>& observers
 	this->position.x += Vx;
 	this->position.y += Vy * deltaTime;
 	if (this->position.y < this->baseGround - this->shape.getSize().y) {
-
+		
+		this->is_mid_air = true;
 	}
 	else { // this sets player on ground, so make sure Vy = 0 here
 		this->position.y = this->baseGround - this->shape.getSize().y;

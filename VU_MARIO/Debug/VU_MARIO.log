@@ -1,5 +1,5 @@
-﻿  PlayableCharacter.cpp
-D:\MARIO\VU_MARIO\PlayableCharacter.cpp(90,90): warning C4305: 'argument': truncation from 'double' to 'const float'
-D:\MARIO\VU_MARIO\PlayableCharacter.cpp(90,154): warning C4305: 'argument': truncation from 'double' to 'const float'
-D:\MARIO\VU_MARIO\PlayableCharacter.cpp(90,216): warning C4305: 'argument': truncation from 'double' to 'const float'
+﻿  Character.cpp
+D:\MARIO\VU_MARIO\Character.cpp(49,16): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\MARIO\VU_MARIO\Character.cpp(85,12): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\MARIO\VU_MARIO\Character.cpp(86,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   VU_MARIO.vcxproj -> D:\MARIO\Debug\VU_MARIO.exe
