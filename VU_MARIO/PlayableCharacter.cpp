@@ -19,7 +19,8 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, std::vector<Observe
 }
 
 void PlayableCharacter::standOn(NonPlayableCharacter* character, std::vector<Observer*>& observers){
-	character->beingStoodOnByPlayable(this->shape.getGlobalBounds(),observers);
+	if (character->beingStoodOnByPlayable(this->shape.getGlobalBounds(), observers))
+	Vy = -5.0f;
 }
 
 void PlayableCharacter::shoot(){
