@@ -48,7 +48,6 @@ bool WorldObject::beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& n
         if (bounds.top + bounds.height <= this->m_position.y + 10.f) {
             newPosition = sf::Vector2f(bounds.left, m_bounds.top);
             
-            std::cout << "hi";
             return true;
         }
     }

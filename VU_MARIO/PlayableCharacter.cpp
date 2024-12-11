@@ -52,7 +52,7 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
 	sf::Vector2f newPosition;
 
-	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition)) {
+	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition) == true) {
 		character->die();
 		character->specificResultAfterBeingStoodOn(observers);
 	}

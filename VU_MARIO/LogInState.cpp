@@ -25,11 +25,11 @@ LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
     this->inputDisplay_position = { sf::Vector2f(505.f, 230.f) ,sf::Vector2f(505.f, 360.f) };
     this->inputBoxes_position = { sf::Vector2f(500.f, 225.f) ,sf::Vector2f(500.f, 355.f) };
     this->frames_position = { sf::Vector2f(200.f, 150.f), sf::Vector2f(200.f, 460.f) };
-    this->all_buttons_position = { sf::Vector2f(350.f, 510.f) ,sf::Vector2f(750.f, 510.f) };
+    this->all_buttons_position = { sf::Vector2f(350.f, 510.f) ,sf::Vector2f(738.f, 510.f) };
 
     this->setAttributes<sf::RectangleShape>(this->inputBoxes, {}, std::vector<sf::Color>(this->inputBoxes.size(), sf::Color::White), font, std::vector<sf::Vector2f>(this->inputBoxes.size(), sf::Vector2f(400.f, 30.f)), {}, { std::vector<int>(this->inputBoxes.size(),2) }, {}, this->inputBoxes_position);
     this->setAttributes<sf::Text>(this->inputDisplay, this->inputText, std::vector<sf::Color>(this->inputDisplay.size(), sf::Color::Black), font, std::vector<sf::Vector2f>(this->inputDisplay.size(), sf::Vector2f(400.f, 30.f)), {}, { std::vector<int>(this->inputDisplay.size(),2) }, { std::vector<int>(this->inputDisplay.size(),20) }, this->inputDisplay_position);
-    this->setAttributes<sf::Text>(this->all_not_input_texts, this->content, std::vector<sf::Color>(this->all_not_input_texts.size(), sf::Color::Red), font, std::vector<sf::Vector2f>(this->all_not_input_texts.size(), sf::Vector2f(400.f, 30.f)), {}, { std::vector<int>(this->all_not_input_texts.size(),2) }, { std::vector<int>(this->all_not_input_texts.size(),20) }, this->all_not_input_texts_position);
+    this->setAttributes<sf::Text>(this->all_not_input_texts, this->content, std::vector<sf::Color>(this->all_not_input_texts.size(), sf::Color::Red), font, std::vector<sf::Vector2f>(this->all_not_input_texts.size(), sf::Vector2f(400.f, 50.f)), {}, { std::vector<int>(this->all_not_input_texts.size(),2) }, { 60,30,30,20,20 }, this->all_not_input_texts_position);
     this->setAttributes<sf::RectangleShape>(this->frames, {}, std::vector<sf::Color>(this->frames.size(), sf::Color::White), font, { sf::Vector2f(800.f, 300.f),sf::Vector2f(800.f, 100.f) }, {}, { std::vector<int>(this->frames.size(),2) }, {}, this->frames_position);
     this->setAttributes<sf::RectangleShape>(this->all_buttons, {}, std::vector<sf::Color>(this->all_buttons.size(), sf::Color::Green), font, std::vector<sf::Vector2f>(this->all_buttons.size(), sf::Vector2f(100.f, 50.f)), {}, { std::vector<int>(this->all_buttons.size(),2) }, {}, this->all_buttons_position);
 

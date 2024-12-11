@@ -1,4 +1,3 @@
-
 #include "NonPlayableCharacter.h"
 #include "Goomba.h"
 #include "KoopaTroopa.h"

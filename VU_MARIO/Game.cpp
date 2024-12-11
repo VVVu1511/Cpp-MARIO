@@ -31,22 +31,20 @@ void Game::chooseState(){
     }
 
     switch (state) {
+    case StateOfGame::login:
+        currentState = new LogInState(this->window, this->font);
+        break;
+
     case StateOfGame::menu:
         currentState = new MenuState;
         break;
+
     case StateOfGame::playing:
         currentState = new PlayingState;
         break;
 
-        /*case StateOfGame::changingMap:
-            currentState = new MenuState;
-            break;*/
     case StateOfGame::gameover:
         currentState = new GameOverState;
-        break;
-
-    case StateOfGame::login:
-        currentState = new LogInState(this->window,this->font);
         break;
     }
 }
