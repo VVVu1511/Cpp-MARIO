@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Animation.h"
+#include "WorldObject.h"
 
 enum class ItemType;
 class AssetManager;
@@ -8,40 +9,28 @@ class Block;
 class Observer;
 class View;
 
-class Item{
-
+class Item : public WorldObject{
 protected:
-	
-	bool alive;
-
-	sf::Vector2f position;
-	sf::Sprite sprite;
-	sf::RectangleShape shape;
-	
-	Animation animation;
-	float baseGround;
-
+	float m_Vx;
 public:
 	Item();
 
 	~Item();
 	
-	static Item* createItem(ItemType type,sf::Vector2f position);
+	static Item* createItem(const ItemType &type,const sf::Vector2f &position);
 
-	virtual void move();
+	virtual void move(const float& deltaTime);
 	virtual void die();
 	virtual void reset();
+	virtual void changeDirection();
 
 	virtual bool isDead();
-	virtual void update(const float& deltaTime, std::vector<Observer*>& observers);
+	virtual void update(const float& deltaTime, const std::vector<Observer*>& observers);
 	virtual void draw(sf::RenderWindow* window);
 	virtual void twinkle(const float& deltaTime);
 	virtual bool standInView(View view);
 
-
-	virtual void beingHitByBlock(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
-	//pass bool into this
-	virtual bool beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
-	virtual void standOn(Block* block, std::vector<Observer*>& observers);
-
+	virtual void hit(Block* block);
+	virtual void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	virtual void standOn(Block* block,const std::vector<Observer*>& observers);
 };

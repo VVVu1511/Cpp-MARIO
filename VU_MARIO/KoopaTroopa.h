@@ -2,18 +2,21 @@
 
 #include "NonPlayableCharacter.h"
 
+class Observer;
+
 class KoopaTroopa : public NonPlayableCharacter{
 private:
-	bool inShell;
-	bool canMoveInShell;
-
+	bool m_inShell;
+	bool m_canMoveInShell;
+	
 public:
 	KoopaTroopa();
 
 	void move(const float& deltaTime) override;
 	void die() override;
 	
-	void beingHitByPlayable(const sf::FloatRect& bounds, bool& alive);
-	bool beingHitByNonPlayable(const sf::FloatRect& bounds, float& o_speed, bool& alive) override;
+	void specificResultAfterBeingHit(const std::vector<Observer*>& observers) override;
+	void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers) override;
+	bool canKill() override;
 };
 

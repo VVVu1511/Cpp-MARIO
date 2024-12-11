@@ -64,25 +64,28 @@ private:
 	sf::Color(255, 242, 0),
 	sf::Color(156, 90, 60),
 	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(82,34,13),
 	sf::Color(34, 177, 76),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(47,255,0),
+	sf::Color(71,122,58),
+	sf::Color(27,64,17),
 	sf::Color(0, 0, 0),
-	sf::Color(1, 1, 1),
+	sf::Color(115,115,115),
 	sf::Color(1, 1, 1),
 	sf::Color(77, 109, 243),
 	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(138,40,138),
+
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(150,141,6),
+
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(153,0,48),
 	sf::Color(168,230,29),
+	
 	sf::Color(237,28,36),
 	};
 
@@ -106,6 +109,7 @@ private:
 	 sf::IntRect(640, 0, 96, 38), sf::IntRect(736, 0, 160, 160), sf::IntRect(896, 0, 64, 48),
 	 sf::IntRect(960, 0, 64, 32), sf::IntRect(1024, 0, 32, 32), sf::IntRect(1056, 0, 62, 70),
 	 sf::IntRect(1118, 0, 16, 304)},
+
 	{sf::IntRect(0, 0, 28, 32), sf::IntRect(28, 0, 28, 32), sf::IntRect(56, 0, 28, 32),
 	 sf::IntRect(84, 0, 28, 32)},
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32)},
@@ -113,10 +117,12 @@ private:
 	 sf::IntRect(96, 0, 32, 32)},
 	{sf::IntRect(0, 0, 20, 28), sf::IntRect(20, 0, 20, 28), sf::IntRect(40, 0, 20, 28),
 	 sf::IntRect(60, 0, 20, 28)},
+	
 	{sf::IntRect(0, 0, 32, 48), sf::IntRect(32, 0, 32, 46)},
 	{sf::IntRect(0, 0, 64, 64), sf::IntRect(64, 0, 64, 64)},
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 16)},
 	{sf::IntRect(0, 0, 32, 48), sf::IntRect(32, 0, 32, 46),sf::IntRect(64, 0, 32, 28)},
+	
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32),
 	 sf::IntRect(96, 0, 32, 32), sf::IntRect(128, 0, 32, 32), sf::IntRect(160, 0, 32, 32)},
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32),

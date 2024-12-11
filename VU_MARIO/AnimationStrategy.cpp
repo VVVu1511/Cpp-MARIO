@@ -42,4 +42,10 @@ void AnimationStrategy::setSprite(sf::Sprite& sprite){
 	sprite.setTextureRect(this->frames[this->curFrameNum]);
 }
 
+void AnimationStrategy::changeTexture(sf::Texture* texture, std::vector<sf::IntRect> frames){
+	this->texture = texture;
+	this->frames = frames;
+	this->frameSize = frames.size();
+}
+
 

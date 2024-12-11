@@ -1,7 +1,7 @@
 #pragma once
 #include<map>
 #include <SFML/Graphics.hpp>
-
+#include "WorldObject.h"
 
 class Animation;
 class AssetManager;
@@ -11,13 +11,10 @@ enum class BlockType;
 class Observer;
 class View;
 
-class Block{
+class Block : public WorldObject{
 protected:
-	
-	bool alive;
-	sf::Vector2f position;
-	float baseGround;
-	sf::RectangleShape shape;
+	bool interact;
+	virtual bool isMidAir();
 
 public:
 	
@@ -25,22 +22,25 @@ public:
 
 	~Block();
 
-	static Block* createBlock(BlockType type, sf::Vector2f position);
+	static Block* createBlock(const BlockType &type,const sf::Vector2f& position);
     
 	virtual void die();
 	virtual bool isDead();
 	virtual void draw(sf::RenderWindow* window);
-	virtual void update(const float& deltaTime, std::vector<Observer*>& observers);
+	virtual void update(const float& deltaTime, const std::vector<Observer*>& observers);
 	virtual void twinkle(const float& deltaTime);
 	virtual bool standInView(View view);
+	virtual bool canInteract();
+	virtual void jump();
 
-	virtual void hit(NonPlayableCharacter* character, std::vector<Observer*>& observers);
-	virtual void hit(Item* item, std::vector<Observer*>& observers);
 
+	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
+	virtual void hit(Item* item, const std::vector<Observer*>& observers);
 
-	virtual void beingStoodOnByCharacter(float& baseGround, const sf::FloatRect& bounds);
-	virtual bool beingHitByPlayable(const sf::FloatRect& bounds,sf::Vector2f& position, std::vector<Observer*>& observers);
-	virtual bool beingHitByNonPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers, float& speed);
+	virtual void specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers);
+	virtual void specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers);
+	virtual void specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers);
 
+	virtual void beingHitFromBottomByBigMario(const std::vector<Observer*>& observers);
 };
 

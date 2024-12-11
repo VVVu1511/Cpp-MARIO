@@ -1,19 +1,18 @@
 #include "Star.h"
 #include "Observer.h"
 
-Star::Star()
-{
+Star::Star(){}
 
+void Star::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+	//sound
+	Item::beingCollectedByPlayable(observers);
+	for (Observer* observer : observers) {
+			observer->collectStar();
+	}
 }
 
-bool Star::beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers){
-	if (Item::beingCollectedByPlayable(bounds, observers)) {
-		for (Observer* observer : observers) {
-			observer->collectStar();
-		}
+void Star::move(const float& deltaTime){
+	Item::move(deltaTime);
 
-		return true;
-	}
-
-	return false;
+	this->m_position.y -= 10.f;
 }

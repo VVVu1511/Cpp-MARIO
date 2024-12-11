@@ -5,14 +5,11 @@ GoodMushroom::GoodMushroom()
 {
 }
 
-bool GoodMushroom::beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers){
-	if (Item::beingCollectedByPlayable(bounds, observers)) {
-		for (Observer* observer : observers) {
-			observer->collectGoodMushroom();
-		}
+void GoodMushroom::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+	//sound
+	Item::beingCollectedByPlayable(observers);
 
-		return true;
+	for (Observer* observer : observers) {
+		observer->collectGoodMushroom();
 	}
-
-	return false;
 }

@@ -7,6 +7,9 @@ class Coin : public Item{
 public:
 	Coin();
 	
-	bool beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
+	void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	void move(const float& deltaTime) override;
+	void standOn(Block* block, const std::vector<Observer*>& observers) override;
+	void reset() override;
 };
 

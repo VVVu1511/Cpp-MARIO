@@ -25,6 +25,12 @@ void Animation::addStrategy(AnimationStrategy* animationStrategy){
 	this->strategies.push_back(animationStrategy);
 }
 
+void Animation::changeTexture(sf::Texture* texture, std::vector<sf::IntRect> frames){
+	for (AnimationStrategy* strategy : this->strategies) {
+		strategy->changeTexture(texture, frames);
+	}
+}
+
 void Animation::die(const float& deltaTime, sf::Sprite& sprite){
 	for (AnimationStrategy* strategy : strategies) {
 		strategy->die(deltaTime,sprite);

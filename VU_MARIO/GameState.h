@@ -7,6 +7,7 @@ enum class StateOfGame {
 	playing = 2,
 	changingMap = 3,
 	gameover = 4,
+	login = 5,
 };
 
 class Observer;
@@ -16,7 +17,7 @@ class GameState{
 protected:
 	bool active = false;
 	View view;
-
+	bool isCreated = false;
 public:
 	GameState();
 	virtual ~GameState() = default;

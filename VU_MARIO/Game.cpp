@@ -5,9 +5,9 @@
 #include "AssetManager.h"
 #include <iostream>
 #include "GameOverState.h"
+#include "LogInState.h"
 
 void Game::chooseState(){
-    
     if (currentState != nullptr) {
         if (currentState->isActive()) return;
 
@@ -15,6 +15,9 @@ void Game::chooseState(){
         currentState = nullptr;
 
         switch (state) {
+        case StateOfGame::login:
+            state = StateOfGame::menu;
+            break;
         case StateOfGame::menu:
             state = StateOfGame::playing;
             break;
@@ -41,12 +44,16 @@ void Game::chooseState(){
     case StateOfGame::gameover:
         currentState = new GameOverState;
         break;
+
+    case StateOfGame::login:
+        currentState = new LogInState(this->window,this->font);
+        break;
     }
 }
 
 Game::Game(){
     currentState = nullptr;
-    state = StateOfGame::menu;
+    state = StateOfGame::login;
 }
 
 void Game::run(){

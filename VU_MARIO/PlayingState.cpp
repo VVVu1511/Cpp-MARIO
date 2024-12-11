@@ -7,6 +7,7 @@
 #include "Collision.h"
 #include "PlayingStateObserver.h"
 #include "PlayableCharacterObserver.h"
+#include "View.h"
 #include <vector>
 
 
@@ -43,10 +44,10 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 
 
 			int type = 0;
-			//call this to get type , id is id in the type
+			
 			int id = instance->getID(pixel,type);
 
-			//create blocks, or items, or characters depends on ID
+			
 			if (type >= 1 && type <= 16) {
 				all_blocks.push_back(Block::createBlock(BlockType(id), sf::Vector2f(i * 32.f, j * 32.f)));
 			}
@@ -80,9 +81,12 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	bool inTime = false;
 
 	for (PlayableCharacter* playable : all_playable_characters) {
-		if (!playable->isDead()) {
+		if (playable->standInView(view)) {
 			canPlay = true;
 			break;
+		}
+		else {
+
 		}
 	}
 	
@@ -96,19 +100,19 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	}
 	
 	for (Block* block : all_blocks) {
-		if (block->standInView(view)) {
+		if (block && block->canInteract() && block->standInView(view)) {
 			block->update(deltaTime, observers);
 		}
 	}
 
 	for (Item* item : all_items) {
-		if (item->standInView(view)) {
+		if (item && item->standInView(view)) {
 			item->update(deltaTime, observers);
 		}
 	}
 
 	for (NonPlayableCharacter* non_playable : all_non_playable_characters) {
-		if (non_playable->standInView(view)) {
+		if (non_playable && non_playable->standInView(view)) {
 			non_playable->update(deltaTime, observers);
 		}
 	}	
@@ -117,9 +121,7 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 		playable->update(deltaTime,observers);
 	}
 	
-	
 	collision.handleAllCollision(this->all_playable_characters, this->all_non_playable_characters, this->all_items, this->all_blocks, deltaTime, observers, this->view);
-
 
 	view.update(all_playable_characters, window);
 }
@@ -253,7 +255,7 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 	attribute_text[3].setString(time_value);
 	attribute_text[4].setString(score_value);
 
-	float offsetX = 50.f;
+	float offsetX = 30.f;
 
 	for (int i = 0; i < 5; i++) {
 		attribute_text[i].setFillColor(sf::Color(236, 234, 226));
@@ -271,6 +273,26 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 	}
 }
 
+void PlayingState::drawChangingMapState(sf::RenderWindow* window, const sf::Font& font){
+	this->drawAttributes(window, font);
+}
+
+void PlayingState::drawCongratulationState(sf::RenderWindow* window, const sf::Font& font){
+	sf::Text text;
+
+	text.setString("Congratulations");
+
+	text.setFont(font);
+
+	text.setCharacterSize(100);
+
+	text.setPosition(window->getSize().x / 2 - text.getGlobalBounds().width / 2, window->getSize().y / 2 - text.getGlobalBounds().height / 2);
+
+	window->draw(text);
+
+	view.setForWindow(window);
+}
+
 PlayingState::PlayingState(){
 	this->active = true;
 }
@@ -281,16 +303,23 @@ PlayingState::~PlayingState(){
 
 void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
 
-	if (this->isMapCreated == false) {
-		this->createMap(window,observers,gameState);
-		this->isMapCreated = true;
+	if (this->expiredTimeOfChangingMap <= 0) {
+		if (this->isCreated == false) {
+			this->createMap(window, observers, gameState);
+			this->isCreated = true;
+		}
+
+		this->update(window, observers, deltaTime);
+
+		this->drawMap(window, font);
+
+		this->temporaryCleanUp();
 	}
 
-	this->update(window,observers,deltaTime);
-	
-	this->drawMap(window,font);
-
-	this->temporaryCleanUp();
+	else {
+		this->expiredTimeOfChangingMap -= deltaTime;
+		this->drawChangingMapState(window, font);
+	}
 }
 
 void PlayingState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
@@ -321,18 +350,22 @@ void PlayingState::decreaseLives(){
 }
 
 void PlayingState::changeMap(){
+	
 	if (mapNum < 3) {
 		mapNum++;
+		this->expiredTimeOfChangingMap = 2;
 		this->restart();
 	}
+
 	else {
-		this->active = false;
+		this->expiredTimeOfCongratulation = 2;
 	}
 }
 
 void PlayingState::restart(){
 	this->time = 400;
-	this->isMapCreated = false;
+	sf::sleep(sf::seconds(2));
+	this->isCreated = false;
 	this->ultimateCleanUp();
 }
 
@@ -346,7 +379,6 @@ void PlayingState::hitBonusBrick(const sf::Vector2f& position, ItemType type) {
 	this->all_blocks.push_back(Block::createBlock(BlockType::basebrick,position));
 
 	this->all_items.push_back(Item::createItem(type,sf::Vector2f(position.x + 5.f,position.y - 30.f)));
-
 }
 
 

@@ -162,6 +162,7 @@
     <ClCompile Include="KeyPressStrategy.cpp" />
     <ClCompile Include="KoopaTroopa.cpp" />
     <ClCompile Include="LimitedTimeStrategy.cpp" />
+    <ClCompile Include="LogInState.cpp" />
     <ClCompile Include="Luigi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mario.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="VerticalPipe.cpp" />
     <ClCompile Include="View.cpp" />
+    <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll" />
@@ -221,6 +223,7 @@
     <ClInclude Include="KeyPressStrategy.h" />
     <ClInclude Include="KoopaTroopa.h" />
     <ClInclude Include="LimitedTimeStrategy.h" />
+    <ClInclude Include="LogInState.h" />
     <ClInclude Include="Luigi.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="MenuState.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="Tree.h" />
     <ClInclude Include="VerticalPipe.h" />
     <ClInclude Include="View.h" />
+    <ClInclude Include="WorldObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

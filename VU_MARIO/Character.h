@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
+#include "WorldObject.h"
 #include <vector>
 
 class AssetManager;
@@ -8,22 +9,16 @@ class Block;
 class Item;
 class AnimationStrategy;
 class Observer;
+class View;
 
-class Character{
+class Character : public WorldObject{
 
 protected:
-	float Vx;
-	float Vy;
-	bool alive;
-	
-	sf::Sprite sprite;
-	sf::Vector2f position;
-	sf::RectangleShape shape;
+	float m_Vx = 5.f;
+	float m_Vy;
 
-	float baseGround;
-	Animation animation;
-
-	void initVariables(sf::Vector2f position, std::vector<AnimationStrategy*> animationStrategy, std::pair<sf::Texture*, std::vector<sf::IntRect>> images);
+	void initVariables(const sf::Vector2f &position, const std::vector<AnimationStrategy*>& animationStrategy,const std::pair<sf::Texture*, std::vector<sf::IntRect>>& images);
+	bool isMidAir();
 
 public:
 
@@ -35,10 +30,10 @@ public:
 	virtual void die();
 	virtual void reset();
 	virtual bool isDead();
-	virtual void update(const float& deltaTime, std::vector<Observer*>& observers);
+	virtual void update(const float& deltaTime, const std::vector<Observer*>& observers);
 	virtual void draw(sf::RenderWindow* window);
+	virtual bool standInView(View view);
 
-
-	virtual void StandOn(Block* block, std::vector<Observer*>& observers);
+	virtual void StandOn(Block* block, const std::vector<Observer*>& observers);
 };
 

@@ -1,73 +1,61 @@
 #include "KoopaTroopa.h"
 
 KoopaTroopa::KoopaTroopa(){
-	this->inShell = false;
-	this->canMoveInShell = false;
+	this->m_inShell = false;
+	this->m_canMoveInShell = false;
 }
 
 void KoopaTroopa::move(const float& deltaTime){
-	if (!this->inShell) {
+	if (!this->m_inShell) {
 		NonPlayableCharacter::move(deltaTime);
 	}
 	else {
-		if (this->canMoveInShell) {
+		if (this->m_canMoveInShell) {
 			NonPlayableCharacter::move(deltaTime);
 
 		}
 
-		animation.die(deltaTime, this->sprite);
+		m_animation.die(deltaTime, this->m_sprite);
 	}
 }
 
 void KoopaTroopa::die(){
-	Character::die();
+	m_animation.die(0.2,this->m_sprite);
 
-	this->alive = true;
-	this->inShell = true;
-
+	this->m_inShell = true;
+	
+	this->m_shape.setSize(this->m_sprite.getGlobalBounds().getSize());
 }
 
-void KoopaTroopa::beingHitByPlayable(const sf::FloatRect& bounds, bool& alive){
-	if (!this->inShell) {
-		NonPlayableCharacter::beingHitByPlayable(bounds, alive);
-	}
-	else {
+void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& observers){
+	if (this->m_inShell) {
+		if (!this->m_canMoveInShell) {
+			sf::Vector2f newPosition;
 
-		sf::FloatRect m_bounds = this->shape.getGlobalBounds();
-		
-		if (m_bounds.intersects(bounds)) {
-			if (!this->canMoveInShell) {
-				this->canMoveInShell = true;
-				this->speed *= 6;
-			}
-			else {
-				NonPlayableCharacter::beingHitByPlayable(bounds, alive);
-			}
+			bool left = this->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+			bool right = this->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
+
+			this->m_canMoveInShell = true;
+			this->m_speed = (right == true) ? 5.f : -5.f;
 		}
 	}
 }
 
-bool KoopaTroopa::beingHitByNonPlayable(const sf::FloatRect& bounds, float& o_speed, bool& alive){
-	if (!this->inShell) {
-		return NonPlayableCharacter::beingHitByNonPlayable(bounds, o_speed,alive);
+void KoopaTroopa::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers){
+	
+	if (!this->m_inShell) {
+		this->m_inShell = true;
 	}
+
 	else {
-		if (!this->canMoveInShell) {
-			return NonPlayableCharacter::beingHitByNonPlayable(bounds, o_speed,alive);
-		}
-		else {
-			if (NonPlayableCharacter::beingHitByNonPlayable(bounds, o_speed,alive)) {
-				
-				this->speed = -this->speed;
-
-				alive = false;
-
-				return true;
-			}
-		}
+		this->die();
 	}
+}
 
-	return false;
+bool KoopaTroopa::canKill(){
+	if (this->m_inShell && !this->m_canMoveInShell) return false;
+
+	return true;
 }
 
 

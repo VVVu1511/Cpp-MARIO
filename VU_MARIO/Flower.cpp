@@ -5,14 +5,11 @@ Flower::Flower()
 {
 }
 
-bool Flower::beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers)
+void Flower::beingCollectedByPlayable(const std::vector<Observer*>& observers)
 {
-	if (Item::beingCollectedByPlayable(bounds,observers)) {
-		for (Observer* observer : observers) {
-			observer->collectFlower();
-		}
+	Item::beingCollectedByPlayable(observers);
 
-		return true;
+	for (Observer* observer : observers) {
+		observer->collectFlower();
 	}
-	return false;
 }

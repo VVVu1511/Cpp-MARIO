@@ -1,8 +1,6 @@
 #include "MenuState.h"
 #include <iostream>
 
-
-
 MenuState::MenuState(){
     this->active = true;
 }

@@ -14,7 +14,7 @@ Item::Item(){}
 
 Item::~Item(){}
 
-Item* Item::createItem(ItemType type, sf::Vector2f position){
+Item* Item::createItem(const ItemType &type, const sf::Vector2f &position){
     Item* result = nullptr;
 
     switch (type)
@@ -52,84 +52,100 @@ Item* Item::createItem(ItemType type, sf::Vector2f position){
         );
 
 
-        result->shape.setSize(sf::Vector2f(floatRect.width, floatRect.height));
+        result->m_shape.setSize(sf::Vector2f(floatRect.width, floatRect.height));
 
-        result->sprite.setTexture(*temp.first);
-        result->sprite.setTextureRect(intRect);
+        result->m_sprite.setTexture(*temp.first);
+        result->m_sprite.setTextureRect(intRect);
 
-        result->animation.addStrategy({ new AutomaticStrategy(temp.first,temp.second,1.0 / 60)});
+        result->m_animation.addStrategy({ new AutomaticStrategy(temp.first,temp.second,1.0 / 60)});
 
-        position.y -= floatRect.getSize().y;
+        sf::Vector2f tempPos = position;
 
-        result->position = position;
+        tempPos.y -= floatRect.getSize().y;
 
-        result->baseGround = position.y;
+        result->m_position = tempPos;
+        
+        result->m_shape.setPosition(result->m_position);
 
-        result->alive = true;
+        result->m_baseGround = result->m_position.y;
+
+        result->m_alive = true;
+
+        result->m_Vx = 3.f;
     }
     
-
     return result;  
 }
 
-void Item::move(){}
+void Item::move(const float& deltaTime){
+    this->m_position.x += m_Vx;
+}
 
 void Item::die(){
-    this->alive = false;
+    this->m_alive = false;
 }
 
 void Item::reset(){
-    this->baseGround = std::numeric_limits<float>::max();
+    this->m_baseGround = std::numeric_limits<float>::max();
+}
+
+void Item::changeDirection(){
+    this->m_Vx *= (-1);
 }
 
 bool Item::isDead()
 {
-    return !(this->alive);
+    return !(this->m_alive);
 }
 
-void Item::update(const float& deltaTime, std::vector<Observer*>& observers){
+void Item::update(const float& deltaTime,const std::vector<Observer*>& observers){
     this->twinkle(deltaTime);
-    
-    if (this->position.y < this->baseGround - this->shape.getSize().y) {
-        this->position.y += 5.f;
+    this->move(deltaTime);
+
+    if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
+        this->m_position.y += 5.f;
     }
     else {
-        this->position.y = this->baseGround - this->shape.getSize().y;
+        this->m_position.y = this->m_baseGround - this->m_shape.getSize().y;
     }
     
-    this->sprite.setPosition(this->position);
-    this->shape.setPosition(this->position);
+    this->m_sprite.setPosition(this->m_position);
+    this->m_shape.setPosition(this->m_position);
 }
 
 void Item::draw(sf::RenderWindow* window){
-    window->draw(this->sprite);
+    window->draw(this->m_sprite);
 }
 
 void Item::twinkle(const float& deltaTime){
-    animation.changeAutomatically(deltaTime, sprite);
+    m_animation.changeAutomatically(deltaTime, m_sprite);
 }
 
 bool Item::standInView(View view){
-    return view.containObjectAt(this->shape.getGlobalBounds());
+    return view.containObjectAt(this->m_shape.getGlobalBounds());
 }
 
-void Item::beingHitByBlock(const sf::FloatRect& bounds, std::vector<Observer*>& observers) {
-    
-}
+void Item::hit(Block* block){
+    sf::Vector2f newPosition;
 
-bool Item::beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers){
-    sf::FloatRect m_bounds = this->shape.getGlobalBounds();
-
-    if (bounds.intersects(m_bounds)) {
-        this->die();
-        
-        return true;
+    if (block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) || block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) {
+        this->m_position = newPosition;
+        this->changeDirection();
     }
-    return false;
 }
 
-void Item::standOn(Block* block, std::vector<Observer*>& observers){
-    block->beingStoodOnByCharacter(this->baseGround, this->shape.getGlobalBounds());
+void Item::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+    this->die();
+}
+
+void Item::standOn(Block* block,const std::vector<Observer*>& observers){
+    sf::Vector2f newPosition;
+
+    if (block->underObjectAt(this->m_shape.getGlobalBounds(), newPosition)) {
+        if (newPosition.y < this->m_baseGround) {
+            this->m_baseGround = newPosition.y;
+        }
+    }
 }
 
 

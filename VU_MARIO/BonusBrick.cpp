@@ -28,36 +28,18 @@ BonusBrick::~BonusBrick(){}
 
 
 void BonusBrick::twinkle(const float& deltaTime){
+	if(m_shape.getFillColor().a != 128) m_shape.setFillColor(sf::Color(255, 255, 255, 128));
 	
-	
-	if(shape.getFillColor().a != 128) shape.setFillColor(sf::Color(255, 255, 255, 128));
-	
-	else shape.setFillColor(sf::Color(255, 255, 255, 255));
+	else m_shape.setFillColor(sf::Color(255, 255, 255, 255));
 }
 
-bool BonusBrick::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers){
-	
-	sf::FloatRect m_bounds = this->shape.getGlobalBounds();
-
-	if (bounds.intersects(m_bounds)) {
-
-		if (bounds.top >= m_bounds.top + m_bounds.height - 5.f) {
-			for (Observer* observer : observers) {
-				observer->hitBonusBrick(sf::Vector2f(this->position.x,this->baseGround + this->shape.getSize().y), type);
-			}
-			
-			this->die();
-
-		}
-
-		return true;
+void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){
+	for (Observer* observer : observers) {
+		observer->hitBonusBrick(sf::Vector2f(this->m_position.x, this->m_baseGround + this->m_shape.getSize().y), type);
 	}
 
-	return false;
-
-	//observer to notify game to add items and new base brick, delete this bonus brick
+	this->die();
 }
-
 
 
 

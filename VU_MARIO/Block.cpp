@@ -20,13 +20,18 @@
 #include "View.h"
 #include "Stick.h"
 
+
+bool Block::isMidAir(){
+    return this->m_position.y < this->m_baseGround;
+}
+
 Block::Block(){}
 
 Block::~Block(){
     
 }
 
-Block* Block::createBlock(BlockType type, sf::Vector2f position)
+Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
 {
     Block* result = nullptr;
 
@@ -34,41 +39,55 @@ Block* Block::createBlock(BlockType type, sf::Vector2f position)
     {
     case BlockType::ground:
         result = new Ground;
+        result->interact = true;
         break;
     case BlockType::indestructible:
         result = new IndestructibleBrick;
+        result->interact = true;
         break;
     case BlockType::basebrick:
         result = new BaseBrick;
+        result->interact = true;
         break;
     case BlockType::brick:
-        result = new HorizontalPipe;
+        result = new Brick;
+        result->interact = true;
         break;
     case BlockType::vertical_pipe:
     case BlockType::vertical_pipe_top:
         result = new VerticalPipe;
+        result->interact = true;
         break;
         //need animation
     case BlockType::bonus:
         result = new BonusBrick;
+        result->interact = true;
         break;
     case BlockType::tree:
         result = new Tree;
+        result->interact = false;
         break;
     case BlockType::mountain:
         result = new Mountain;
+        result->interact = false;
         break;
     case BlockType::cloud:
         result = new Cloud;
+        result->interact = false;
         break;
     case BlockType::castle:
+    case BlockType::big_castle:
         result = new Castle;
+        result->interact = false;
         break;
     case BlockType::flag:
         result = new Flag;
+        result->interact = true;
         break;
     case BlockType::stick:
         result = new Stick;
+        result->interact = true;
+        break;
     default:
         result = nullptr;
         break;
@@ -89,123 +108,105 @@ Block* Block::createBlock(BlockType type, sf::Vector2f position)
             static_cast<float>(intRect.height)
         );
 
-        result->shape.setSize(sf::Vector2f(floatRect.width, floatRect.height));
+        result->m_shape.setSize(sf::Vector2f(floatRect.width, floatRect.height));
 
-        result->shape.setTexture(temp.first);
-        result->shape.setTextureRect(temp.second);
-
-        position.y -= temp.second.getSize().y;
+        result->m_shape.setTexture(temp.first);
         
-        result->position = position;
+        result->m_shape.setTextureRect(temp.second);
+
+        sf::Vector2f tempPos = position;
         
-        result->baseGround = position.y;
+        tempPos.y -= temp.second.getSize().y;
+        
+        if (type == BlockType::vertical_pipe_top)
+        {
+            tempPos.x -= 4.f;
+        }
 
-
-        result->shape.setPosition(position);
+        result->m_position = tempPos;
+        
+        result->m_baseGround = result->m_position.y;
+        
+        result->m_shape.setPosition(result->m_position);
+        
+        result->m_alive = true;
     }
     
     return result;
 }
 
 void Block::die() {
-    this->alive = false;
+    this->m_alive = false;
 }
 
 bool Block::isDead() {
-    return !this->alive;
+    return !this->m_alive;
 }
 
 void Block::draw(sf::RenderWindow* window) {
 
-    window->draw(this->shape);
+    window->draw(this->m_shape);
 }
 
-void Block::update(const float& deltaTime, std::vector<Observer*>& observers) {
+void Block::update(const float& deltaTime, const std::vector<Observer*>& observers) {
     this->twinkle(deltaTime);
 
-    if (this->position.y < this->baseGround) {
-        this->position.y += 5.f;
+    if (this->m_position.y < this->m_baseGround) {
+        this->m_position.y += 5.f;
     }
 
     else {
-        this->position.y = this->baseGround;
+        this->m_position.y = this->m_baseGround;
     }
 
-    this->shape.setPosition(this->position);
+    this->m_shape.setPosition(this->m_position);
 }
-
 
 bool Block::standInView(View view){
-    return view.containObjectAt(this->shape.getGlobalBounds());
+    return view.containObjectAt(this->m_shape.getGlobalBounds());
 }
+
+bool Block::canInteract(){
+    return this->interact;
+}
+
+void Block::jump(){}
 
 void Block::twinkle(const float& deltaTime){}
 
+void Block::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
+    sf::Vector2f newm_position;
 
-void Block::hit(NonPlayableCharacter* character, std::vector<Observer*>& observers){
-    if (this->position.y < this->baseGround) {
-        character->beingHitByBlock(this->shape.getGlobalBounds(),observers);
+    if (this->m_position.y < this->m_baseGround && character->beingHitFromAbove(this->m_shape.getGlobalBounds(),newm_position)) {
+        character->die();
     }
 }
 
-void Block::hit(Item* item, std::vector<Observer*>& observers){
-    item->beingCollectedByPlayable(this->shape.getGlobalBounds(), observers);
-}
+void Block::hit(Item* item, const std::vector<Observer*>& observers){
+    sf::Vector2f newPosition;
 
-void Block::beingStoodOnByCharacter(float& baseGround, const sf::FloatRect& bounds) {
-    sf::FloatRect m_bounds = shape.getGlobalBounds();
-    
-    if (bounds.left + bounds.width > m_bounds.left && bounds.left < m_bounds.left + m_bounds.width) {
-        if (this->position.y >= bounds.top + 15.f && position.y < baseGround) {
-            baseGround = this->position.y;
-        }
+    if (((item->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition))
+        || (item->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
+        || (item->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition))) && this->isMidAir()) {
+
+        item->beingCollectedByPlayable(observers);
     }
 }
 
-bool Block::beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers) {
-    sf::FloatRect m_bounds = shape.getGlobalBounds();
+void Block::specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers){
 
-    if (bounds.intersects(m_bounds)) {
-        if (bounds.left + bounds.width <= m_bounds.left + 5.f) {
-            position.x = m_bounds.left - bounds.width;
-        }
-        
-        else if (bounds.left >= m_bounds.left + m_bounds.width - 5.f) {
-            position.x = m_bounds.left + m_bounds.width;
-        }
+}
 
-        else {
-            position.y = m_bounds.top + m_bounds.height;
-        }
-        return true;
-        
-    }
-    return false;
+void Block::specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers){
+
+}
+
+void Block::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){
+}
+
+void Block::beingHitFromBottomByBigMario(const std::vector<Observer*>& observers){
+
 }
 
 
-bool Block::beingHitByNonPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers,float& speed){
-    
-    sf::FloatRect m_bounds = this->shape.getGlobalBounds();
 
-    if (bounds.intersects(m_bounds)) {
-        if (bounds.top + bounds.height > m_bounds.top) {
-            if (bounds.left + bounds.width <= m_bounds.left + 1.f) {
-                position.x = m_bounds.left - bounds.width - 5.f;
-                speed *= -1.001;
-            }
-
-            else if (bounds.left >= m_bounds.left + m_bounds.width - 1.f) {
-                position.x = m_bounds.left + m_bounds.width + 5.f;
-                speed *= -1.001;
-            }
-
-            return true;
-        }
-        
-        
-    }
-
-    return false;
-    
-}

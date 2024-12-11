@@ -25,5 +25,6 @@ public:
 	virtual void jump(const float& deltaTime, sf::Sprite& sprite);
 	virtual void doNothing(sf::Sprite& sprite);
 	virtual void setSprite(sf::Sprite& sprite);
+	virtual void changeTexture(sf::Texture* texture, std::vector<sf::IntRect> frames);
 };
 

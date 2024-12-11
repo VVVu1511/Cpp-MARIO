@@ -6,24 +6,21 @@ class Observer;
 class View;
 
 class NonPlayableCharacter : public Character{
-
 protected:
 	
-	float speed = 0.5f;
+	float m_speed = 1.f;
 
 public:
-	static NonPlayableCharacter* createCharacter(NonPlayableCharacterType type, sf::Vector2f position);
+	static NonPlayableCharacter* createCharacter(const NonPlayableCharacterType &type, const sf::Vector2f& position);
 	
 	void move(const float& deltaTime) override;
-	void update(const float& deltaTime, std::vector<Observer*>& observers) override;
-	virtual bool standInView(View view);
+	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;
+	virtual void changeDirection();
 
-	virtual void hit(NonPlayableCharacter* character, std::vector<Observer*>& observers);
-	virtual void hit(Block* block, std::vector<Observer*>& observers);
-	
-	virtual bool beingHitByNonPlayable(const sf::FloatRect& bounds, float& o_speed, bool& alive);
-	virtual bool beingStoodOnByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
-	virtual void beingHitByPlayable(const sf::FloatRect& bounds,bool &alive);
-	virtual void beingHitByBlock(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
+	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
+	virtual void hit(Block* block, const std::vector<Observer*>& observers);
+	virtual void specificResultAfterBeingHit(const std::vector<Observer*>& observers);
+	virtual void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers);
+	virtual bool canKill();
 };
 

@@ -19,6 +19,5 @@ public:
 	
 	void twinkle(const float& deltaTime);
 	
-	bool beingHitByPlayable(const sf::FloatRect& bounds, sf::Vector2f& position, std::vector<Observer*>& observers);
-
+	void specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers) override;
 };

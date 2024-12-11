@@ -12,6 +12,7 @@ public:
 	~Animation();
 
 	void addStrategy(AnimationStrategy* animationStrategy);
+	void changeTexture(sf::Texture* texture, std::vector<sf::IntRect> frames);
 
 	void die(const float& deltaTime, sf::Sprite& sprite);
 	void moveleft(const float& deltaTime, sf::Sprite& sprite);

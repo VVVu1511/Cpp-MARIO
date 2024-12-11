@@ -6,22 +6,34 @@
 #include <limits>
 #include "Animation.h"
 #include "AssetManager.h"
+#include "View.h"
 
-void Character::initVariables(sf::Vector2f position, std::vector<AnimationStrategy*> animationStrategy, std::pair<sf::Texture*, std::vector<sf::IntRect>> images){
+bool Character::standInView(View view) {
+	return view.containObjectAt(this->m_shape.getGlobalBounds());
+}
+
+void Character::initVariables(const sf::Vector2f &position, const std::vector<AnimationStrategy*>& animationStrategy,const std::pair<sf::Texture*, std::vector<sf::IntRect>> &images){
 	
-	position.y -= images.second[0].getSize().y;
+	sf::Vector2f tempPos = position;
+
+	tempPos.y -= images.second[0].getSize().y;
 	
-	this->position = position;
+	this->m_position = tempPos;
 	
 	sf::FloatRect floatRect = AssetManager::getInstance()->ToFloatRect(images.second[0]);
 
-	this->shape.setSize(sf::Vector2f(floatRect.getSize().x,floatRect.getSize().y));
+	this->m_shape.setSize(sf::Vector2f(floatRect.getSize().x,floatRect.getSize().y));
 	
-	for(AnimationStrategy* strategy : animationStrategy) this->animation.addStrategy(strategy);
+	for(AnimationStrategy* strategy : animationStrategy) this->m_animation.addStrategy(strategy);
 	
-	this->Vx = 0;
-	this->Vy = 0;
-	this->alive = true;
+	this->m_Vx = 0;
+	this->m_Vy = 0;
+	this->m_alive = true;
+
+}
+
+bool Character::isMidAir(){
+	return this->m_position.y < this->m_baseGround - this->m_shape.getSize().y;
 }
 
 Character::Character(){}
@@ -32,41 +44,48 @@ Character::~Character(){
 
 void Character::die(){
 
-	animation.die(0.2, sprite);
+	m_animation.die(0.2, m_sprite);
 
-	this->alive = false;
+	this->m_alive = false;
 }
 
 void Character::reset(){
-	this->baseGround = std::numeric_limits<float>::max();
+	this->m_baseGround = std::numeric_limits<float>::max();
 }
 
 bool Character::isDead()
 {
-	return !(this->alive);
+	return !(this->m_alive);
 }
 
-void Character::update(const float& deltaTime, std::vector<Observer*>& observers){
-	Vy = 0;
-
-	if (this->position.y < this->baseGround - this->shape.getSize().y) {
-		this->position.y += 5.f;
-	}
-	else {
-		this->position.y = this->baseGround - this->shape.getSize().y;
-	}
-
-	if (this->sprite.getScale().x == -1.f) this->sprite.setPosition(sf::Vector2f(this->position.x + this->shape.getSize().x,this->position.y));
+void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
 	
-	else this->sprite.setPosition(this->position);
+	if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
+		this->m_position.y += 5.f;
+	}
 
-	this->shape.setPosition(this->position);
+	else {
+		this->m_position.y = this->m_baseGround - this->m_shape.getSize().y;
+	}
+
+	if (this->m_sprite.getScale().x == -1.f) this->m_sprite.setPosition(sf::Vector2f(this->m_position.x + this->m_shape.getSize().x, this->m_position.y));
+
+	else this->m_sprite.setPosition(this->m_position);
+
+
+	this->m_shape.setPosition(this->m_position);
 }
 
 void Character::draw(sf::RenderWindow* window){
-	window->draw(sprite);
+	window->draw(this->m_sprite);
 }
 
-void Character::StandOn(Block* block, std::vector<Observer*>& observers) {
-	block->beingStoodOnByCharacter(this->baseGround, this->shape.getGlobalBounds());
+void Character::StandOn(Block* block,const std::vector<Observer*>& observers) {
+	sf::Vector2f newPosition;
+
+	if (block->underObjectAt(this->m_shape.getGlobalBounds(),newPosition)) {
+		if (newPosition.y < this->m_baseGround) {
+			this->m_baseGround = newPosition.y;
+		}
+	}
 }

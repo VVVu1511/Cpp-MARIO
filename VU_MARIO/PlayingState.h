@@ -14,7 +14,6 @@ class PlayingState;
 class Observer;
 enum class UpdateType;
 
-
 class PlayingState : public GameState{
 private:
 	
@@ -23,7 +22,8 @@ private:
 	int mapNum = 1;
 	float time = 400;
 	int score = 0;
-	
+	float expiredTimeOfChangingMap = 0;
+	float expiredTimeOfCongratulation = 0;
 
 	std::vector<PlayableCharacter*>all_playable_characters;
 	std::vector<NonPlayableCharacter*>all_non_playable_characters;
@@ -31,7 +31,6 @@ private:
 	std::vector<Item*>all_items;
 	
 	Collision collision;
-	bool isMapCreated = false;
 	
 	
 	void createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState);
@@ -41,6 +40,8 @@ private:
 	void ultimateCleanUp();
 	void cleanObserverForEachLive(std::vector<Observer*>& observers);
 	void drawAttributes(sf::RenderWindow* window,const sf::Font& font);
+	void drawChangingMapState(sf::RenderWindow* window, const sf::Font& font);
+	void drawCongratulationState(sf::RenderWindow* window, const sf::Font& font);
 
 	void RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font);
 public:

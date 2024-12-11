@@ -5,15 +5,23 @@ Coin::Coin()
 {
 }
 
-bool Coin::beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers){
-	if (Item::beingCollectedByPlayable(bounds,observers)) {
-		for (Observer* observer : observers) {
-			observer->collectCoins();
-		}
+void Coin::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+	Item::beingCollectedByPlayable(observers);
 
-		return true;
+	for (Observer* observer : observers) {
+		observer->collectCoins();
 	}
+}
 
-	return false;
+void Coin::move(const float& deltaTime){
+
+}
+
+void Coin::standOn(Block* block, const std::vector<Observer*>& observers){
+
+}
+
+void Coin::reset(){
+
 }
 

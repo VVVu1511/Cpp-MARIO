@@ -36,9 +36,8 @@ void View::update(std::vector<PlayableCharacter*> playable, sf::RenderWindow* wi
 	}
 
 	for (PlayableCharacter* character : playable) {
-		character->standInView(view);
+		character->standInsideView(view);
 	}
-	
 
 }
 

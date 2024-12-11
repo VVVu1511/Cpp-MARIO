@@ -6,6 +6,7 @@ class Observer;
 class Star : public Item{
 public:
 	Star();
-	bool beingCollectedByPlayable(const sf::FloatRect& bounds, std::vector<Observer*>& observers);
+	void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	void move(const float& deltaTime) override;
 };
 
