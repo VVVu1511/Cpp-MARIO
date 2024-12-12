@@ -1,5 +1,87 @@
-﻿  Character.cpp
-D:\MARIO\VU_MARIO\Character.cpp(49,16): warning C4305: 'argument': truncation from 'double' to 'const float'
-D:\MARIO\VU_MARIO\Character.cpp(85,12): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-D:\MARIO\VU_MARIO\Character.cpp(86,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  VU_MARIO.vcxproj -> D:\MARIO\Debug\VU_MARIO.exe
+﻿  Animation.cpp
+D:\VUmario\MARIO\VU_MARIO\Animation.cpp(11,20): warning C4018: '<': signed/unsigned mismatch
+  AnimationStrategy.cpp
+  AssetManager.cpp
+D:\VUmario\MARIO\VU_MARIO\AssetManager.cpp(97,57): warning C4018: '>': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\AssetManager.cpp(108,61): warning C4018: '>': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\AssetManager.cpp(118,64): warning C4018: '>': signed/unsigned mismatch
+  AutomaticStrategy.cpp
+  BaseBrick.cpp
+  Block.cpp
+D:\VUmario\MARIO\VU_MARIO\Block.cpp(217,18): warning C4305: '*=': truncation from 'double' to 'float'
+  BonusBrick.cpp
+  Brick.cpp
+  Castle.cpp
+  Character.cpp
+D:\VUmario\MARIO\VU_MARIO\Character.cpp(49,16): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\VUmario\MARIO\VU_MARIO\Character.cpp(85,12): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\Character.cpp(86,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Cloud.cpp
+  Coin.cpp
+  Collision.cpp
+  Flag.cpp
+  Flower.cpp
+  Game.cpp
+  GameState.cpp
+  GoodMushroom.cpp
+  Goomba.cpp
+  Ground.cpp
+  Generating Code...
+  Compiling...
+  HorizontalPipe.cpp
+  IndestructibleBrick.cpp
+  Item.cpp
+D:\VUmario\MARIO\VU_MARIO\Item.cpp(60,90): warning C4305: 'argument': truncation from 'double' to 'const float'
+  KeyPressStrategy.cpp
+  KoopaTroopa.cpp
+  LimitedTimeStrategy.cpp
+  Luigi.cpp
+  main.cpp
+  Mario.cpp
+  MenuState.cpp
+  Mountain.cpp
+  NonPlayableCharacter.cpp
+D:\VUmario\MARIO\VU_MARIO\NonPlayableCharacter.cpp(38,91): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\VUmario\MARIO\VU_MARIO\NonPlayableCharacter.cpp(38,149): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\VUmario\MARIO\VU_MARIO\NonPlayableCharacter.cpp(65,14): warning C4305: '*=': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\NonPlayableCharacter.cpp(66,18): warning C4305: '*=': truncation from 'double' to 'float'
+  Observer.cpp
+  PlayableCharacter.cpp
+D:\VUmario\MARIO\VU_MARIO\PlayableCharacter.cpp(91,90): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\VUmario\MARIO\VU_MARIO\PlayableCharacter.cpp(91,154): warning C4305: 'argument': truncation from 'double' to 'const float'
+D:\VUmario\MARIO\VU_MARIO\PlayableCharacter.cpp(91,216): warning C4305: 'argument': truncation from 'double' to 'const float'
+  PlayableCharacterObserver.cpp
+  PlayingState.cpp
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:             T=unsigned int
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         and
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,72): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:             T=unsigned int
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         and
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(25,51): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(152,20): warning C4018: '<': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(160,20): warning C4018: '<': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\PlayingState.cpp(176,20): warning C4018: '<': signed/unsigned mismatch
+  PlayingStateObserver.cpp
+  Sound.cpp
+  Star.cpp
+  Stick.cpp
+  Generating Code...
+  Compiling...
+  Tree.cpp
+  VerticalPipe.cpp
+  View.cpp
+  Generating Code...
+  VU_MARIO.vcxproj -> D:\VUmario\MARIO\Debug\VU_MARIO.exe
