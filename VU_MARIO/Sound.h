@@ -38,7 +38,7 @@ enum class SoundType {
 class SoundManager {
 private:
     const std::vector<std::string>soundFile = {
-        "../sounds/1up_collect.wav",
+        "../sounds/1up_collected.wav",
         "../sounds/back_to_small.wav",
         "../sounds/background_castle.wav",
         "../sounds/background_open.wav",
@@ -48,7 +48,7 @@ private:
         "../sounds/background_winter.wav",
         "../sounds/block_destroyed.wav",
         "../sounds/block_hitted.wav",
-        "../sounds/bonus_appeared.wav",
+        "../sounds/bonus_appeard.wav",
         "../sounds/bonus_collected.wav",
         "../sounds/boss_destroyed.wav",
         "../sounds/coin_sound.wav",
@@ -82,4 +82,5 @@ public:
     static SoundManager* getInstance();
     void playSound(SoundType id);
     void stopSound(SoundType id);
+    sf::Sound::Status getSoundStatus(SoundType id);
 };

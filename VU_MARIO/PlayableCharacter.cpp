@@ -8,8 +8,11 @@
 #include "Item.h"
 #include "Block.h"
 #include "NonPlayableCharacter.h"
+#include "Observer.h"
+#include "Sound.h"
 
-
+#define MAX_JUMP_SPEED -14
+#define MAX_SPEED 5
 void PlayableCharacter::collect(Item * item, std::vector<Observer*>& observers){
 	item->beingCollectedByPlayable(this->shape.getGlobalBounds(),observers);
 }
@@ -107,11 +110,17 @@ void PlayableCharacter::move(const float& deltaTime){
 	bool doneST = false;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (!this->is_mid_air || !this->is_max_jump_speed ) ) {
+		//play sound
+		if (SoundManager::getInstance()->getSoundStatus(SoundType::jump_small) != sf::Sound::Playing) {
+			SoundManager::getInstance()->playSound(SoundType::jump_small);
+		}
+		
 		//Vy += -15;
+
 		Vy += -3;
-		if (Vy <= -14)
+		if (Vy <= MAX_JUMP_SPEED)
 		{
-			Vy = -14;
+			Vy = MAX_JUMP_SPEED;
 			this->is_max_jump_speed = true;
 		}
 		this->is_mid_air = true;
@@ -125,7 +134,7 @@ void PlayableCharacter::move(const float& deltaTime){
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		Vx += (Vx < 5) ? 2 * deltaTime : 0;
+		Vx += (Vx < MAX_SPEED) ? 2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveright(deltaTime, sprite);
 		}
@@ -134,7 +143,7 @@ void PlayableCharacter::move(const float& deltaTime){
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		/*this->position.x -= 5.f;*/
-		Vx += (Vx > -5) ? -2 * deltaTime : 0;
+		Vx += (Vx > -MAX_SPEED) ? -2 * deltaTime : 0;
 		if (this->position.y >= this->baseGround - this->shape.getSize().y) {
 			animation.moveleft(deltaTime, sprite);
 		}
@@ -144,8 +153,6 @@ void PlayableCharacter::move(const float& deltaTime){
 	if (!doneST && this->position.y >= this->baseGround - this->shape.getSize().y) {
 		animation.doNothing(this->sprite);
 	}
-		
-	
 }
 
 void PlayableCharacter::update(const float& deltaTime, std::vector<Observer*>& observers){

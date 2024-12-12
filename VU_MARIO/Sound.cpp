@@ -19,21 +19,12 @@ void SoundManager::load(){
 	}
 }
 
-void SoundManager::cleanup(){
-	for (auto& s : sounds) {
-		s.stop();
+SoundManager::SoundManager() {
+	if (!instance) {
+		instance = this;
 	}
-
-	soundBuffers.clear();
-	sounds.clear();
-
-	delete instance;
-	
-	instance = nullptr;
-	
 }
 
-SoundManager::SoundManager(){}
 
 SoundManager::~SoundManager(){
 	this->cleanup();
@@ -48,10 +39,32 @@ SoundManager* SoundManager::getInstance()
 	return instance;
 }
 
-void SoundManager::playSound(SoundType id){
-	this->sounds[(int)id - 1].play();
+void SoundManager::playSound(SoundType id) {
+	int index = static_cast<int>(id) - 1;
+	if (sounds[index].getStatus() != sf::Sound::Playing) {
+		sounds[index].play();
+	}
 }
+
 
 void SoundManager::stopSound(SoundType id){
 	this->sounds[(int)id - 1].stop();
 }
+
+sf::Sound::Status SoundManager::getSoundStatus(SoundType id) {
+	return sounds[static_cast<int>(id) - 1].getStatus();
+}
+
+
+void SoundManager::cleanup() {
+	if (instance) {
+		for (auto& s : sounds) {
+			s.stop();
+		}
+		soundBuffers.clear();
+		sounds.clear();
+		delete instance;
+		instance = nullptr;
+	}
+}
+
