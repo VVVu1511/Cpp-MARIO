@@ -36,7 +36,7 @@ void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& obse
 			bool right = this->beingHitFromRightBy(bounds, newPosition);
 
 			this->m_canMoveInShell = true;
-			this->m_speed = (right == true) ? -10.f : 10.f;
+			this->m_speed = (right == true) ? -5.f : 5.f;
 		}
 	}
 }
@@ -46,7 +46,7 @@ void KoopaTroopa::specificResultAfterBeingStoodOn(const std::vector<Observer*>& 
 }
 
 void KoopaTroopa::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
-	if (this->m_inShell && this->m_canMoveInShell) {
+	if (this->m_inShell == true && this->m_canMoveInShell == true) {
 		sf::Vector2f newPosition;
 
 		if ((character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) == true

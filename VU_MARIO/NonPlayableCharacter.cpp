@@ -69,6 +69,15 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 		
 		this->changeDirection();
 		character->changeDirection();
+		
+		if (this->m_speed < 0) {
+			this->m_position.x -= 1.f;
+			character->m_position.x += 1.f;
+		}
+		else {
+			this->m_position.x += 1.f;
+			character->m_position.x -= 1.f;
+		}
 	}
 
 }
@@ -76,12 +85,12 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
 	sf::Vector2f newPosition;
 
-	if (block->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition)) {
+	if (block->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition) == true) {
 		this->m_position = newPosition;
 	}
 
-	else if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
-		|| (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
+	else if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) == true
+		|| (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) == true)
 	{
 		this->m_position = newPosition;
 		this->changeDirection();
@@ -107,5 +116,5 @@ void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Obse
 }
 
 void NonPlayableCharacter::changeDirection(){
-	this->m_speed *= -1.00005;
+	this->m_speed *= -1;
 }

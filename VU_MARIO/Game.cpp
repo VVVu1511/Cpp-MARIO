@@ -58,13 +58,12 @@ void Game::run(){
 	
     window = new sf::RenderWindow(sf::VideoMode(1200,576), "MARIO BROS 1985!");
 	
-    window->setFramerateLimit(60);
-
     if (!this->font.loadFromFile("../fonts/VeniteAdoremus-rgRBA.ttf")) {
         std::cout << "Can not load file!";
     }
 
     ev = new sf::Event;
+    window->setFramerateLimit(60);
 	
     AssetManager::getInstance();
 
@@ -86,6 +85,7 @@ void Game::run(){
         }
 
         deltaTime = clock.restart().asSeconds();
+       
 
         window->clear(sf::Color(92,148,252));
         
