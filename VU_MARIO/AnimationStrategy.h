@@ -11,6 +11,7 @@ protected:
 	int frameSize;
 	float SPF;
 	int curFrameNum;
+	float m_time_each_frame;
 
 public:
 	AnimationStrategy();

@@ -11,6 +11,7 @@ protected:
 	bool m_alive;
 	float m_baseGround;
 	Animation m_animation;
+	float m_delay_dead_time;
 
 public:
 	virtual bool beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& newPosition);

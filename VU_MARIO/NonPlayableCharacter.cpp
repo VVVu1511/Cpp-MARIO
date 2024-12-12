@@ -65,6 +65,11 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 	
 	else if (right == true || left == true)
 	{
+		if (character->canKillNonPlayable(this->m_shape.getGlobalBounds())) {
+			this->die();
+			return;
+		}
+
 		this->m_position = newPosition;
 		
 		this->changeDirection();
@@ -74,12 +79,13 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 			this->m_position.x -= 1.f;
 			character->m_position.x += 1.f;
 		}
+
 		else {
 			this->m_position.x += 1.f;
 			character->m_position.x -= 1.f;
 		}
-	}
 
+	}
 }
 
 void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
@@ -94,6 +100,7 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 	{
 		this->m_position = newPosition;
 		this->changeDirection();
+
 	}
 
 }
@@ -104,8 +111,12 @@ void NonPlayableCharacter::specificResultAfterBeingHit(const std::vector<Observe
 
 void NonPlayableCharacter::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){}
 
-bool NonPlayableCharacter::canKill(){
+bool NonPlayableCharacter::canKillPlayable(const sf::FloatRect& bounds){
 	return true;
+}
+
+bool NonPlayableCharacter::canKillNonPlayable(const sf::FloatRect& bounds){
+	return false;
 }
 
 void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Observer*>& observers){

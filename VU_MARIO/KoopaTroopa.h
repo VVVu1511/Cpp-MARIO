@@ -18,6 +18,7 @@ public:
 	void specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds) override;
 	void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds) override;
 	void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) override;
-	bool canKill() override;
+	bool canKillPlayable(const sf::FloatRect& bounds) override;
+	virtual bool canKillNonPlayable(const sf::FloatRect& bounds) override;
 };
 

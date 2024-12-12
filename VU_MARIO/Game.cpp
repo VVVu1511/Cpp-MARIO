@@ -86,7 +86,6 @@ void Game::run(){
 
         deltaTime = clock.restart().asSeconds();
        
-
         window->clear(sf::Color(92,148,252));
         
         this->currentState->execute(window, observers, currentState, deltaTime, ev, font);

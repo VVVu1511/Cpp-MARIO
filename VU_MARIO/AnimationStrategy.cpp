@@ -6,7 +6,9 @@ AnimationStrategy::AnimationStrategy(){
 	curFrameNum = 0;
 }
 
-AnimationStrategy::AnimationStrategy(sf::Texture* texture, std::vector<sf::IntRect> frames, const float& SPF) : texture(texture), frames(frames),frameSize(frames.size()),SPF(SPF),curFrameNum(0){}
+AnimationStrategy::AnimationStrategy(sf::Texture* texture, std::vector<sf::IntRect> frames, const float& SPF) : texture(texture), frames(frames),frameSize(frames.size()),SPF(SPF),curFrameNum(0){
+	this->m_time_each_frame = 0.1;
+}
 
 AnimationStrategy::AnimationStrategy(AnimationStrategy& other) : texture(texture),frames(frames),frameSize(frames.size()),SPF(SPF), curFrameNum(0) {}
 

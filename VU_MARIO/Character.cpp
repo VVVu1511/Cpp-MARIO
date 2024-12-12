@@ -31,7 +31,7 @@ void Character::initVariables(const sf::Vector2f &position, const std::vector<An
 	this->m_Vx = 0;
 	this->m_Vy = 0;
 	this->m_alive = true;
-
+	this->m_delay_dead_time = 0;
 }
 
 bool Character::isMidAir(){
@@ -47,8 +47,9 @@ Character::~Character(){
 void Character::die(){
 
 	m_animation.die(0.2, m_sprite);
+	
+	this->m_delay_dead_time = 0.2;
 
-	this->m_alive = false;
 }
 
 void Character::reset(){
@@ -57,11 +58,16 @@ void Character::reset(){
 
 bool Character::isDead()
 {
-	return !(this->m_alive);
+	if (this->m_delay_dead_time == 0) return false;
+	
+	return true;
 }
 
 void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
-	
+	if (this->m_delay_dead_time > 0) {
+		this->m_delay_dead_time -= deltaTime;
+	}
+
 	if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
 		this->m_position.y += 5.f;
 	}

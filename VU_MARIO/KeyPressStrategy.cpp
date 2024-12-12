@@ -3,7 +3,7 @@
 
 KeyPressStrategy::KeyPressStrategy() : AnimationStrategy(){}
 
-KeyPressStrategy::KeyPressStrategy(sf::Texture* texture, std::vector<sf::IntRect> frames, const float& SPF) : AnimationStrategy(texture,frames,SPF){
+KeyPressStrategy::KeyPressStrategy(sf::Texture* texture, std::vector<sf::IntRect> frames, const float& SPF) : AnimationStrategy(texture, frames, SPF) {
 	switch (frameSize)
 	{
 	case 5:
@@ -23,8 +23,12 @@ KeyPressStrategy::KeyPressStrategy(sf::Texture* texture, std::vector<sf::IntRect
 KeyPressStrategy::KeyPressStrategy(const KeyPressStrategy& other) : AnimationStrategy(other.texture,other.frames,other.SPF){}
 
 
-
 void KeyPressStrategy::moveleft(const float& deltaTime, sf::Sprite& sprite){
+	if (m_time_each_frame > 0) {
+		m_time_each_frame -= deltaTime;
+		return;
+	}
+
 
 	if (curFrameNum < bound) {
 		curFrameNum++;
@@ -34,10 +38,15 @@ void KeyPressStrategy::moveleft(const float& deltaTime, sf::Sprite& sprite){
 	
 	sprite.setScale(-1.f, 1.f);
 	this->setSprite(sprite);
+	this->m_time_each_frame = 0.1;
 }
 
 void KeyPressStrategy::moveright(const float& deltaTime, sf::Sprite& sprite){
-	
+	if (m_time_each_frame > 0) {
+		m_time_each_frame -= deltaTime;
+		return;
+	}
+
 	if (curFrameNum < frameSize - 3) {
 		curFrameNum++;
 	}
@@ -46,6 +55,8 @@ void KeyPressStrategy::moveright(const float& deltaTime, sf::Sprite& sprite){
 	
 	sprite.setScale(1.f, 1.f);
 	this->setSprite(sprite);
+
+	this->m_time_each_frame = 0.1;
 }
 
 

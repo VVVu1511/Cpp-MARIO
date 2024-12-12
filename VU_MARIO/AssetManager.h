@@ -55,7 +55,6 @@ enum class PlayableCharacterType {
 	big_super_mario = 11,
 };
 
-
 class AssetManager {
 private:
 	const std::vector<sf::Color> all_colors = {
@@ -99,7 +98,6 @@ private:
 	const int offSetItemForColor = 16;
 	const int offSetNonPlayableForColor = 20;
 	const int offSetPlayableForColor = 24;
-
 
 
 	std::vector<std::vector<sf::IntRect>> IntRect = {
@@ -176,7 +174,6 @@ private:
 	std::vector<sf::Texture*> playable_characters;
 	std::vector<sf::Texture*> nonplayable_characters;
 
-
 	const float gravity = 10.f;
 
 	static AssetManager* instance;
@@ -199,6 +196,7 @@ public:
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getItem(ItemType type);
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getPlayableCharacter(PlayableCharacterType type);
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getNonPlayableCharacter(NonPlayableCharacterType type);
+
 
 	std::string getMapFile(int mapNum);
 	int getID(sf::Color color,int& type);

@@ -22,15 +22,21 @@ ItemType BonusBrick::getRandomItem(){
 
 BonusBrick::BonusBrick(){
 	this->type = getRandomItem();
+	this->m_animation_frame = 0.1;
 }
 
 BonusBrick::~BonusBrick(){}
 
 
 void BonusBrick::twinkle(const float& deltaTime){
-	if(m_shape.getFillColor().a != 128) m_shape.setFillColor(sf::Color(255, 255, 255, 128));
-	
-	else m_shape.setFillColor(sf::Color(255, 255, 255, 255));
+	if (this->m_animation_frame > 0) {
+		this->m_animation_frame -= deltaTime;
+		m_shape.setFillColor(sf::Color(255, 255, 255, 255));
+		return;
+	}
+
+	m_shape.setFillColor(sf::Color(255, 255, 255, 128));	
+	this->m_animation_frame = 0.1;
 }
 
 void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){

@@ -10,6 +10,7 @@ class Observer;
 class BonusBrick : public Block{
 
 private:
+	float m_animation_frame;
 	ItemType type;
 
 	ItemType getRandomItem();

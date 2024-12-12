@@ -29,12 +29,12 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
 	{
 
-		if (this->isSuper) {
+		if (this->isSuper == true) {
 			character->die();
 			return;
 		}
 		
-		if (character->canKill()) {
+		if (character->canKillPlayable(this->m_shape.getGlobalBounds())) {
 			if (!this->isBig) {
 				this->die();
 				return;
@@ -176,13 +176,13 @@ void PlayableCharacter::setCenterForView(sf::View& view){
 void PlayableCharacter::move(const float& deltaTime){
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		this->m_position.x -= m_Vx;
-		if (m_Vx > 0) m_animation.moveleft(deltaTime, this->m_sprite);
+		this->m_position.x -= 3.f;
+		m_animation.moveleft(deltaTime, this->m_sprite);
 	}
 	
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		this->m_position.x += m_Vx;
-		if(m_Vx > 0) m_animation.moveright(deltaTime, this->m_sprite);
+		this->m_position.x += 3.f;
+		m_animation.moveright(deltaTime, this->m_sprite);
 	}
 	
 	else {

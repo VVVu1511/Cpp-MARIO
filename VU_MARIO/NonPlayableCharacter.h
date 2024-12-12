@@ -21,6 +21,7 @@ public:
 	virtual void hit(Block* block, const std::vector<Observer*>& observers);
 	virtual void specificResultAfterBeingHit(const std::vector<Observer*>& observers,const sf::FloatRect& bounds);
 	virtual void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds);
-	virtual bool canKill();
+	virtual bool canKillPlayable(const sf::FloatRect& bounds);
+	virtual bool canKillNonPlayable(const sf::FloatRect& bounds);
 };
 

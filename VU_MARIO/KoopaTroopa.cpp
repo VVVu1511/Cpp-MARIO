@@ -1,4 +1,5 @@
 #include "KoopaTroopa.h"
+#include<iostream>
 
 KoopaTroopa::KoopaTroopa(){
 	this->m_inShell = false;
@@ -28,7 +29,7 @@ void KoopaTroopa::die(){
 }
 
 void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){
-	if (this->m_inShell) {
+	if (this->m_inShell == true) {
 		if (this->m_canMoveInShell == false) {
 			sf::Vector2f newPosition;
 
@@ -36,7 +37,7 @@ void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& obse
 			bool right = this->beingHitFromRightBy(bounds, newPosition);
 
 			this->m_canMoveInShell = true;
-			this->m_speed = (right == true) ? -5.f : 5.f;
+			this->m_speed = (right == true) ? -4.f : 4.f;
 		}
 	}
 }
@@ -49,10 +50,13 @@ void KoopaTroopa::hit(NonPlayableCharacter* character, const std::vector<Observe
 	if (this->m_inShell == true && this->m_canMoveInShell == true) {
 		sf::Vector2f newPosition;
 
-		if ((character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) == true
-			|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) == true) {
+		bool left = character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+		bool right = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
+		
+		if (left == true || right == true) {
 				character->die();
 		}
+
 	}
 	
 	else {
@@ -60,9 +64,21 @@ void KoopaTroopa::hit(NonPlayableCharacter* character, const std::vector<Observe
 	}
 }
 
-bool KoopaTroopa::canKill(){
-	if (this->m_inShell == true && this->m_canMoveInShell == false) return false;
+bool KoopaTroopa::canKillNonPlayable(const sf::FloatRect& bounds){
+	if (this->m_canMoveInShell == true && this->m_inShell == true) return true;
 
+	return false;
+}
+
+bool KoopaTroopa::canKillPlayable(const sf::FloatRect& bounds){
+	if (this->m_inShell == true) {
+		if (this->m_canMoveInShell == false) return false;
+		
+		if (this->m_speed < 0 && bounds.left > this->m_position.x) return false;
+
+		if (this->m_speed > 0 && bounds.left  < this->m_position.x) return false;
+	}
+	
 	return true;
 }
 
