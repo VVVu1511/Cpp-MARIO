@@ -8,50 +8,50 @@
 #include "LogInState.h"
 
 void Game::chooseState(){
+    StateOfGame nextState = StateOfGame::playing;
+
+    std::pair<int, PlayableCharacterType> mapAndmainCharacter;
+
+    if (this->state == StateOfGame::menu) {
+        mapAndmainCharacter = this->currentState->giveMapNumAndCharacterType();
+    }
+
     if (currentState != nullptr) {
         if (currentState->isActive()) return;
 
+        nextState = currentState->nextState();
+        
         delete currentState;
-        currentState = nullptr;
 
-        switch (state) {
-        case StateOfGame::login:
-            state = StateOfGame::menu;
-            break;
-        case StateOfGame::menu:
-            state = StateOfGame::playing;
-            break;
-        case StateOfGame::playing:
-            state = StateOfGame::gameover;
-            break;
-        case StateOfGame::gameover:
-            state = StateOfGame::menu;
-            break;
-        }
+        currentState = nullptr;
     }
 
-    switch (state) {
+    switch (nextState) {
     case StateOfGame::login:
         currentState = new LogInState(this->window, this->font);
+        this->state = StateOfGame::login;
         break;
 
     case StateOfGame::menu:
         currentState = new MenuState(this->window,this->font);
+        this->state = StateOfGame::menu;
         break;
 
     case StateOfGame::playing:
         currentState = new PlayingState;
+        this->state = StateOfGame::playing;
         break;
 
     case StateOfGame::gameover:
         currentState = new GameOverState;
+        this->state = StateOfGame::gameover;
         break;
     }
 }
 
 Game::Game(){
     currentState = nullptr;
-    state = StateOfGame::login;
+    this->state = StateOfGame::playing;
 }
 
 void Game::run(){

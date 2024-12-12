@@ -21,4 +21,5 @@ public:
 	void twinkle(const float& deltaTime);
 	
 	void specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers) override;
+	void draw(sf::RenderWindow* window) override;
 };

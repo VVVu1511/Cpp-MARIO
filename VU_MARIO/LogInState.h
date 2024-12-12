@@ -41,6 +41,7 @@ public:
 	LogInState(sf::RenderWindow* window, const sf::Font& font);
 	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font) override;
 	bool isActive() override;
+	StateOfGame nextState() override;
 };
 
 

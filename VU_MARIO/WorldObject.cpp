@@ -67,3 +67,7 @@ bool WorldObject::underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPo
 
     return false;
 }
+
+bool WorldObject::canBeDeleted(){
+    return this->m_delay_dead_time < 0;
+}

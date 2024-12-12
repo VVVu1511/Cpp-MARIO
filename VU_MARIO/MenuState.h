@@ -35,10 +35,14 @@ private:
 	void handleChoosingLevelButton(const sf::Event*& ev);
 	void handleChoosingCharacterButton(const sf::Event*& ev);
 	std::string findContentOfButtonClicked(const sf::Vector2f& mousePos,const std::vector<sf::RectangleShape>& all_buttons,const std::vector<sf::Text>&texts);
+	int mapNum();
+	PlayableCharacterType mainCharacterType();
 
 public:
 	MenuState(sf::RenderWindow* window,sf::Font &font);
 	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font) override;
 	bool isActive() override;
+	StateOfGame nextState() override;
+	std::pair<int, PlayableCharacterType> giveMapNumAndCharacterType() override;
 };
 

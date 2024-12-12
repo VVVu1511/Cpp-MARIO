@@ -76,6 +76,8 @@ Item* Item::createItem(const ItemType &type, const sf::Vector2f &position){
         result->m_alive = true;
 
         result->m_Vx = 3.f;
+
+        result->m_delay_dead_time = 0;
     }
     
     return result;  
@@ -87,6 +89,7 @@ void Item::move(const float& deltaTime){
 
 void Item::die(){
     this->m_alive = false;
+    this->m_delay_dead_time = -1;
 }
 
 void Item::reset(){

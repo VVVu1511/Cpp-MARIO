@@ -1,5 +1,6 @@
 #include "MenuState.h"
 #include <iostream>
+#include "AssetManager.h"
 
 void MenuState::drawMenu(sf::RenderWindow* window){
     window->draw(this->m_menu_frames);
@@ -130,6 +131,30 @@ std::string MenuState::findContentOfButtonClicked(const sf::Vector2f& mousePos, 
     return "";
 }
 
+int MenuState::mapNum(){
+    int size = this->m_level_contents.size();
+
+    for (int i = 0; i < size; i++) {
+        if (this->m_levelInput == this->m_level_contents[i]) {
+            return i + 1;
+        }
+    }
+
+    return -1;
+}
+
+PlayableCharacterType MenuState::mainCharacterType(){
+    if (this->m_characterInput == "MARIO") {
+        return PlayableCharacterType::small_mario;
+    }
+    else if (this->m_characterInput == "LUIGI") {
+        return PlayableCharacterType::small_luigi;
+    }
+
+    return PlayableCharacterType();
+}
+
+
 MenuState::MenuState(sf::RenderWindow* window, sf::Font& font){
     this->active = true;
     this->m_levelInput = "";
@@ -198,4 +223,18 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
 
 bool MenuState::isActive(){
     return this->active;
+}
+
+StateOfGame MenuState::nextState(){    
+    return StateOfGame();
+}
+
+std::pair<int, PlayableCharacterType> MenuState::giveMapNumAndCharacterType(){
+    int mapNum;
+    PlayableCharacterType type;
+
+    mapNum = this->mapNum();
+    type = this->mainCharacterType();
+
+    return std::pair<int, PlayableCharacterType>(mapNum,type);
 }

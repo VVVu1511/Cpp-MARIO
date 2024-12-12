@@ -13,145 +13,211 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{1db703a2-b3e7-4900-a14b-c4f28b373c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{0a12a527-cc01-4570-aac1-0ddec8c99510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldObject">
+      <UniqueIdentifier>{4759e538-a63b-4dc2-81a1-731d2411cf9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldObject\Block">
+      <UniqueIdentifier>{83152eb8-6d5f-4d4f-98b4-59e849ffceb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldObject\Item">
+      <UniqueIdentifier>{e93487a2-c2e0-490b-9ff2-2e1f3eb69963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldObject\PlayableCharacter">
+      <UniqueIdentifier>{58b44788-3fd4-4515-99ff-f4ded72aaf56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{f813bb19-72bc-4d75-b0d8-fd49495d6b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Asset">
+      <UniqueIdentifier>{43241c21-ceaa-490c-bf70-fa2b9a45e20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{712226e7-81a0-45bd-9cd2-2e90695584dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Observer">
+      <UniqueIdentifier>{99b83dc0-b4d4-4635-9edc-ca402f3138cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\WorldObject\NonPlayableCharacter">
+      <UniqueIdentifier>{5bb89505-a908-4ce2-9f63-4388dc7c44ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{b109fc27-804f-496d-bb67-e08222521ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Asset">
+      <UniqueIdentifier>{b6d85a82-c5cb-4ce1-a52b-1aa9eeba6258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{64534757-3cb8-4cfa-b4fc-7acc1955305c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{3677439c-b9f8-4669-bc24-1a08dac45b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Observer">
+      <UniqueIdentifier>{36ebd196-a5ce-4095-bec7-ba7518442bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObject">
+      <UniqueIdentifier>{9705a31f-bd2a-496f-9a02-e0982da47eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObject\Block">
+      <UniqueIdentifier>{bd8a1e2b-bf63-4dbe-bb46-96b1fcd57ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObject\Item">
+      <UniqueIdentifier>{51677785-b0ab-4d31-89c1-b2d25adb02de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObject\PlayableCharacter">
+      <UniqueIdentifier>{d142d603-5a33-4f1b-acf8-51f7e6cbc1e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WorldObject\NonPlayableCharacter">
+      <UniqueIdentifier>{0d566084-d13d-4264-9e30-b10b67ac7fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{d1a89019-8f7a-46ff-b4fa-58e821641a81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseBrick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BonusBrick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Castle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cloud.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HorizontalPipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IndestructibleBrick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mountain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VerticalPipe.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mario.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flower.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Star.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GoodMushroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Coin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Luigi.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="AnimationStrategy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyPressStrategy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="AutomaticStrategy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="LimitedTimeStrategy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="NonPlayableCharacter.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="KeyPressStrategy.cpp">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="PlayableCharacter.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Asset</Filter>
     </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Asset</Filter>
     </ClCompile>
-    <ClCompile Include="KoopaTroopa.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayingStateObserver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayableCharacterObserver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stick.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="GameOverState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="WorldObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="LogInState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingStateObserver.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayableCharacterObserver.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldObject.cpp">
+      <Filter>Source Files\WorldObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseBrick.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusBrick.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Cloud.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Flag.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalPipe.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="IndestructibleBrick.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Mountain.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Stick.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalPipe.cpp">
+      <Filter>Source Files\WorldObject\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <Filter>Source Files\WorldObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\WorldObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="GoodMushroom.cpp">
+      <Filter>Source Files\WorldObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Source Files\WorldObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="KoopaTroopa.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Luigi.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayableCharacter.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\WorldObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="NonPlayableCharacter.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,140 +256,140 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BaseBrick.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BonusBrick.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Castle.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BonusBrick.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Cloud.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Flag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="HorizontalPipe.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
-    <ClInclude Include="IndestructibleBrick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mountain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VerticalPipe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mario.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Flower.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Star.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GoodMushroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Coin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Luigi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayingState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyPressStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AutomaticStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LimitedTimeStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NonPlayableCharacter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayableCharacter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KoopaTroopa.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayingStateObserver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayableCharacterObserver.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Ground.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
     <ClInclude Include="Stick.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\WorldObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Header Files\WorldObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower.h">
+      <Filter>Header Files\WorldObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\WorldObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Header Files\WorldObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="GoodMushroom.h">
+      <Filter>Header Files\WorldObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayableCharacter.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Luigi.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="KoopaTroopa.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationStrategy.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AutomaticStrategy.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyPressStrategy.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="LimitedTimeStrategy.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="WorldObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="LogInState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayableCharacterObserver.h">
+      <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingStateObserver.h">
+      <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="IndestructibleBrick.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountain.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="NonPlayableCharacter.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldObject.h">
+      <Filter>Header Files\WorldObject</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalPipe.h">
+      <Filter>Header Files\WorldObject\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

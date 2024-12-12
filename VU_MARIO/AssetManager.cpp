@@ -7,6 +7,7 @@ void AssetManager::load(){
     this->loadItems();
     this->loadNonPlayableCharacters();
     this->loadPlayableCharacters();
+    this->loadBonusAnimation();
 }
 
 void AssetManager::loadBlocks(){
@@ -168,7 +169,26 @@ sf::FloatRect AssetManager::ToFloatRect(const sf::IntRect& intRect)
     );
 }
 
+void AssetManager::loadBonusAnimation(){
+    int size = BONUS_FILE.size();
 
+    for (int i = 0; i < size; i++) {
+        sf::Texture* readFile = new sf::Texture;
+
+        if (!readFile->loadFromFile(BONUS_FILE[i])) {
+            std::cout << "Cannot load from file " + BONUS_FILE[i];
+            exit(1);
+        }
+
+        bonus_animation.push_back(readFile);
+    }
+}
+
+std::pair<sf::Texture*, std::vector<sf::IntRect>> AssetManager::getBonusAnimation(BonusAnimation type) {
+    int id = (int)type;
+
+    return std::pair<sf::Texture*, std::vector<sf::IntRect>>(this->bonus_animation[id - 1],this->bonusIntRect[id - 1]);
+}
 
 
 

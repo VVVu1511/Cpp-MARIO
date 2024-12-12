@@ -3,8 +3,11 @@
 #include "View.h"
 #include <bitset>
 
+
 #define CLICKED_COLOR sf::Color(255,255,255,128)
 #define BUTTON_COLOR sf::Color(211, 78, 76)
+
+
 
 enum class StateOfGame {
 	menu = 1,
@@ -34,6 +37,8 @@ public:
 	virtual ~GameState() = default;
 	virtual void execute(sf::RenderWindow* window,std::vector<Observer*>&observers,GameState* gameState, const float& deltaTime, const sf::Event* ev,const sf::Font& font) = 0;
 	virtual bool isActive() = 0;
+	virtual StateOfGame nextState() = 0;
+	virtual std::pair<int, PlayableCharacterType> giveMapNumAndCharacterType();
 };
 
 template<typename T>

@@ -1,155 +1,26 @@
-﻿  Block.cpp
+﻿  BaseBrick.cpp
+  Block.cpp
+  BonusBrick.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\BonusBrick.cpp(25,28): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\BonusBrick.cpp(29,88): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Brick.cpp
+  Castle.cpp
   Character.cpp
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Character.cpp(49,18): warning C4305: 'argument': truncation from 'double' to 'const float'
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Character.cpp(51,28): warning C4305: '=': truncation from 'double' to 'float'
+  Cloud.cpp
+  Coin.cpp
   Collision.cpp
+  Flag.cpp
+  Flower.cpp
   Game.cpp
-  GameOverState.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameOverState.cpp(22,73): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameOverState.cpp(22,52): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-  GameState.cpp
+  GoodMushroom.cpp
+  Ground.cpp
+  HorizontalPipe.cpp
+  IndestructibleBrick.cpp
   Item.cpp
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Item.cpp(64,92): warning C4305: 'argument': truncation from 'double' to 'const float'
-  LogInState.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(13,81): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(13,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(17,32): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(39,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(69,41): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(75,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(75,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(124,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(124,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(129,36): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(141,35): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(153,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(153,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(157,35): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameState.h(70,72): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(33,9): message : see reference to function template instantiation 'void GameState::setAttributes<sf::RectangleShape>(std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &,const std::vector<std::string,std::allocator<std::string>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const sf::Font &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &)' being compiled
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameState.h(79,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\LogInState.cpp(114,5): message : see reference to function template instantiation 'void GameState::draw<sf::RectangleShape>(sf::RenderWindow *,std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &)' being compiled
-  Luigi.cpp
-  Mario.cpp
-  MenuState.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(33,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(33,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(42,39): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(48,43): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(99,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(99,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(111,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(111,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(141,80): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(141,59): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameState.h(79,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(6,9): message : see reference to function template instantiation 'void GameState::draw<sf::RectangleShape>(sf::RenderWindow *,std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &)' being compiled
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameState.h(70,72): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\MenuState.cpp(156,9): message : see reference to function template instantiation 'void GameState::setAttributes<sf::RectangleShape>(std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &,const std::vector<std::string,std::allocator<std::string>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const sf::Font &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &)' being compiled
+  Mountain.cpp
   NonPlayableCharacter.cpp
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\NonPlayableCharacter.cpp(36,93): warning C4305: 'argument': truncation from 'double' to 'const float'
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\NonPlayableCharacter.cpp(36,152): warning C4305: 'argument': truncation from 'double' to 'const float'
@@ -157,7 +28,8 @@ C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tư
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,90): warning C4305: 'argument': truncation from 'double' to 'const float'
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,154): warning C4305: 'argument': truncation from 'double' to 'const float'
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,216): warning C4305: 'argument': truncation from 'double' to 'const float'
-  PlayableCharacterObserver.cpp
+  Generating Code...
+  Compiling...
   PlayingState.cpp
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(27,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
@@ -182,7 +54,9 @@ C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tư
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(176,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(184,20): warning C4018: '<': signed/unsigned mismatch
   PlayingStateObserver.cpp
-  View.cpp
-  main.cpp
+  Star.cpp
+  Stick.cpp
+  Tree.cpp
+  VerticalPipe.cpp
   Generating Code...
   VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe

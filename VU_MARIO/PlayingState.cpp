@@ -61,7 +61,7 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 			}
 
 			else if (type >= 25 && type <= 35) {
-				PlayableCharacter* new_character = PlayableCharacter::createCharacter(PlayableCharacterType(id), sf::Vector2f(i * 32.f, j * 32.f));
+				PlayableCharacter* new_character = PlayableCharacter::createCharacter(this->m_mainCharacterType, sf::Vector2f(i * 32.f, j * 32.f));
 				all_playable_characters.push_back(new_character);
 				
 				for (Observer* observer : observers) {
@@ -158,7 +158,7 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 
 void PlayingState::temporaryCleanUp(){
 	for (int i = 0; i < all_blocks.size(); i++) {
-		if (all_blocks[i]->isDead()) {
+		if (all_blocks[i]->canBeDeleted()) {
 			delete all_blocks[i];
 			all_blocks.erase(all_blocks.begin() + i);
 		}
@@ -166,7 +166,7 @@ void PlayingState::temporaryCleanUp(){
 	}
 
 	for (int i = 0; i < all_items.size(); i++) {
-		if (all_items[i]->isDead()) {
+		if (all_items[i]->canBeDeleted()) {
 			delete all_items[i];
 			all_items.erase(all_items.begin() + i);
 		}
@@ -174,7 +174,7 @@ void PlayingState::temporaryCleanUp(){
 	}
 
 	for (int i = 0; i < all_playable_characters.size(); i++) {
-		if (all_playable_characters[i]->isDead()) {
+		if (all_playable_characters[i]->canBeDeleted()) {
 			delete all_playable_characters[i];
 			all_playable_characters.erase(all_playable_characters.begin() + i);
 		}
@@ -182,7 +182,7 @@ void PlayingState::temporaryCleanUp(){
 	}
 
 	for (int i = 0; i < all_non_playable_characters.size(); i++) {
-		if (all_non_playable_characters[i]->isDead()) {
+		if (all_non_playable_characters[i]->canBeDeleted()) {
 			delete all_non_playable_characters[i];
 			all_non_playable_characters.erase(all_non_playable_characters.begin() + i);
 		}
@@ -294,6 +294,14 @@ void PlayingState::drawCongratulationState(sf::RenderWindow* window, const sf::F
 
 PlayingState::PlayingState(){
 	this->active = true;
+	this->mapNum = 1;
+	this->m_mainCharacterType = PlayableCharacterType::small_mario;
+}
+
+PlayingState::PlayingState(const std::pair<int, PlayableCharacterType>& mapAndMainCharacter){
+	this->active = true;
+	this->mapNum = mapAndMainCharacter.first;
+	this->m_mainCharacterType = mapAndMainCharacter.second;
 }
 
 PlayingState::~PlayingState(){
@@ -349,7 +357,10 @@ void PlayingState::decreaseLives(){
 }
 
 void PlayingState::changeMap(){
-	
+	std::cout << "hi";
+
+	exit(1);
+
 	if (mapNum < 3) {
 		mapNum++;
 		this->expiredTimeOfChangingMap = 2;
@@ -378,6 +389,11 @@ void PlayingState::hitBonusBrick(const sf::Vector2f& position, ItemType type) {
 	this->all_blocks.push_back(Block::createBlock(BlockType::basebrick,position));
 
 	this->all_items.push_back(Item::createItem(type,sf::Vector2f(position.x + 5.f,position.y - 30.f)));
+}
+
+StateOfGame PlayingState::nextState()
+{
+	return StateOfGame();
 }
 
 

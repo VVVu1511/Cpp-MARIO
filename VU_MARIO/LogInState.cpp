@@ -51,6 +51,11 @@ bool LogInState::isActive(){
 	return this->active;
 }
 
+StateOfGame LogInState::nextState(){
+
+    return StateOfGame();
+}
+
 void LogInState::handleTextInput(std::string &input, const sf::Event* ev) {
     if (std::isprint(ev->text.unicode) && input.size() < max_chars) {
         input += static_cast<char>(ev->text.unicode);

@@ -134,6 +134,8 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         result->m_shape.setPosition(result->m_position);
         
         result->m_alive = true;
+
+        result->m_delay_dead_time = 0;
     }
     
     return result;
@@ -141,6 +143,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
 
 void Block::die() {
     this->m_alive = false;
+    this->m_delay_dead_time = -1;
 }
 
 bool Block::isDead() {
@@ -153,6 +156,7 @@ void Block::draw(sf::RenderWindow* window) {
 }
 
 void Block::update(const float& deltaTime, const std::vector<Observer*>& observers) {
+
     this->twinkle(deltaTime);
 
     if (this->m_position.y < this->m_baseGround) {
@@ -164,6 +168,7 @@ void Block::update(const float& deltaTime, const std::vector<Observer*>& observe
     }
 
     this->m_shape.setPosition(this->m_position);
+    this->m_sprite.setPosition(this->m_position);
 }
 
 bool Block::standInView(View view){

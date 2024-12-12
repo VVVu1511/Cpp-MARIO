@@ -37,3 +37,7 @@ bool GameOverState::isActive(){
 
 	return this->active;
 }
+
+StateOfGame GameOverState::nextState(){
+	return StateOfGame::menu;
+}

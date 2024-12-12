@@ -19,6 +19,6 @@ public:
 	virtual bool beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
 	virtual bool beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
 	virtual bool underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-
+	virtual bool canBeDeleted();
 };
 

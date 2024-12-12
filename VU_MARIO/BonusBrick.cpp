@@ -23,20 +23,18 @@ ItemType BonusBrick::getRandomItem(){
 BonusBrick::BonusBrick(){
 	this->type = getRandomItem();
 	this->m_animation_frame = 0.1;
+
+	std::pair<sf::Texture*, std::vector<sf::IntRect>> images = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::bonus_brick_animation);
+
+	AnimationStrategy* newStrategy = new AutomaticStrategy(images.first,images.second,1.0 / 60);
+	
+	this->m_animation.addStrategy(newStrategy);
 }
 
 BonusBrick::~BonusBrick(){}
 
-
 void BonusBrick::twinkle(const float& deltaTime){
-	if (this->m_animation_frame > 0) {
-		this->m_animation_frame -= deltaTime;
-		m_shape.setFillColor(sf::Color(255, 255, 255, 255));
-		return;
-	}
-
-	m_shape.setFillColor(sf::Color(255, 255, 255, 128));	
-	this->m_animation_frame = 0.1;
+	m_animation.changeAutomatically(deltaTime,this->m_sprite);
 }
 
 void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){
@@ -45,6 +43,10 @@ void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observe
 	}
 
 	this->die();
+}
+
+void BonusBrick::draw(sf::RenderWindow* window){
+	window->draw(this->m_sprite);
 }
 
 

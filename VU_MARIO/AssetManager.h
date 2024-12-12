@@ -55,6 +55,10 @@ enum class PlayableCharacterType {
 	big_super_mario = 11,
 };
 
+enum class BonusAnimation {
+	bonus_brick_animation = 1,
+};
+
 class AssetManager {
 private:
 	const std::vector<sf::Color> all_colors = {
@@ -145,6 +149,10 @@ private:
 	 sf::IntRect(96, 0, 32, 64), sf::IntRect(128, 0, 32, 64)},
 	};
 
+	std::vector<std::vector<sf::IntRect>> bonusIntRect = {
+		{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32)},
+	};
+
 	const std::vector<std::string>FILE = {
 		"../images/blocks.png",
 		"../images/star.png",
@@ -168,11 +176,16 @@ private:
 		"../images/big_super_mario.png",
 	};
 
+	const std::vector<std::string>BONUS_FILE = {
+		"../images/bonus_brick.png",
+	};
+
 
 	sf::Texture* blocks;
 	std::vector<sf::Texture*> items;
 	std::vector<sf::Texture*> playable_characters;
 	std::vector<sf::Texture*> nonplayable_characters;
+	std::vector<sf::Texture*> bonus_animation;
 
 	const float gravity = 10.f;
 
@@ -183,7 +196,7 @@ private:
 	void loadItems();
 	void loadNonPlayableCharacters();
 	void loadPlayableCharacters();
-
+	void loadBonusAnimation();
 
 public:
 	static void destroy();
@@ -196,7 +209,7 @@ public:
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getItem(ItemType type);
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getPlayableCharacter(PlayableCharacterType type);
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> getNonPlayableCharacter(NonPlayableCharacterType type);
-
+	std::pair<sf::Texture*, std::vector<sf::IntRect>> getBonusAnimation(BonusAnimation type);
 
 	std::string getMapFile(int mapNum);
 	int getID(sf::Color color,int& type);
