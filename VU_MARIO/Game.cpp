@@ -36,7 +36,7 @@ void Game::chooseState(){
         break;
 
     case StateOfGame::menu:
-        currentState = new MenuState;
+        currentState = new MenuState(this->window,this->font);
         break;
 
     case StateOfGame::playing:

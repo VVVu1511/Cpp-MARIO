@@ -1,101 +1,63 @@
 #include "MenuState.h"
 #include <iostream>
 
-MenuState::MenuState(){
-    this->active = true;
+void MenuState::drawMenu(sf::RenderWindow* window){
+    window->draw(this->m_menu_frames);
+    this->draw<sf::RectangleShape>(window, this->m_menu_all_buttons);
+    this->draw<sf::Text>(window, this->m_menu_texts);
 }
 
-void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
+void MenuState::drawChoosingLevel(sf::RenderWindow* window){
+    this->draw<sf::RectangleShape>(window, this->m_level_all_buttons);
+    this->draw<sf::Text>(window, this->m_level_texts);
+}
 
-    if (!isCreated) {
-        this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-        isCreated = true;
+void MenuState::drawChoosingCharacter(sf::RenderWindow* window){
+    this->draw<sf::RectangleShape>(window, this->m_character_all_buttons);
+    this->draw<sf::Text>(window, this->m_character_texts);
+}
+
+void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+    if (this->m_isChoosingLevel == true) {
+        this->handleChoosingLevelButton(ev);
+        return;
     }
 
+    else if (this->m_isChoosingCharacter == true) {
+        this->handleChoosingCharacterButton(ev);
+        return;
+    }
 
-    std::string content = "SUPER";
-    std::string content2 = "MARIO BROS";
-    std::string content3 = "PLAY";
-    std::string content4 = "CHOOSE LEVEL";
-    std::string content5 = "CHOOSE CHARACTER";
+    if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
 
-    sf::Text text, text2;
-    sf::RectangleShape shape(sf::Vector2f(600.f, 300.f));
-    
+        sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
-    sf::RectangleShape button(sf::Vector2f(600.f, 50.f));
-    button.setPosition(300.f, 360.f);
-    button.setFillColor(sf::Color(211, 78, 76));
+        if (this->m_menu_all_buttons[0].getGlobalBounds().contains(mousePos)) {
+            this->m_menu_all_buttons[0].setFillColor(CLICKED_COLOR);
+            this->handlePlayButton();
+        }
 
-    sf::Text button1_text;
+        else if (this->m_menu_all_buttons[1].getGlobalBounds().contains(mousePos)) {
+            this->m_isChoosingLevel = true;
+            this->m_delay_levelTime = 0.2;
+            this->m_menu_all_buttons[1].setFillColor(CLICKED_COLOR);
+        }
 
-    button1_text.setPosition(sf::Vector2f(550.f, 370.f));
+        else if (this->m_menu_all_buttons[2].getGlobalBounds().contains(mousePos)) {
+            this->m_isChoosingCharacter = true;
+            this->m_delay_characterTime = 0.2;
+            this->m_menu_all_buttons[2].setFillColor(CLICKED_COLOR);
+        }
+    }
 
-    button1_text.setString(content3);
+    else {
+        for (sf::RectangleShape &button : this->m_menu_all_buttons) {
+            button.setFillColor(BUTTON_COLOR);
+        }
+    }
 
-    button1_text.setCharacterSize(30);
+    /*if (ev->type == sf::Event::MouseButtonPressed) {
 
-    button1_text.setFont(font);
-
-    button1_text.setFillColor(sf::Color(252, 222, 202));
-
-    sf::RectangleShape button2(sf::Vector2f(600.f, 50.f));
-    button2.setPosition(300.f, 420.f);
-    button2.setFillColor(sf::Color(211, 78, 76));
-    sf::Text button2_text;
-
-    button2_text.setPosition(sf::Vector2f(470.f, 430.f));
-
-    button2_text.setString(content4);
-
-    button2_text.setCharacterSize(30);
-
-    button2_text.setFont(font);
-
-    button2_text.setFillColor(sf::Color(252, 222, 202));
-
-    sf::RectangleShape button3(sf::Vector2f(600.f, 50.f));
-    button3.setPosition(300.f, 480.f);
-    button3.setFillColor(sf::Color(211, 78, 76));
-
-    sf::Text button3_text;
-
-    button3_text.setPosition(sf::Vector2f(450.f, 490.f));
-
-    button3_text.setString(content5);
-
-    button3_text.setCharacterSize(30);
-
-    button3_text.setFont(font);
-
-    button3_text.setFillColor(sf::Color(252, 222, 202));
-
-    shape.setPosition(sf::Vector2f(300.f, 50.f));
-
-    shape.setFillColor(sf::Color(211, 78, 76));
-
-    text.setPosition(sf::Vector2f(350.f, 100.f));
-
-    text.setString(content);
-
-    text.setCharacterSize(60);
-
-    text.setFont(font);
-
-    text2.setPosition(sf::Vector2f(350.f, 170.f));
-
-    text2.setString(content2);
-
-    text2.setCharacterSize(75);
-
-    text2.setFont(font);
-
-    text.setFillColor(sf::Color(252, 222, 202));
-
-    text2.setFillColor(sf::Color(252, 222, 202));
-   
-    if (ev->type == sf::Event::MouseButtonPressed) {
-        
         sf::Vector2i position = sf::Mouse::getPosition(*window);
 
         sf::Vector2f float_position((float)position.x, (float)position.y);
@@ -115,42 +77,123 @@ void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observ
     }
 
     if (ev->type == sf::Event::MouseButtonReleased) {
-        button.setFillColor(sf::Color(211, 78, 76));
-        button2.setFillColor(sf::Color(211, 78, 76));
-        button3.setFillColor(sf::Color(211, 78, 76));
+        button.setFillColor(BUTTON_COLOR);
+        button2.setFillColor(BUTTON_COLOR);
+        button3.setFillColor(BUTTON_COLOR);
     }
 
     if (ev->type == sf::Event::MouseWheelScrolled) {
+
+    }*/
+
+}
+
+void MenuState::handlePlayButton(){
+    if (this->m_levelInput != "" && this->m_characterInput != "") {
+        this->active = false;
+    }
+}
+
+void MenuState::handleChoosingLevelButton(const sf::Event*& ev){
+    if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
         
+        this->m_levelInput = this->findContentOfButtonClicked(mousePos, this->m_level_all_buttons, this->m_level_texts);
+
+        if (this->m_levelInput != "") {
+            this->m_isChoosingLevel = false;
+        }
+    }
+}
+
+void MenuState::handleChoosingCharacterButton(const sf::Event*& ev){
+    if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
+
+        this->m_characterInput = this->findContentOfButtonClicked(mousePos, this->m_character_all_buttons, this->m_character_texts);
+
+        if (this->m_characterInput != "") {
+            this->m_isChoosingCharacter = false;
+        }
+    }
+}
+
+std::string MenuState::findContentOfButtonClicked(const sf::Vector2f& mousePos, const std::vector<sf::RectangleShape>& all_buttons, const std::vector<sf::Text>& texts){
+    int size = all_buttons.size();
+
+    for (int i = 0; i < size; i++) {
+        if (all_buttons[i].getGlobalBounds().contains(mousePos)) {
+            return texts[i].getString();
+        }
     }
 
-    window->draw(shape);
+    return "";
+}
 
-    window->draw(text);
+MenuState::MenuState(sf::RenderWindow* window, sf::Font& font){
+    this->active = true;
+    this->m_levelInput = "";
+    this->m_delay_levelTime = 0;
+    this->m_characterInput = "";
+    this->m_delay_characterTime = 0;
+    this->m_isChoosingLevel = this->m_isChoosingCharacter = false;
 
-    window->draw(text2);
+    this->view = View(sf::FloatRect(0, 0,window->getSize().x, window->getSize().y));
 
-    window->draw(button);
+    this->m_menu_contents = {"SUPER","MARIO BROS","PLAY","CHOOSE LEVEL","CHOOSE CHARACTER"};
+    this->m_menu_texts = std::vector<sf::Text>(5);
+    this->m_menu_all_buttons = std::vector<sf::RectangleShape>(3);
 
-    window->draw(button2);
+    this->m_level_contents = { "WORLD 1 - EASY","WORLD 2 - MEDIUM","WORLD 3 - HARD" };
+    this->m_level_all_buttons = std::vector<sf::RectangleShape>(3);
+    this->m_level_texts = std::vector<sf::Text>(3);
 
-    window->draw(button3);
+    this->m_character_contents = { "MARIO","LUIGI" };
+    this->m_character_all_buttons = std::vector<sf::RectangleShape>(2);
+    this->m_character_texts = std::vector<sf::Text>(2);
 
-    window->draw(button1_text);
 
-    window->draw(button2_text);
+    this->setAttributes<sf::RectangleShape>(this->m_menu_all_buttons, {}, std::vector<sf::Color>(this->m_menu_all_buttons.size(), BUTTON_COLOR), font, std::vector<sf::Vector2f>(this->m_menu_all_buttons.size(), sf::Vector2f(600.f, 50.f)), {}, {}, {}, { sf::Vector2f(300.f, 360.f), sf::Vector2f(300.f, 420.f), sf::Vector2f(300.f, 480.f) });
+    this->setAttributes<sf::Text>(this->m_menu_texts, this->m_menu_contents, std::vector<sf::Color>(this->m_menu_texts.size(), sf::Color(252, 222, 202)), font, {}, {}, {}, {60,75,30,30,30}, {sf::Vector2f(350.f, 100.f), sf::Vector2f(350.f, 170.f) ,sf::Vector2f(550.f, 370.f), sf::Vector2f(470.f, 430.f), sf::Vector2f(450.f, 490.f)});
+    this->m_menu_frames.setSize(sf::Vector2f(600.f, 300.f));
+    this->m_menu_frames.setPosition(sf::Vector2f(300.f, 50.f));
+    this->m_menu_frames.setFillColor(BUTTON_COLOR);
 
-    window->draw(button3_text);
+    this->setAttributes<sf::RectangleShape>(this->m_level_all_buttons, {}, std::vector<sf::Color>(this->m_level_all_buttons.size(), BUTTON_COLOR), font, std::vector<sf::Vector2f>(this->m_level_all_buttons.size(), sf::Vector2f(1200.f, 100.f)), {}, {}, {}, { sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 110.f), sf::Vector2f(0.f, 220.f) });
+    this->setAttributes<sf::Text>(this->m_level_texts, this->m_level_contents, std::vector<sf::Color>(this->m_level_texts.size(), sf::Color(252, 222, 202)), font,{}, {}, {}, std::vector<int>(this->m_level_texts.size(), 50), {sf::Vector2f(5.f, 5.f), sf::Vector2f(5.f, 115.f) ,sf::Vector2f(5.f, 225.f)});
 
-    view.setForWindow(window);
-	
-	//draw
+    this->setAttributes<sf::RectangleShape>(this->m_character_all_buttons, {}, std::vector<sf::Color>(this->m_character_all_buttons.size(), BUTTON_COLOR), font, std::vector<sf::Vector2f>(this->m_character_all_buttons.size(), sf::Vector2f(1200.f, 100.f)), {}, {}, {}, { sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 110.f) });
+    this->setAttributes<sf::Text>(this->m_character_texts, this->m_character_contents, std::vector<sf::Color>(this->m_character_texts.size(), sf::Color(252, 222, 202)), font, {}, {}, {}, {50,50}, {sf::Vector2f(5.f, 5.f), sf::Vector2f(5.f, 115.f)});
+}
 
-	//select level, character
+void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
+    this->handleInputEvent(ev,font);
 
-	//button play , press --> check selection
+    if (this->m_isChoosingLevel == true) {
+        if (this->m_delay_levelTime <= 0) {
+            this->drawChoosingLevel(window);
+        }
+        else {
+            this->m_delay_levelTime -= deltaTime;
+            this->drawMenu(window);
+        }
+    }
 
-	//press--> state = PlayingState
+    else if (this->m_isChoosingCharacter == true) {
+        if (this->m_delay_characterTime <= 0) {
+            this->drawChoosingCharacter(window);
+        }
+        else {
+            this->m_delay_characterTime -= deltaTime;
+            this->drawMenu(window);
+        }
+    }
+
+    else {
+        this->drawMenu(window);
+    }
+
+    view.setForWindow(window);	
 }
 
 bool MenuState::isActive(){

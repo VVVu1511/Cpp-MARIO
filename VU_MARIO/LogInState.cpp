@@ -6,12 +6,15 @@ LogInState::LogInState(){}
 
 LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
     this->valid_username = { "123" };
+    this->m_delay_log_in = 0;
+    this->m_logInClicked = 0;
     this->valid_password = { "123" };
     this->active = true;
     this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     this->max_chars = 40;
     this->m_current_time = 0;
-    this->m_allow_input_time = 0.09;
+    this->m_inputBoxActive = 0;
+    this->m_allow_input_time = 0.07;
 
     this->content = { "MARIO 1985","Username:","Password:","LOG IN","EXIT" };
     this->all_not_input_texts = std::vector<sf::Text>(5);
@@ -63,7 +66,7 @@ void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime
     this->m_current_time += deltaTime;
 
     if (this->m_current_time >= this->m_allow_input_time) {
-        this->m_allow_input_time += 0.09;
+        this->m_allow_input_time += 0.07;
         canInput = true;
     }
 
@@ -72,25 +75,25 @@ void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
         if (this->inputBoxes[0].getGlobalBounds().contains(mousePos)) {
-            m_inputBoxActive = true;
+            m_inputBoxActive = 1;
             this->inputBoxes[0].setOutlineColor(sf::Color::Green);
             this->inputBoxes[1].setOutlineColor(sf::Color::Black);
         }
 
         else if (this->inputBoxes[1].getGlobalBounds().contains(mousePos)) {
-            m_inputBoxActive = true;
+            m_inputBoxActive = 1;
             this->inputBoxes[0].setOutlineColor(sf::Color::Black);
             this->inputBoxes[1].setOutlineColor(sf::Color::Green);
         }
 
-        else if (m_inputBoxActive) {
-            m_inputBoxActive = false;
+        else if (m_inputBoxActive == 1) {
+            m_inputBoxActive = 0;
             this->inputBoxes[0].setOutlineColor(sf::Color::Black);
             this->inputBoxes[1].setOutlineColor(sf::Color::Black);
         }
     }
 
-    if (canInput && m_inputBoxActive && ev->type == sf::Event::TextEntered) {
+    if (canInput && m_inputBoxActive == 1 && ev->type == sf::Event::TextEntered) {
 
         if (this->inputBoxes[0].getOutlineColor() == sf::Color::Green) {
             handleTextInput(this->inputText[0], ev);
@@ -103,8 +106,8 @@ void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime
 
     this->inputDisplay[0].setString(this->inputText[0]);
     this->inputDisplay[1].setString(std::string(this->inputText[1].size(), '*'));
-    this->handleLogInButton(ev);
-    this->handleExitButton(window, ev);
+    this->handleLogInButton(ev,deltaTime);
+    this->handleExitButton(window, ev,deltaTime);
 }
 
 void LogInState::drawAll(sf::RenderWindow* window){
@@ -114,56 +117,68 @@ void LogInState::drawAll(sf::RenderWindow* window){
     draw<sf::Text>(window, this->all_not_input_texts);
 }
 
-void LogInState::handleLogInButton(const sf::Event* ev){
-    bool login = false;
-
+void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime){
+    
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
 
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
         if (this->all_buttons[0].getGlobalBounds().contains(mousePos)) {
-            login = true;
+            this->all_buttons[0].setFillColor(CLICKED_COLOR);
+            this->m_logInClicked = 1;
+            this->m_delay_log_in = 0.2;
         }
     }
 
-    if (login) {
+    if (this->m_logInClicked == 1) {
+        if (this->m_delay_log_in > 0) {
+            this->m_delay_log_in -= deltaTime;
+            return;
+        }
+
         if (this->checkValidInput()) {
             this->active = false;
-            std::cout << "hi";
+            sf::sleep(sf::seconds(0.2));
+        }
+
+        else {
+            this->m_logInClicked = 0;
         }
     }
 }
 
-void LogInState::handleExitButton(sf::RenderWindow* window,const sf::Event* ev){
+void LogInState::handleExitButton(sf::RenderWindow* window,const sf::Event* ev, const float& deltaTime){
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
 
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
         if (this->all_buttons[1].getGlobalBounds().contains(mousePos)) {
+            this->all_buttons[1].setFillColor(CLICKED_COLOR);
+            sf::sleep(sf::seconds(0.2));
             window->close();
         }
     }
 }
 
 bool LogInState::checkValidInput() {
-    bool contain_username = false;
-    bool contain_password = false;
+    std::bitset<1>contain_username = 0;
+    std::bitset<1>contain_password = 0;
 
     for (std::string username : valid_username) {
         if (inputText[0] == username) {
-            contain_username = true;
+            contain_username = 1;
             break;
         }
     }
 
     for (std::string password : valid_password) {
         if (inputText[1] == password) {
-            contain_password = true;
+            contain_password = 1;
             break;
         }
     }
 
-    if ((!contain_username) || (!contain_password)) return false;
+    if ((contain_username != 1) || (contain_password != 1)) return false;
 
     return true;
 }
