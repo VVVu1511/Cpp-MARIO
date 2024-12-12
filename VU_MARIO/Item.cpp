@@ -10,6 +10,10 @@
 #include "Animation.h"
 #include "View.h"
 
+bool Item::isMidAir(){
+    return this->m_position.y < this->m_baseGround - this->m_shape.getSize().y;
+}
+
 Item::Item(){}
 
 Item::~Item(){}

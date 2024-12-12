@@ -7,13 +7,13 @@
 ItemType BonusBrick::getRandomItem(){
 	int randValue = rand() % 100; 
 
-	if (randValue < 10) {
+	if (randValue > 95) {
 		return ItemType::star; 
 	}
-	else if (randValue < 30) {
+	else if (randValue > 90) {
 		return ItemType::flower; 
 	}
-	else if (randValue < 60) {
+	else if (randValue > 85) {
 		return ItemType::mushroom; 
 	}
 	

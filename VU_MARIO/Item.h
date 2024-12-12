@@ -12,6 +12,7 @@ class View;
 class Item : public WorldObject{
 protected:
 	float m_Vx;
+	virtual bool isMidAir();
 public:
 	Item();
 

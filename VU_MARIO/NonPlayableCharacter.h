@@ -19,8 +19,8 @@ public:
 
 	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
 	virtual void hit(Block* block, const std::vector<Observer*>& observers);
-	virtual void specificResultAfterBeingHit(const std::vector<Observer*>& observers);
-	virtual void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers);
+	virtual void specificResultAfterBeingHit(const std::vector<Observer*>& observers,const sf::FloatRect& bounds);
+	virtual void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds);
 	virtual bool canKill();
 };
 

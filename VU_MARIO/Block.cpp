@@ -115,6 +115,10 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         result->m_shape.setTextureRect(temp.second);
 
         sf::Vector2f tempPos = position;
+
+        if (type == BlockType::flag) {
+            tempPos.x = tempPos.x - result->m_shape.getSize().x + 5.f;
+        }
         
         tempPos.y -= temp.second.getSize().y;
         

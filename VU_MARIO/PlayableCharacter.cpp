@@ -44,7 +44,7 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 		}
 		
 		else {
-			character->specificResultAfterBeingHit(observers);
+			character->specificResultAfterBeingHit(observers,this->m_shape.getGlobalBounds());
 		}
 	}
 }
@@ -54,7 +54,7 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 
 	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition) == true) {
 		character->die();
-		character->specificResultAfterBeingStoodOn(observers);
+		character->specificResultAfterBeingStoodOn(observers,this->m_shape.getGlobalBounds());
 	}
 
 }

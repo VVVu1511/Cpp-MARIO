@@ -16,6 +16,8 @@ void Character::initVariables(const sf::Vector2f &position, const std::vector<An
 	
 	sf::Vector2f tempPos = position;
 
+	this->m_baseGround= tempPos.y;
+
 	tempPos.y -= images.second[0].getSize().y;
 	
 	this->m_position = tempPos;

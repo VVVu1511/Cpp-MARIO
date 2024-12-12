@@ -42,7 +42,6 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 		for (unsigned int i = 0; i < width; i++) {
 			sf::Color pixel = readMap.getPixel(i, j);
 
-
 			int type = 0;
 			
 			int id = instance->getID(pixel,type);

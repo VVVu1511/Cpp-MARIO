@@ -15,8 +15,9 @@ public:
 	void move(const float& deltaTime) override;
 	void die() override;
 	
-	void specificResultAfterBeingHit(const std::vector<Observer*>& observers) override;
-	void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers) override;
+	void specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds) override;
+	void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds) override;
+	void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) override;
 	bool canKill() override;
 };
 

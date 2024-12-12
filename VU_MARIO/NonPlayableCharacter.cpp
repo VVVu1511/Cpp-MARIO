@@ -56,14 +56,17 @@ void NonPlayableCharacter::move(const float& deltaTime){
 void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
 	sf::Vector2f newPosition;
 
-	if (character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition)) {
+	bool right = character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+	bool left = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
+
+	if (character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition) == true) {
 		this->m_position = newPosition;
 	}
-
-	else if ((character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
-		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
+	
+	else if (right == true || left == true)
 	{
 		this->m_position = newPosition;
+		
 		this->changeDirection();
 		character->changeDirection();
 	}
@@ -86,11 +89,11 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 
 }
 
-void NonPlayableCharacter::specificResultAfterBeingHit(const std::vector<Observer*>& observers){
+void NonPlayableCharacter::specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){
 
 }
 
-void NonPlayableCharacter::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers){}
+void NonPlayableCharacter::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){}
 
 bool NonPlayableCharacter::canKill(){
 	return true;
@@ -104,5 +107,5 @@ void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Obse
 }
 
 void NonPlayableCharacter::changeDirection(){
-	this->m_speed *= -1.002;
+	this->m_speed *= -1.00005;
 }

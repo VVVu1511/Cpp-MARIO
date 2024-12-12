@@ -27,33 +27,41 @@ void KoopaTroopa::die(){
 	this->m_shape.setSize(this->m_sprite.getGlobalBounds().getSize());
 }
 
-void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& observers){
+void KoopaTroopa::specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){
 	if (this->m_inShell) {
-		if (!this->m_canMoveInShell) {
+		if (this->m_canMoveInShell == false) {
 			sf::Vector2f newPosition;
 
-			bool left = this->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
-			bool right = this->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
+			bool left = this->beingHitFromLeftBy(bounds, newPosition);
+			bool right = this->beingHitFromRightBy(bounds, newPosition);
 
 			this->m_canMoveInShell = true;
-			this->m_speed = (right == true) ? 5.f : -5.f;
+			this->m_speed = (right == true) ? -10.f : 10.f;
 		}
 	}
 }
 
-void KoopaTroopa::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers){
+void KoopaTroopa::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){
 	
-	if (!this->m_inShell) {
-		this->m_inShell = true;
-	}
+}
 
+void KoopaTroopa::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
+	if (this->m_inShell && this->m_canMoveInShell) {
+		sf::Vector2f newPosition;
+
+		if ((character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) == true
+			|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) == true) {
+				character->die();
+		}
+	}
+	
 	else {
-		this->die();
+		NonPlayableCharacter::hit(character, observers);
 	}
 }
 
 bool KoopaTroopa::canKill(){
-	if (this->m_inShell && !this->m_canMoveInShell) return false;
+	if (this->m_inShell == true && this->m_canMoveInShell == false) return false;
 
 	return true;
 }
