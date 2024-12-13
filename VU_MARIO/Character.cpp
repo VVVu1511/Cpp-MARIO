@@ -48,7 +48,7 @@ void Character::die(){
 
 	m_animation.die(0.2, m_sprite);
 	
-	this->m_delay_dead_time = 0.2;
+	this->m_delay_dead_time = 0.5;
 
 }
 
@@ -64,6 +64,7 @@ bool Character::isDead()
 void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
 	if (this->m_delay_dead_time > 0) {
 		this->m_delay_dead_time -= deltaTime;
+		this->m_animation.die(deltaTime,this->m_sprite);
 	}
 
 	if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
@@ -71,7 +72,7 @@ void Character::update(const float& deltaTime, const std::vector<Observer*>& obs
 	}
 
 	else {
-		this->m_position.y = this->m_baseGround - this->m_shape.getSize().y;
+		if(this->m_position.y - this->m_baseGround < 15.f) this->m_position.y = this->m_baseGround - this->m_shape.getSize().y + 1.f;
 	}
 
 	if (this->m_sprite.getScale().x == -1.f) this->m_sprite.setPosition(sf::Vector2f(this->m_position.x + this->m_shape.getSize().x, this->m_position.y));

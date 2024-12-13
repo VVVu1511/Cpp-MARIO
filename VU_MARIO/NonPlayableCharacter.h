@@ -4,6 +4,7 @@
 enum class NonPlayableCharacterType;
 class Observer;
 class View;
+class PlayableCharacter;
 
 class NonPlayableCharacter : public Character{
 protected:
@@ -19,8 +20,8 @@ public:
 
 	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
 	virtual void hit(Block* block, const std::vector<Observer*>& observers);
-	virtual void specificResultAfterBeingHit(const std::vector<Observer*>& observers,const sf::FloatRect& bounds);
-	virtual void specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds);
+	virtual void specificResultAfterBeingHitByPlayable(const std::vector<Observer*>& observers,const PlayableCharacter& character);
+	virtual void specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, const PlayableCharacter& character);
 	virtual bool canKillPlayable(const sf::FloatRect& bounds);
 	virtual bool canKillNonPlayable(const sf::FloatRect& bounds);
 };

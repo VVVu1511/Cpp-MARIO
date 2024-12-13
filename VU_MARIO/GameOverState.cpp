@@ -6,6 +6,11 @@ GameOverState::GameOverState(){
 	text.setCharacterSize(100);
 	text.setFillColor(sf::Color(255, 255, 255, 128));
 	this->active = true;
+	this->delay_time = 2;
+}
+
+GameOverState::GameOverState(sf::RenderWindow* window) : GameOverState(){
+	this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 }
 
 GameOverState::~GameOverState(){
@@ -14,16 +19,9 @@ GameOverState::~GameOverState(){
 
 void GameOverState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
 	
-	if (expiredTime < 0) this->active = false;
+	if (this->delay_time < 0) this->active = false;
 
-	expiredTime -= deltaTime;
-	
-	if (!isCreated) {
-		view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-		isCreated = true;
-	}
-	
-	
+	this->delay_time -= deltaTime;
 	
 	text.setFont(font);
 	text.setPosition(window->getSize().x / 2 - text.getGlobalBounds().width / 2, window->getSize().y / 2 - text.getGlobalBounds().height / 2);
@@ -38,6 +36,8 @@ bool GameOverState::isActive(){
 	return this->active;
 }
 
-StateOfGame GameOverState::nextState(){
-	return StateOfGame::menu;
+GameState* GameOverState::nextState() {
+	return nullptr;
 }
+
+void GameOverState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){}

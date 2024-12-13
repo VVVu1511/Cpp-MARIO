@@ -14,11 +14,11 @@ protected:
 	float m_delay_dead_time;
 
 public:
-	virtual bool beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-	virtual bool beingHitFromLeftBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-	virtual bool beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-	virtual bool beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-	virtual bool underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition);
-	virtual bool canBeDeleted();
+	virtual bool beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
+	virtual bool beingHitFromLeftBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
+	virtual bool beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
+	virtual bool beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
+	virtual bool underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
+	virtual bool canBeDeleted() const;
 };
 

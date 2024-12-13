@@ -14,7 +14,6 @@ void AssetManager::loadBlocks(){
     sf::Texture* readFile = new sf::Texture;
     if (!readFile->loadFromFile(FILE[0])) {
         std::cout << "Cannot load from file " + FILE[0];
-        exit(1);
     }
     blocks = readFile;
 }
@@ -65,6 +64,7 @@ AssetManager* AssetManager::getInstance() {
 void AssetManager::destroy(){
 
     delete instance->blocks;
+  
 
     for (const sf::Texture* item : instance->items) {
         delete item;
@@ -78,6 +78,11 @@ void AssetManager::destroy(){
         delete non_playable_character;
     }
 
+    for (const sf::Texture* animation : instance->bonus_animation) {
+        delete animation;
+    }
+
+
     delete instance;
 
     instance = nullptr;
@@ -85,7 +90,6 @@ void AssetManager::destroy(){
 
 AssetManager::AssetManager(){
 }
-
 
 AssetManager::~AssetManager(){
     
@@ -155,9 +159,9 @@ int AssetManager::getID(sf::Color color, int& type)
     else if (result > offSetNonPlayableForColor) result -= offSetNonPlayableForColor;
     else if (result > offSetItemForColor) result -= offSetItemForColor;
 
+   
     return result;
 }
-
 
 sf::FloatRect AssetManager::ToFloatRect(const sf::IntRect& intRect)
 {
@@ -189,6 +193,8 @@ std::pair<sf::Texture*, std::vector<sf::IntRect>> AssetManager::getBonusAnimatio
 
     return std::pair<sf::Texture*, std::vector<sf::IntRect>>(this->bonus_animation[id - 1],this->bonusIntRect[id - 1]);
 }
+
+
 
 
 

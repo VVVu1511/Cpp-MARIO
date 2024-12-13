@@ -20,7 +20,7 @@ void AutomaticStrategy::changeAutomatically(const float& deltaTime, sf::Sprite& 
 	(curFrameNum < frameSize - m_bound) ? curFrameNum++ : curFrameNum = 0;
 	
 	this->setSprite(sprite);
-	this->m_time_each_frame = 0.2;
+	this->m_time_each_frame = 0.1;
 }
 
 AutomaticStrategy::~AutomaticStrategy(){}

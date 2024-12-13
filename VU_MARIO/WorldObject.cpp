@@ -1,7 +1,7 @@
 #include "WorldObject.h"
 #include<iostream>
 
-bool WorldObject::beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& newPosition){
+bool WorldObject::beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const{
     sf::FloatRect m_bounds = this->m_shape.getGlobalBounds();
 
     if (bounds.intersects(m_bounds)) {
@@ -14,11 +14,12 @@ bool WorldObject::beingHitFromBottom(const sf::FloatRect& bounds, sf::Vector2f& 
     return false;
 }
 
-bool WorldObject::beingHitFromLeftBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition){
+bool WorldObject::beingHitFromLeftBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const {
     sf::FloatRect m_bounds = this->m_shape.getGlobalBounds();
 
     if (bounds.intersects(m_bounds)) {
-        if (bounds.left + bounds.width <= m_bounds.left + 5.f) {
+        float width = bounds.left + bounds.width;
+        if (width <= m_bounds.left + 5.f) {
             newPosition = sf::Vector2f(m_bounds.left - bounds.width, bounds.top);
             return true;
         }        
@@ -27,7 +28,7 @@ bool WorldObject::beingHitFromLeftBy(const sf::FloatRect& bounds, sf::Vector2f& 
     return false;
 }
 
-bool WorldObject::beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition){
+bool WorldObject::beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const {
     sf::FloatRect m_bounds = this->m_shape.getGlobalBounds();
 
     if (bounds.intersects(m_bounds)) {
@@ -41,7 +42,7 @@ bool WorldObject::beingHitFromRightBy(const sf::FloatRect& bounds, sf::Vector2f&
     return false;
 }
 
-bool WorldObject::beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition) {
+bool WorldObject::beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const {
     sf::FloatRect m_bounds = this->m_shape.getGlobalBounds();
 
     if (bounds.intersects(m_bounds)) {
@@ -53,7 +54,7 @@ bool WorldObject::beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& n
     }
 }
 
-bool WorldObject::underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition){
+bool WorldObject::underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const {
     
     sf::FloatRect m_bounds = this->m_shape.getGlobalBounds();
 
@@ -68,6 +69,6 @@ bool WorldObject::underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPo
     return false;
 }
 
-bool WorldObject::canBeDeleted(){
+bool WorldObject::canBeDeleted() const {
     return this->m_delay_dead_time < 0;
 }

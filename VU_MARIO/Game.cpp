@@ -8,50 +8,17 @@
 #include "LogInState.h"
 
 void Game::chooseState(){
-    StateOfGame nextState = StateOfGame::playing;
+    if (this->currentState == nullptr || this->currentState->isActive() == true) return;
 
-    std::pair<int, PlayableCharacterType> mapAndmainCharacter;
+    GameState* temp = this->currentState;
 
-    if (this->state == StateOfGame::menu) {
-        mapAndmainCharacter = this->currentState->giveMapNumAndCharacterType();
-    }
-
-    if (currentState != nullptr) {
-        if (currentState->isActive()) return;
-
-        nextState = currentState->nextState();
-        
-        delete currentState;
-
-        currentState = nullptr;
-    }
-
-    switch (nextState) {
-    case StateOfGame::login:
-        currentState = new LogInState(this->window, this->font);
-        this->state = StateOfGame::login;
-        break;
-
-    case StateOfGame::menu:
-        currentState = new MenuState(this->window,this->font);
-        this->state = StateOfGame::menu;
-        break;
-
-    case StateOfGame::playing:
-        currentState = new PlayingState;
-        this->state = StateOfGame::playing;
-        break;
-
-    case StateOfGame::gameover:
-        currentState = new GameOverState;
-        this->state = StateOfGame::gameover;
-        break;
-    }
+    this->currentState = this->currentState->nextState();
+    
+    delete temp;
 }
 
 Game::Game(){
-    currentState = nullptr;
-    this->state = StateOfGame::playing;
+    this->currentState = new PlayingState;
 }
 
 void Game::run(){
@@ -63,13 +30,12 @@ void Game::run(){
     }
 
     ev = new sf::Event;
-    window->setFramerateLimit(60);
 	
     AssetManager::getInstance();
 
     while (window->isOpen()) {
         
-        this->chooseState();
+       /* this->chooseState();*/
 
         while (window->pollEvent(*ev)) {
             if (ev->type == sf::Event::Closed) {
@@ -88,7 +54,7 @@ void Game::run(){
        
         window->clear(sf::Color(92,148,252));
         
-        this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
+        if(this->currentState->isActive()) this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 
         window->display();
     }

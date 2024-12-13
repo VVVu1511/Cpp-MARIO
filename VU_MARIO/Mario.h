@@ -8,7 +8,6 @@ class Mario : public PlayableCharacter{
 
 public:
 	Mario();
-	void turnToSmall() override;
 	void collectGoodMushroom();
 	void collectStar();
 	void collectFlower();

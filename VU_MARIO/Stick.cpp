@@ -5,15 +5,13 @@ Stick::Stick(){}
 
 Stick::~Stick(){}
 
-void Stick::specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers){
+void Stick::specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers, const PlayableCharacter& character){
     for (Observer* observer : observers) {
         observer->hitStick();
     }
 }
 
-void Stick::specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers){
-    this->specificResultAfterBeingHitFromLeft(observers);
-}
+
 
 
 

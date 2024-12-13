@@ -105,11 +105,13 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 
 }
 
-void NonPlayableCharacter::specificResultAfterBeingHit(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){
-
+void NonPlayableCharacter::specificResultAfterBeingHitByPlayable(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+{
 }
 
-void NonPlayableCharacter::specificResultAfterBeingStoodOn(const std::vector<Observer*>& observers, const sf::FloatRect& bounds){}
+void NonPlayableCharacter::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+{
+}
 
 bool NonPlayableCharacter::canKillPlayable(const sf::FloatRect& bounds){
 	return true;
@@ -120,8 +122,9 @@ bool NonPlayableCharacter::canKillNonPlayable(const sf::FloatRect& bounds){
 }
 
 void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Observer*>& observers){
-	this->move(deltaTime);
-
+	
+	if(this->m_delay_dead_time == 0) this->move(deltaTime);
+	
 	Character::update(deltaTime,observers);
 	
 }

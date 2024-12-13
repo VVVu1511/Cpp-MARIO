@@ -20,6 +20,7 @@ private:
 	int lives = 2;
 	int mapNum;
 	float time = 400;
+	
 	int score = 0;
 	float expiredTimeOfChangingMap = 0;
 	float expiredTimeOfCongratulation = 0;
@@ -29,9 +30,9 @@ private:
 	std::vector<NonPlayableCharacter*>all_non_playable_characters;
 	std::vector<Block*>all_blocks;
 	std::vector<Item*>all_items;
+	std::vector<sf::Text>m_attributes_text;
 	
 	Collision collision;
-	
 	
 	void createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState);
 	void update(sf::RenderWindow* window, std::vector<Observer*>& observers, const float& deltaTime);
@@ -40,8 +41,7 @@ private:
 	void ultimateCleanUp();
 	void cleanObserverForEachLive(std::vector<Observer*>& observers);
 	void drawAttributes(sf::RenderWindow* window,const sf::Font& font);
-	void drawChangingMapState(sf::RenderWindow* window, const sf::Font& font);
-	void drawCongratulationState(sf::RenderWindow* window, const sf::Font& font);
+	
 
 	void RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font);
 public:
@@ -57,6 +57,8 @@ public:
 	void restart();
 	bool isActive() override;
 	void hitBonusBrick(const sf::Vector2f& position, ItemType type);
-	StateOfGame nextState() override;
+	GameState* nextState() override;
+	void drawState(sf::RenderWindow* window) override;
+	void handleInputEvent(const sf::Event*& ev, const sf::Font& font) override;
 };
 

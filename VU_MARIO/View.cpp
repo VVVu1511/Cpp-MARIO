@@ -31,9 +31,11 @@ void View::update(std::vector<PlayableCharacter*> playable, sf::RenderWindow* wi
 		}
 	}
 	
-	if (minPositionX > view.getCenter().x && chosen_character != nullptr) {
+	/*if (minPositionX > view.getCenter().x && chosen_character != nullptr) {
 		chosen_character->setCenterForView(view);
-	}
+	}*/
+
+	chosen_character->setCenterForView(view);
 
 	for (PlayableCharacter* character : playable) {
 		character->standInsideView(view);

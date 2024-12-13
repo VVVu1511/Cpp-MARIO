@@ -16,6 +16,7 @@
 #include "AssetManager.h"
 #include "AutomaticStrategy.h"
 #include "Animation.h"
+#include "PlayableCharacter.h"
 #include "Observer.h"
 #include "View.h"
 #include "Stick.h"
@@ -38,18 +39,26 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
     switch (type)
     {
     case BlockType::ground:
+    case BlockType::blue_ground:
         result = new Ground;
         result->interact = true;
         break;
     case BlockType::indestructible:
+    case BlockType::blue_indestructible:
+    case BlockType::dark_blue_indestructible:
         result = new IndestructibleBrick;
         result->interact = true;
         break;
     case BlockType::basebrick:
+    case BlockType::blue_baseBrick:
+    case BlockType::dark_blue_baseBrick:
+    case BlockType::light_blue_baseBrick:
         result = new BaseBrick;
         result->interact = true;
         break;
     case BlockType::brick:
+    case BlockType::blue_brick:
+    case BlockType::light_blue_brick:
         result = new Brick;
         result->interact = true;
         break;
@@ -72,6 +81,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         result->interact = false;
         break;
     case BlockType::cloud:
+    case BlockType::winter_cloud:
         result = new Cloud;
         result->interact = false;
         break;
@@ -81,13 +91,16 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         result->interact = false;
         break;
     case BlockType::flag:
+    case BlockType::winter_flag:
         result = new Flag;
         result->interact = true;
         break;
     case BlockType::stick:
+    case BlockType::winter_stick:
         result = new Stick;
         result->interact = true;
         break;
+
     default:
         result = nullptr;
         break;
@@ -179,7 +192,18 @@ bool Block::canInteract(){
     return this->interact;
 }
 
-void Block::jump(){}
+void Block::jump(){
+    this->m_position.y -= 10.f;
+}
+
+bool Block::connectToUnderground(){
+    return false;
+}
+
+bool Block::connectToGround()
+{
+    return false;
+}
 
 void Block::twinkle(const float& deltaTime){}
 
@@ -202,20 +226,21 @@ void Block::hit(Item* item, const std::vector<Observer*>& observers){
     }
 }
 
-void Block::specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers){
-
+void Block::specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+{
 }
 
-void Block::specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers){
-
+void Block::specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+{
 }
 
-void Block::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){
+void Block::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+{
 }
 
-void Block::beingHitFromBottomByBigMario(const std::vector<Observer*>& observers){
 
-}
+
+
 
 
 

@@ -29,22 +29,12 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
 	{
 
-		if (this->isSuper == true) {
-			character->die();
-			return;
-		}
-		
 		if (character->canKillPlayable(this->m_shape.getGlobalBounds())) {
-			if (!this->isBig) {
-				this->die();
-				return;
-			}
-
-			this->turnToSmall();
+			this->die();
 		}
 		
 		else {
-			character->specificResultAfterBeingHit(observers,this->m_shape.getGlobalBounds());
+			character->specificResultAfterBeingHitByPlayable(observers,*this);
 		}
 	}
 }
@@ -54,26 +44,26 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 
 	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition) == true) {
 		character->die();
-		character->specificResultAfterBeingStoodOn(observers,this->m_shape.getGlobalBounds());
+		character->specificResultAfterBeingStoodOnByPlayable(observers,*this);
 	}
 
 }
 
-void PlayableCharacter::shoot(){
-	if (this->isFire) {
-
-	}
+void PlayableCharacter::shoot(const float& deltaTime){
+	
 }
 
 void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
 	
+	//brick
+
+	//mario, big mario, super mario
+
 	sf::Vector2f newPosition;
 
 	if (block->beingHitFromBottom(this->m_shape.getGlobalBounds(),newPosition)) {
 
-		if(this->isBig) block->beingHitFromBottomByBigMario(observers);
-
-		block->specificResultAfterBeingHitFromBottom(observers);
+		block->specificResultAfterBeingHitFromBottom(observers,*this);
 
 		block->jump();
 
@@ -81,15 +71,17 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 	}
 
 	else if (block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) {
-		block->specificResultAfterBeingHitFromLeft(observers);
+		block->specificResultAfterBeingHitFromLeft(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;
+		std::cout << "h";
 	}
 
 	else if (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) {
-		block->specificResultAfterBeingHitFromRight(observers);
+		block->specificResultAfterBeingHitFromRight(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;
+		std::cout << "h";
 	}
 
 	else {
@@ -97,6 +89,27 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		this->m_Vy = 10.f;
 	}
 
+}
+
+void PlayableCharacter::StandOn(Block* block, const std::vector<Observer*>& observers){
+	if (block->connectToUnderground() == true)
+	{
+		sf::Vector2f newPosition;
+
+		if (block->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition)) {
+			this->m_position.y += 300.f;
+		}
+		
+	}
+	else if (block->connectToGround() == true) {
+		sf::Vector2f newPosition;
+		if (block->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition)) {
+			this->m_position.y -= 300.f;
+		}
+	}
+	else {
+		Character::StandOn(block, observers);
+	}
 }
 
 bool PlayableCharacter::findMinForView(float& minX){
@@ -121,22 +134,19 @@ void PlayableCharacter::standInsideView(sf::View& view){
 }
 
 void PlayableCharacter::collectGoodMushroom(){
-	if(!this->isBig) this->m_shape.setSize(sf::Vector2f(this->m_shape.getSize().x,this->m_shape.getSize().y * 2));
-
-	this->isBig = true;
+	
 }
 
 void PlayableCharacter::collectStar(){
-	this->isSuper = true;
+	
 }
 
-void PlayableCharacter::collectFlower(){
-	this->isFire = true;
+void PlayableCharacter::collectFlower() {
+
 }
 
-void PlayableCharacter::turnToSmall(){
-	this->m_shape.setSize(sf::Vector2f(32.f, 32.f));
-	this->isBig = false;
+bool PlayableCharacter::canDestroyBrick() const{
+	return false;
 }
 
 PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterType &type, const sf::Vector2f position)
@@ -161,16 +171,15 @@ PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterTyp
 
 		result->initVariables(position, {new KeyPressStrategy(images.first, images.second, 1.0 / 60), new LimitedTimeStrategy(images.first, images.second, 1.0 / 60), new AutomaticStrategy(images.first, images.second, 1.0 / 60)}, images);
 		
-		result->isBig = false;
-		result->isSuper = false;
-		result->isFire = false;
+
 	}
 
 	return result;
 }
 
 void PlayableCharacter::setCenterForView(sf::View& view){
-	view.setCenter(this->m_position.x, view.getCenter().y);
+	/*view.setCenter(this->m_position.x, view.getCenter().y);*/
+	view.setCenter(this->m_position.x, this->m_position.y);
 }
 
 void PlayableCharacter::move(const float& deltaTime){
@@ -199,7 +208,7 @@ void PlayableCharacter::move(const float& deltaTime){
 }
 
 void PlayableCharacter::update(const float& deltaTime, const std::vector<Observer*>& observers){
-	this->move(deltaTime);
+	if(m_delay_dead_time == 0) this->move(deltaTime);
 	
 	Character::update(deltaTime,observers);
 }

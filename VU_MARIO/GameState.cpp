@@ -1,13 +1,22 @@
 #include "GameState.h"
 
+std::string GameState::findContentOfButtonClicked(const sf::Vector2f& mousePos, const std::vector<sf::RectangleShape>& all_buttons, const std::vector<sf::Text>& texts) {
+    int size = all_buttons.size();
+
+    for (int i = 0; i < size; i++) {
+        if (all_buttons[i].getGlobalBounds().contains(mousePos)) {
+            return texts[i].getString();
+        }
+    }
+
+    return "";
+}
+
 GameState::GameState(){
 	this->active = true;
 }
 
-std::pair<int, PlayableCharacterType> GameState::giveMapNumAndCharacterType(){
-	
-	return std::pair<int, PlayableCharacterType>();
-}
+
 
 
 

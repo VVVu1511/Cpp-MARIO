@@ -10,7 +10,6 @@
 #include "View.h"
 #include <vector>
 
-
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
 	
 	this->cleanObserverForEachLive(observers);
@@ -37,7 +36,6 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 	unsigned int width = readMap.getSize().x;
 	unsigned int height = readMap.getSize().y;
 	
-
 	for (unsigned int j = 0; j < height; j++) {
 		for (unsigned int i = 0; i < width; i++) {
 			sf::Color pixel = readMap.getPixel(i, j);
@@ -47,20 +45,19 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 			int id = instance->getID(pixel,type);
 
 			
-			if (type >= 1 && type <= 16) {
+			if (type >= 1 && type <= 39) {
 				all_blocks.push_back(Block::createBlock(BlockType(id), sf::Vector2f(i * 32.f, j * 32.f)));
 			}
 
-			else if (type >= 17 && type <= 20) {
-				std::cout << type << " " << id;
+			else if (type >= 40 && type <= 43) {
 				all_items.push_back(Item::createItem(ItemType(id), sf::Vector2f(i * 32.f, j * 32.f)));
 			}
 
-			else if (type >= 21 && type <= 24) {
+			else if (type >= 44 && type <= 47) {
 				all_non_playable_characters.push_back(NonPlayableCharacter::createCharacter(NonPlayableCharacterType(id), sf::Vector2f(i * 32.f, j * 32.f)));
 			}
 
-			else if (type >= 25 && type <= 35) {
+			else if (type >= 48 && type <= 58) {
 				PlayableCharacter* new_character = PlayableCharacter::createCharacter(this->m_mainCharacterType, sf::Vector2f(i * 32.f, j * 32.f));
 				all_playable_characters.push_back(new_character);
 				
@@ -76,7 +73,7 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 
 void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& observers, const float& deltaTime){
 	
-	bool canPlay = false;
+	/*bool canPlay = false;
 	bool inTime = false;
 
 	for (PlayableCharacter* playable : all_playable_characters) {
@@ -93,10 +90,10 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 		inTime = true;
 	}
 
-	if (!canPlay || !inTime) {
+	if (canPlay == false || inTime == false) {
 		this->decreaseLives();
 		return;
-	}
+	}*/
 	
 	for (Block* block : all_blocks) {
 		if (block && block->canInteract() && block->standInView(view)) {
@@ -173,14 +170,6 @@ void PlayingState::temporaryCleanUp(){
 
 	}
 
-	for (int i = 0; i < all_playable_characters.size(); i++) {
-		if (all_playable_characters[i]->canBeDeleted()) {
-			delete all_playable_characters[i];
-			all_playable_characters.erase(all_playable_characters.begin() + i);
-		}
-
-	}
-
 	for (int i = 0; i < all_non_playable_characters.size(); i++) {
 		if (all_non_playable_characters[i]->canBeDeleted()) {
 			delete all_non_playable_characters[i];
@@ -246,56 +235,32 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 		break;
 	}
 
-	std::vector<sf::Text>attribute_text{5};
+	int size = this->m_attributes_text.size();
+
+	float offsetX = 20.f;
 	
-	attribute_text[0].setString(coins_value);
-	attribute_text[1].setString(lives_value);
-	attribute_text[2].setString(mapNum_value);
-	attribute_text[3].setString(time_value);
-	attribute_text[4].setString(score_value);
-
-	float offsetX = 30.f;
-
+	std::vector<std::string>temp = { coins_value,lives_value,mapNum_value,time_value,score_value };
+	
+	setAttributes<sf::Text>(this->m_attributes_text, temp, std::vector<sf::Color>(size, sf::Color(236, 234, 226)), font, {}, {}, {}, std::vector<int>(size, 40), {});
+	
 	for (int i = 0; i < 5; i++) {
-		attribute_text[i].setFillColor(sf::Color(236, 234, 226));
-		attribute_text[i].setFont(font);
-		attribute_text[i].setCharacterSize(40);
-		attribute_text[i].setPosition(sf::Vector2f(offsetX, 30.f));
 
-		offsetX += attribute_text[i].getGlobalBounds().width + 20.f;
+		this->m_attributes_text[i].setPosition(offsetX, 30.f);
+
+		offsetX += this->m_attributes_text[i].getGlobalBounds().width + 20.f;
 	}
 
-	view.setForAttributes(attribute_text);
 
-	for (int i = 0; i < 5; i++) {
-		window->draw(attribute_text[i]);
-	}
-}
+	view.setForAttributes(this->m_attributes_text);
 
-void PlayingState::drawChangingMapState(sf::RenderWindow* window, const sf::Font& font){
-	this->drawAttributes(window, font);
-}
-
-void PlayingState::drawCongratulationState(sf::RenderWindow* window, const sf::Font& font){
-	sf::Text text;
-
-	text.setString("Congratulations");
-
-	text.setFont(font);
-
-	text.setCharacterSize(100);
-
-	text.setPosition(window->getSize().x / 2 - text.getGlobalBounds().width / 2, window->getSize().y / 2 - text.getGlobalBounds().height / 2);
-
-	window->draw(text);
-
-	view.setForWindow(window);
+	draw<sf::Text>(window, this->m_attributes_text);
 }
 
 PlayingState::PlayingState(){
 	this->active = true;
 	this->mapNum = 1;
 	this->m_mainCharacterType = PlayableCharacterType::small_mario;
+	this->m_attributes_text = std::vector<sf::Text>(5);
 }
 
 PlayingState::PlayingState(const std::pair<int, PlayableCharacterType>& mapAndMainCharacter){
@@ -309,24 +274,14 @@ PlayingState::~PlayingState(){
 }
 
 void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
+	if(time == 400) this->createMap(window, observers, gameState);
 
-	if (this->expiredTimeOfChangingMap <= 0) {
-		if (this->isCreated == false) {
-			this->createMap(window, observers, gameState);
-			this->isCreated = true;
-		}
-
-		this->update(window, observers, deltaTime);
-
-		this->drawMap(window, font);
-
-		this->temporaryCleanUp();
-	}
-
-	else {
-		this->expiredTimeOfChangingMap -= deltaTime;
-		this->drawChangingMapState(window, font);
-	}
+	this->update(window, observers, deltaTime);
+	
+	this->drawMap(window, font);
+	
+	this->temporaryCleanUp();
+	
 }
 
 void PlayingState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
@@ -357,10 +312,7 @@ void PlayingState::decreaseLives(){
 }
 
 void PlayingState::changeMap(){
-	std::cout << "hi";
-
-	exit(1);
-
+	
 	if (mapNum < 3) {
 		mapNum++;
 		this->expiredTimeOfChangingMap = 2;
@@ -391,9 +343,16 @@ void PlayingState::hitBonusBrick(const sf::Vector2f& position, ItemType type) {
 	this->all_items.push_back(Item::createItem(type,sf::Vector2f(position.x + 5.f,position.y - 30.f)));
 }
 
-StateOfGame PlayingState::nextState()
-{
-	return StateOfGame();
+GameState* PlayingState::nextState(){
+	return nullptr;
+}
+
+void PlayingState::drawState(sf::RenderWindow* window){
+
+}
+
+void PlayingState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+
 }
 
 

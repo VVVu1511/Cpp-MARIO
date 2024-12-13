@@ -36,8 +36,8 @@ BonusBrick::~BonusBrick(){}
 void BonusBrick::twinkle(const float& deltaTime){
 	m_animation.changeAutomatically(deltaTime,this->m_sprite);
 }
-
-void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers){
+	
+void BonusBrick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers, const PlayableCharacter& character) {
 	for (Observer* observer : observers) {
 		observer->hitBonusBrick(sf::Vector2f(this->m_position.x, this->m_baseGround + this->m_shape.getSize().y), type);
 	}

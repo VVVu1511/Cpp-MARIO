@@ -8,6 +8,7 @@ class View {
 private:
 	sf::View view;
 	
+	
 public:
 	View();
 	View(sf::FloatRect floatRect);

@@ -43,7 +43,7 @@ LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
 
 void LogInState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){  
     this->handleEventForInput(ev, deltaTime,window);
-    this->drawAll(window);
+    this->drawState(window);
     this->view.setForWindow(window);
 }
 
@@ -51,9 +51,9 @@ bool LogInState::isActive(){
 	return this->active;
 }
 
-StateOfGame LogInState::nextState(){
+GameState* LogInState::nextState(){
 
-    return StateOfGame();
+    return nullptr;
 }
 
 void LogInState::handleTextInput(std::string &input, const sf::Event* ev) {
@@ -115,11 +115,15 @@ void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime
     this->handleExitButton(window, ev,deltaTime);
 }
 
-void LogInState::drawAll(sf::RenderWindow* window){
+void LogInState::drawState(sf::RenderWindow* window){
     draw<sf::RectangleShape>(window, this->inputBoxes);
     draw<sf::Text>(window, this->inputDisplay);
     draw<sf::RectangleShape>(window, this->all_buttons);
     draw<sf::Text>(window, this->all_not_input_texts);
+}
+
+void LogInState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+
 }
 
 void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime){

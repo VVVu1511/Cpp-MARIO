@@ -1,62 +1,8 @@
-﻿  BaseBrick.cpp
-  Block.cpp
-  BonusBrick.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\BonusBrick.cpp(25,28): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\BonusBrick.cpp(29,88): warning C4305: 'argument': truncation from 'double' to 'const float'
-  Brick.cpp
-  Castle.cpp
-  Character.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Character.cpp(49,18): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Character.cpp(51,28): warning C4305: '=': truncation from 'double' to 'float'
-  Cloud.cpp
-  Coin.cpp
-  Collision.cpp
-  Flag.cpp
-  Flower.cpp
-  Game.cpp
-  GoodMushroom.cpp
-  Ground.cpp
-  HorizontalPipe.cpp
-  IndestructibleBrick.cpp
-  Item.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Item.cpp(64,92): warning C4305: 'argument': truncation from 'double' to 'const float'
-  Mountain.cpp
-  NonPlayableCharacter.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\NonPlayableCharacter.cpp(36,93): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\NonPlayableCharacter.cpp(36,152): warning C4305: 'argument': truncation from 'double' to 'const float'
-  PlayableCharacter.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,90): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,154): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(162,216): warning C4305: 'argument': truncation from 'double' to 'const float'
+﻿  PlayableCharacter.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,90): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,154): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,216): warning C4305: 'argument': truncation from 'double' to 'const float'
+  WorldObject.cpp
   Generating Code...
-  Compiling...
-  PlayingState.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(27,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(27,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(160,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(176,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(184,20): warning C4018: '<': signed/unsigned mismatch
-  PlayingStateObserver.cpp
-  Star.cpp
-  Stick.cpp
-  Tree.cpp
-  VerticalPipe.cpp
-  Generating Code...
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\WorldObject.cpp(55): warning C4715: 'WorldObject::beingHitFromAbove': not all control paths return a value
   VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe

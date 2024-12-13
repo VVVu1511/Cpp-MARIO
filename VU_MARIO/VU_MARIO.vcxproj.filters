@@ -219,6 +219,27 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="ChangingMapState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ChoosingCharacterState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ChoosingLevelState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CongratulationState.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BigMario.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="FireMario.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperMario.cpp">
+      <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll">
@@ -390,6 +411,27 @@
     </ClInclude>
     <ClInclude Include="VerticalPipe.h">
       <Filter>Header Files\WorldObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangingMapState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ChoosingCharacterState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ChoosingLevelState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CongratulationState.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BigMario.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="FireMario.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperMario.h">
+      <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

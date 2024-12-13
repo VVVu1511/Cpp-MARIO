@@ -6,7 +6,7 @@ class Luigi : public PlayableCharacter{
 
 public:
 	Luigi();
-	void turnToSmall() override;
+	
 	void move();
 	void collectGoodMushroom();
 	void collectStar();

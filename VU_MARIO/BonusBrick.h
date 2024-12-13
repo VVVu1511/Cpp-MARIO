@@ -20,6 +20,6 @@ public:
 	
 	void twinkle(const float& deltaTime);
 	
-	void specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers) override;
+	void specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers, const PlayableCharacter& character) override;
 	void draw(sf::RenderWindow* window) override;
 };

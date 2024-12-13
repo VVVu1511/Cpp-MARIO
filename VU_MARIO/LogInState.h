@@ -31,7 +31,6 @@ private:
 
 	void handleTextInput(std::string& input,const sf::Event* ev);
 	void handleEventForInput(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window);
-	void drawAll(sf::RenderWindow* window);
 	void handleLogInButton(const sf::Event* ev, const float& deltaTime);
 	void handleExitButton(sf::RenderWindow* window,const sf::Event* ev, const float& deltaTime);
 	bool checkValidInput();
@@ -41,7 +40,9 @@ public:
 	LogInState(sf::RenderWindow* window, const sf::Font& font);
 	void execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font) override;
 	bool isActive() override;
-	StateOfGame nextState() override;
+	void drawState(sf::RenderWindow* window) override;
+	GameState* nextState() override;
+	void handleInputEvent(const sf::Event*& ev, const sf::Font& font) override;
 };
 
 
