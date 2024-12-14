@@ -22,6 +22,16 @@
 #include "Stick.h"
 
 
+void Block::updateGravity(){
+    if (this->m_position.y < this->m_baseGround) {
+        this->m_position.y += 5.f;
+    }
+
+    else {
+        this->m_position.y = this->m_baseGround;
+    }
+}
+
 bool Block::isMidAir(){
     return this->m_position.y < this->m_baseGround;
 }
@@ -169,18 +179,12 @@ void Block::draw(sf::RenderWindow* window) {
 }
 
 void Block::update(const float& deltaTime, const std::vector<Observer*>& observers) {
-
     this->twinkle(deltaTime);
 
-    if (this->m_position.y < this->m_baseGround) {
-        this->m_position.y += 5.f;
-    }
-
-    else {
-        this->m_position.y = this->m_baseGround;
-    }
+    this->updateGravity();
 
     this->m_shape.setPosition(this->m_position);
+
     this->m_sprite.setPosition(this->m_position);
 }
 
@@ -202,6 +206,10 @@ bool Block::connectToUnderground(){
 
 bool Block::connectToGround()
 {
+    return false;
+}
+
+bool Block::canKillPlayable(){
     return false;
 }
 

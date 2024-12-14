@@ -30,7 +30,7 @@ void AssetManager::loadItems(){
 }
 
 void AssetManager::loadNonPlayableCharacters(){
-    for (int i = 5; i <= 8; i++) {
+    for (int i = 5; i <= 9; i++) {
         sf::Texture* readFile = new sf::Texture;
         if (!readFile->loadFromFile(FILE[i])) {
             std::cout << "Cannot load from file " + FILE[i];
@@ -43,7 +43,7 @@ void AssetManager::loadNonPlayableCharacters(){
 void AssetManager::loadPlayableCharacters(){
     int size = FILE.size();
 
-    for (int i = 9; i < size; i++) {
+    for (int i = 10; i < size; i++) {
         sf::Texture* readFile = new sf::Texture;
         if (!readFile->loadFromFile(FILE[i])) {
             std::cout << "Cannot load from file " + FILE[i];

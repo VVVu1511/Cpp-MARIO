@@ -7,7 +7,6 @@
 #include<SFML/Graphics.hpp>
 #include <iostream>
 
-
 enum class BlockType{
 	big_castle = 1,
 	ground = 2,
@@ -60,10 +59,12 @@ enum class ItemType {
 };
 
 enum class NonPlayableCharacterType {
+	bullet = -1,
 	cactus = 1,
 	boss = 2,
 	goomba = 3,
 	koopatroopa = 4,
+	fire_sequence = 5,
 };
 
 enum class PlayableCharacterType {
@@ -82,11 +83,17 @@ enum class PlayableCharacterType {
 
 enum class BonusAnimation {
 	bonus_brick_animation = 1,
+	winter_goomba = 2,
+	main_fire = 3,
+	blue_turtle = 4,
+	red_turtle = 5,
+	boss_fire = 6,
 };
 
 class AssetManager {
 private:
 	const std::vector<sf::Color> all_colors = {
+	//blocks
 	sf::Color(1, 1, 1),
 	sf::Color(255, 126, 0),
 	sf::Color(255, 242, 0),
@@ -134,10 +141,11 @@ private:
 	sf::Color(1, 1, 1),
 	sf::Color(150,141,6),
 	//nonplayable
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(148, 66, 137),
+	sf::Color(113, 201, 154),
 	sf::Color(153,0,48),
 	sf::Color(168,230,29),
+	sf::Color(201,127,47),
 	//playable
 	sf::Color(237,28,36),
 	};
@@ -147,11 +155,11 @@ private:
 
 	const int offsetItem = 1;
 	const int offsetNonPlayable = 5;
-	const int offsetPlayable = 9;
+	const int offsetPlayable = 10;
 
 	const int offSetItemForColor = 39;
 	const int offSetNonPlayableForColor = 43;
-	const int offSetPlayableForColor = 47;
+	const int offSetPlayableForColor = 48;
 
 
 	std::vector<std::vector<sf::IntRect>> IntRect = {
@@ -179,6 +187,7 @@ private:
 	{sf::IntRect(0, 0, 64, 64), sf::IntRect(64, 0, 64, 64)},
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 16)},
 	{sf::IntRect(0, 0, 32, 48), sf::IntRect(32, 0, 32, 46),sf::IntRect(64, 0, 32, 28)},
+	{sf::IntRect(0, 0, 29, 80)},
 	//playable
 	{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32),
 	 sf::IntRect(96, 0, 32, 32), sf::IntRect(128, 0, 32, 32), sf::IntRect(160, 0, 32, 32)},
@@ -205,7 +214,14 @@ private:
 	};
 
 	
-	const std::vector<std::vector<sf::IntRect>>bonusIntRect = { {sf::IntRect(0,0,32,32),sf::IntRect(32,0,32,32)} };
+	const std::vector<std::vector<sf::IntRect>>bonusIntRect = { 
+		{sf::IntRect(0,0,32,32),sf::IntRect(32,0,32,32)} ,
+		{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32)},
+		{sf::IntRect(0, 0, 16, 16), sf::IntRect(16, 0, 16, 16), sf::IntRect(32, 0, 16, 16), sf::IntRect(48, 0, 16, 16)},
+		{sf::IntRect(0, 0, 32, 46), sf::IntRect(32, 0, 32, 48),sf::IntRect(64, 0, 32, 28)},
+		{sf::IntRect(0, 0, 32, 48), sf::IntRect(32, 0, 32, 46),sf::IntRect(64, 0, 32, 28)},
+		{sf::IntRect(0, 0, 48, 16), sf::IntRect(48, 0, 48, 16)},
+	};
 	
 	const std::vector<std::string>FILE = {
 		"../images/blocks.png",
@@ -217,6 +233,7 @@ private:
 		"../images/boss.png",
 		"../images/goomba.png",
 		"../images/koopatroopa.png",
+		"../images/fire_sequence.png",
 		"../images/small_mario.png",
 		"../images/small_mario_disappear.png",
 		"../images/small_super_mario.png",
@@ -232,6 +249,11 @@ private:
 
 	const std::vector<std::string>BONUS_FILE = {
 		"../images/bonus_brick.png",
+		"../images/winter_goomba.png",
+		"../images/main_fire.png",
+		"../images/blue_turtle.png",
+		"../images/red_turtle.png",
+		"../images/boss_fire.png",
 	};
 
 	

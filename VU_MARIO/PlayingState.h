@@ -60,5 +60,8 @@ public:
 	GameState* nextState() override;
 	void drawState(sf::RenderWindow* window) override;
 	void handleInputEvent(const sf::Event*& ev, const sf::Font& font) override;
+
+	void bossShootingEvent(const sf::Vector2f& position, const float& speed);
+	void mainShootingEvent(const sf::Vector2f& position, const float& speed);
 };
 

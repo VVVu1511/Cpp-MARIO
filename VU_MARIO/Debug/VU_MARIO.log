@@ -1,8 +1,7 @@
-﻿  PlayableCharacter.cpp
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,90): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,154): warning C4305: 'argument': truncation from 'double' to 'const float'
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(172,216): warning C4305: 'argument': truncation from 'double' to 'const float'
-  WorldObject.cpp
+﻿  Boss.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Boss.cpp(13,85): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Bullet.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\Bullet.cpp(17,85): warning C4305: 'argument': truncation from 'double' to 'const float'
+  NonPlayableCharacter.cpp
   Generating Code...
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\WorldObject.cpp(55): warning C4715: 'WorldObject::beingHitFromAbove': not all control paths return a value
   VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe

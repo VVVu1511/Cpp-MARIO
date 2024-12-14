@@ -15,6 +15,7 @@ class PlayableCharacter;
 class Block : public WorldObject{
 protected:
 	bool interact;
+	void updateGravity();
 	virtual bool isMidAir();
 
 public:
@@ -35,6 +36,7 @@ public:
 	virtual void jump();
 	virtual bool connectToUnderground();
 	virtual bool connectToGround();
+	virtual bool canKillPlayable();
 
 
 	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);

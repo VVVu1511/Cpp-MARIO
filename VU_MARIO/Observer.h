@@ -17,5 +17,7 @@ public:
 	virtual void collectStar() = 0;
 	virtual void hitBonusBrick(const sf::Vector2f& position, ItemType type) = 0;
 	virtual void hitStick() = 0;
+	virtual void bossShooting(const sf::Vector2f& position, const float& speed) = 0;
+	virtual void mainShooting(const sf::Vector2f& position, const float& speed) = 0;
 };
 

@@ -51,4 +51,12 @@ void PlayableCharacterObserver::hitBonusBrick(const sf::Vector2f& position, Item
 void PlayableCharacterObserver::hitStick(){
 }
 
+void PlayableCharacterObserver::bossShooting(const sf::Vector2f& position, const float& speed){
+
+}
+
+void PlayableCharacterObserver::mainShooting(const sf::Vector2f& position, const float& speed){
+	
+}
+
 

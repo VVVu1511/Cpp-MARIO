@@ -8,8 +8,17 @@
 #include "Observer.h"
 #include "KeyPressStrategy.h"
 #include "View.h"
+#include "Cactus.h"
+#include "KoopaTroopa.h"
+#include "FireSequence.h"
+#include "Boss.h"
+#include "Bullet.h"
 
-NonPlayableCharacter* NonPlayableCharacter::createCharacter(const NonPlayableCharacterType& type, const sf::Vector2f& m_position)
+void NonPlayableCharacter::setSize(const sf::Vector2f& size) {
+	this->m_shape.setSize(size);
+}
+
+NonPlayableCharacter* NonPlayableCharacter::createCharacter(const NonPlayableCharacterType& type, const sf::Vector2f& position,  const int& mapNum)
 {
 
 	NonPlayableCharacter* result = nullptr;
@@ -20,20 +29,30 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(const NonPlayableCha
 		result = new Goomba;
 		break;
 	case NonPlayableCharacterType::koopatroopa:
-		result = new KoopaTroopa;
+		result = new KoopaTroopa(mapNum);
 		break;
-	//case
+	case NonPlayableCharacterType::cactus:
+		result = new Cactus(position);
+		break;
+	case NonPlayableCharacterType::boss:
+		result = new Boss;
+		break;
+	case NonPlayableCharacterType::fire_sequence:
+		result = new FireSequence;
+		break;
+	case NonPlayableCharacterType::bullet:
+		result = new Bullet;
+		break;
+		//case
 	//case
 	default:
 		result = nullptr;
 		break;
 	}
 	
-	if (result)
+	if (result != nullptr)
 	{
-		std::pair<sf::Texture*, std::vector<sf::IntRect>> images = AssetManager::getInstance()->getNonPlayableCharacter(type);
-		
-		result->initVariables(m_position, {new LimitedTimeStrategy(images.first,images.second,1.0 / 60),new AutomaticStrategy(images.first,images.second,1.0 / 60) }, images);
+		result->initVariables(position, {}, {nullptr,{}});
 	}
 
 	return result;
@@ -67,6 +86,11 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 	{
 		if (character->canKillNonPlayable(this->m_shape.getGlobalBounds())) {
 			this->die();
+			return;
+		}
+
+		if (this->canKillNonPlayable(character->m_shape.getGlobalBounds())) {
+			character->die();
 			return;
 		}
 
@@ -105,11 +129,11 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 
 }
 
-void NonPlayableCharacter::specificResultAfterBeingHitByPlayable(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+void NonPlayableCharacter::specificResultAfterBeingHitByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character)
 {
 }
 
-void NonPlayableCharacter::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, const PlayableCharacter& character)
+void NonPlayableCharacter::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character)
 {
 }
 
@@ -121,12 +145,18 @@ bool NonPlayableCharacter::canKillNonPlayable(const sf::FloatRect& bounds){
 	return false;
 }
 
+bool NonPlayableCharacter::canBeKilledByPlayable(const sf::FloatRect& bounds){
+	return true;
+}
+
+void NonPlayableCharacter::shoot(const float& deltaTime, const std::vector<Observer*>& observers){}
+
 void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Observer*>& observers){
-	
+	this->shoot(deltaTime, observers);
+
 	if(this->m_delay_dead_time == 0) this->move(deltaTime);
 	
 	Character::update(deltaTime,observers);
-	
 }
 
 void NonPlayableCharacter::changeDirection(){

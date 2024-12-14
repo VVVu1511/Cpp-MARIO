@@ -27,7 +27,8 @@ public:
 	~Character();
 
 	virtual void move(const float& deltaTime) = 0;
-	virtual void die();
+
+	virtual void die() ;
 	virtual void reset();
 	virtual bool isDead();
 	virtual void update(const float& deltaTime, const std::vector<Observer*>& observers);

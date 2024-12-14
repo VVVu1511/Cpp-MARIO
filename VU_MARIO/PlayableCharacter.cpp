@@ -34,7 +34,7 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 		}
 		
 		else {
-			character->specificResultAfterBeingHitByPlayable(observers,*this);
+			character->specificResultAfterBeingHitByPlayable(observers,this);
 		}
 	}
 }
@@ -43,8 +43,10 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 	sf::Vector2f newPosition;
 
 	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition) == true) {
-		character->die();
-		character->specificResultAfterBeingStoodOnByPlayable(observers,*this);
+		
+		if(character->canBeKilledByPlayable(this->m_shape.getGlobalBounds()) == true) character->die();
+		
+		character->specificResultAfterBeingStoodOnByPlayable(observers,this);
 	}
 
 }
@@ -55,14 +57,21 @@ void PlayableCharacter::shoot(const float& deltaTime){
 
 void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
 	
+	sf::Vector2f newPosition;
 	//brick
-
+	bool bottom = block->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition);
+	bool left = block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+	bool right = block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
 	//mario, big mario, super mario
 
-	sf::Vector2f newPosition;
-
-	if (block->beingHitFromBottom(this->m_shape.getGlobalBounds(),newPosition)) {
-
+	if (block->canKillPlayable() == true) {
+		if (bottom == true || left == true || right == true) {
+			this->die();
+		}
+		return;
+	}
+	
+	if (bottom == true) {
 		block->specificResultAfterBeingHitFromBottom(observers,*this);
 
 		block->jump();
@@ -70,14 +79,14 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		this->m_position = newPosition;
 	}
 
-	else if (block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) {
+	else if (left == true) {
 		block->specificResultAfterBeingHitFromLeft(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;
 		std::cout << "h";
 	}
 
-	else if (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) {
+	else if (right == true) {
 		block->specificResultAfterBeingHitFromRight(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;

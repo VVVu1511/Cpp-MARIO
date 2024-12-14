@@ -46,3 +46,14 @@ void PlayingStateObserver::hitStick(){
 		gameState->changeMap();
 	}
 }
+
+void PlayingStateObserver::bossShooting(const sf::Vector2f& position, const float& speed){
+	for (PlayingState* gameState : GameStates) {
+		/*gameState->bossShootingEvent(position,speed);*/
+	}
+}
+
+void PlayingStateObserver::mainShooting(const sf::Vector2f& position, const float& speed){
+
+
+}

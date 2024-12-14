@@ -240,6 +240,18 @@
     <ClCompile Include="SuperMario.cpp">
       <Filter>Source Files\WorldObject\PlayableCharacter</Filter>
     </ClCompile>
+    <ClCompile Include="Cactus.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSequence.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll">
@@ -432,6 +444,18 @@
     </ClInclude>
     <ClInclude Include="SuperMario.h">
       <Filter>Header Files\WorldObject\PlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Cactus.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSequence.h">
+      <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

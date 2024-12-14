@@ -143,7 +143,10 @@
     <ClCompile Include="BigMario.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BonusBrick.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Cactus.cpp" />
     <ClCompile Include="Castle.cpp" />
     <ClCompile Include="ChangingMapState.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -154,6 +157,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CongratulationState.cpp" />
     <ClCompile Include="FireMario.cpp" />
+    <ClCompile Include="FireSequence.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Flower.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -211,7 +215,10 @@
     <ClInclude Include="BigMario.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BonusBrick.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Cactus.h" />
     <ClInclude Include="Castle.h" />
     <ClInclude Include="ChangingMapState.h" />
     <ClInclude Include="Character.h" />
@@ -222,6 +229,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CongratulationState.h" />
     <ClInclude Include="FireMario.h" />
+    <ClInclude Include="FireSequence.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Flower.h" />
     <ClInclude Include="Game.h" />

@@ -14,7 +14,6 @@ protected:
 public:
 	static PlayableCharacter* createCharacter(const PlayableCharacterType &type,const sf::Vector2f position);
 	
-
 	void setCenterForView(sf::View& view);
 	void move(const float& deltaTime) override;
 	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;

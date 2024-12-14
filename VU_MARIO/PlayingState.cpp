@@ -53,20 +53,18 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 				all_items.push_back(Item::createItem(ItemType(id), sf::Vector2f(i * 32.f, j * 32.f)));
 			}
 
-			else if (type >= 44 && type <= 47) {
-				all_non_playable_characters.push_back(NonPlayableCharacter::createCharacter(NonPlayableCharacterType(id), sf::Vector2f(i * 32.f, j * 32.f)));
+			else if (type >= 44 && type <= 48) {
+				all_non_playable_characters.push_back(NonPlayableCharacter::createCharacter(NonPlayableCharacterType(id), sf::Vector2f(i * 32.f, j * 32.f),this->mapNum));
 			}
 
-			else if (type >= 48 && type <= 58) {
+			else if (type >= 49 && type <= 59) {
 				PlayableCharacter* new_character = PlayableCharacter::createCharacter(this->m_mainCharacterType, sf::Vector2f(i * 32.f, j * 32.f));
 				all_playable_characters.push_back(new_character);
-				
 				for (Observer* observer : observers) {
 					observer->addPlayableCharacter(new_character);
 				}
-			}
-			
-		}
+			}			
+		}	
 	}
 
 }
@@ -96,19 +94,19 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	}*/
 	
 	for (Block* block : all_blocks) {
-		if (block && block->canInteract() && block->standInView(view)) {
+		if (block != nullptr && block->canInteract() == true && block->standInView(view) == true) {
 			block->update(deltaTime, observers);
 		}
 	}
 
 	for (Item* item : all_items) {
-		if (item && item->standInView(view)) {
+		if (item != nullptr && item->standInView(view) == true) {
 			item->update(deltaTime, observers);
 		}
 	}
 
 	for (NonPlayableCharacter* non_playable : all_non_playable_characters) {
-		if (non_playable && non_playable->standInView(view)) {
+		if (non_playable != nullptr && non_playable->standInView(view) == true) {
 			non_playable->update(deltaTime, observers);
 		}
 	}	
@@ -155,27 +153,29 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 
 void PlayingState::temporaryCleanUp(){
 	for (int i = 0; i < all_blocks.size(); i++) {
-		if (all_blocks[i]->canBeDeleted()) {
+		if (all_blocks[i]->canBeDeleted() == true) {
 			delete all_blocks[i];
+			all_blocks[i] = nullptr;
 			all_blocks.erase(all_blocks.begin() + i);
 		}
 			
 	}
 
 	for (int i = 0; i < all_items.size(); i++) {
-		if (all_items[i]->canBeDeleted()) {
+		if (all_items[i]->canBeDeleted() == true) {
 			delete all_items[i];
+			all_items[i] = nullptr;
 			all_items.erase(all_items.begin() + i);
 		}
 
 	}
 
 	for (int i = 0; i < all_non_playable_characters.size(); i++) {
-		if (all_non_playable_characters[i]->canBeDeleted()) {
+		if (all_non_playable_characters[i]->canBeDeleted() == true) {
 			delete all_non_playable_characters[i];
+			all_non_playable_characters[i] = nullptr;
 			all_non_playable_characters.erase(all_non_playable_characters.begin() + i);
 		}
-
 	}
 }
 
@@ -352,6 +352,18 @@ void PlayingState::drawState(sf::RenderWindow* window){
 }
 
 void PlayingState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+
+}
+
+void PlayingState::bossShootingEvent(const sf::Vector2f& position, const float& speed){
+	NonPlayableCharacter* new_bullet = NonPlayableCharacter::createCharacter(NonPlayableCharacterType::bullet, position, this->mapNum);
+
+	if(speed < 0) this->all_non_playable_characters[this->all_non_playable_characters.size() - 1]->changeDirection();
+
+	this->all_non_playable_characters.push_back(new_bullet);
+}
+
+void PlayingState::mainShootingEvent(const sf::Vector2f& position, const float& speed){
 
 }
 
