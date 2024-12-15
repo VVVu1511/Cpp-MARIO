@@ -8,7 +8,7 @@ private:
 	
 public:
 	Star();
-	void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	void beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers);
 	void move(const float& deltaTime) override;
 	
 };

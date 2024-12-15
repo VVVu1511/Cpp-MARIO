@@ -5,8 +5,8 @@ Coin::Coin()
 {
 }
 
-void Coin::beingCollectedByPlayable(const std::vector<Observer*>& observers){
-	Item::beingCollectedByPlayable(observers);
+void Coin::beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers){
+	Item::beingCollectedByPlayable(character,observers);
 
 	for (Observer* observer : observers) {
 		observer->collectCoins();

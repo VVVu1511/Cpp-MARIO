@@ -5,11 +5,11 @@ GoodMushroom::GoodMushroom()
 {
 }
 
-void GoodMushroom::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+void GoodMushroom::beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers){
 	//sound
-	Item::beingCollectedByPlayable(observers);
+	Item::beingCollectedByPlayable(character,observers);
 
 	for (Observer* observer : observers) {
-		observer->collectGoodMushroom();
+		observer->collectGoodMushroom(character);
 	}
 }

@@ -23,16 +23,22 @@ void PlayingStateObserver::collectCoins(){
 	}
 }
 
-void PlayingStateObserver::collectFlower(){
-	
+void PlayingStateObserver::collectFlower(PlayableCharacter* character){
+	for (PlayingState* gameState : GameStates) {
+		gameState->mainCollectingFlowerEvent(character);
+	}
 }
 
-void PlayingStateObserver::collectGoodMushroom(){
-	
+void PlayingStateObserver::collectGoodMushroom(PlayableCharacter* character){
+	for (PlayingState* gameState : GameStates) {
+		gameState->mainCollectingMushroomEvent(character);
+	}
 }
 
-void PlayingStateObserver::collectStar(){
-
+void PlayingStateObserver::collectStar(PlayableCharacter* character){
+	for (PlayingState* gameState : GameStates) {
+		gameState->mainCollectingStarEvent(character);
+	}
 }
 
 void PlayingStateObserver::hitBonusBrick(const sf::Vector2f& position, ItemType type) {
@@ -49,11 +55,18 @@ void PlayingStateObserver::hitStick(){
 
 void PlayingStateObserver::bossShooting(const sf::Vector2f& position, const float& speed){
 	for (PlayingState* gameState : GameStates) {
-		/*gameState->bossShootingEvent(position,speed);*/
+		gameState->bossShootingEvent(position,speed);
 	}
 }
 
 void PlayingStateObserver::mainShooting(const sf::Vector2f& position, const float& speed){
+	for (PlayingState* gameState : GameStates) {
+		gameState->mainShootingEvent(position, speed);
+	}
+}
 
-
+void PlayingStateObserver::mainTurnToSmall(PlayableCharacter* character){
+	for (PlayingState* gameState : GameStates) {
+		gameState->mainBecomeSmall(character);
+	}
 }

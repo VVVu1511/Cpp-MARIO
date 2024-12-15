@@ -15,7 +15,7 @@ public:
 	~View();
 
 	void setForAttributes(std::vector<sf::Text>& texts);
-	void update(std::vector<PlayableCharacter*> playable,sf::RenderWindow* window);
+	void update(const std::vector<PlayableCharacter*>& playable,sf::RenderWindow* window);
 	void setForWindow(sf::RenderWindow* window);
 	bool containObjectAt(const sf::FloatRect& bounds);
 };

@@ -9,6 +9,10 @@
 #include "PlayableCharacterObserver.h"
 #include "View.h"
 #include <vector>
+#include "FireMario.h"
+#include "SuperMario.h"
+#include "BigMario.h"
+#include "Mario.h"
 
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
 	
@@ -16,8 +20,11 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 
 	AssetManager* instance = AssetManager::getInstance();
 	
-	observers.push_back(new PlayingStateObserver);
-	observers.push_back(new PlayableCharacterObserver);
+	Observer* observer1 = new PlayingStateObserver;
+	Observer* observer2 = new PlayableCharacterObserver;
+
+	observers.push_back(observer1);
+	observers.push_back(observer2);
 	
 	for (Observer* observer : observers) {
 		observer->addPlayingState(gameState);
@@ -117,7 +124,7 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	
 	collision.handleAllCollision(this->all_playable_characters, this->all_non_playable_characters, this->all_items, this->all_blocks, deltaTime, observers, this->view);
 
-	view.update(all_playable_characters, window);
+	view.update(this->all_playable_characters, window);
 }
 
 void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
@@ -125,25 +132,25 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 	this->drawAttributes(window, font);
 
 	for (Block* block : this->all_blocks) {
-		if (block && block->standInView(view)) {
+		if (block != nullptr && block->standInView(view)) {
 			block->draw(window);
 		}
 	}
 
 	for (Item* item : this->all_items) {
-		if (item && item->standInView(view)) {
+		if (item != nullptr && item->standInView(view)) {
 			item->draw(window);
 		}
 	}
 
 	for (NonPlayableCharacter* non_playable : this->all_non_playable_characters) {
-		if (non_playable && non_playable->standInView(view)) {
+		if (non_playable != nullptr && non_playable->standInView(view)) {
 			non_playable->draw(window);
 		}
 	}
 
 	for (PlayableCharacter* playable : this->all_playable_characters) {
-		if (playable) {
+		if (playable != nullptr) {
 			playable->draw(window);
 		}
 	}
@@ -170,7 +177,7 @@ void PlayingState::temporaryCleanUp(){
 
 	}
 
-	for (int i = 0; i < all_non_playable_characters.size(); i++) {
+	for (int i = 0; i < this->all_non_playable_characters.size(); i++) {
 		if (all_non_playable_characters[i]->canBeDeleted() == true) {
 			delete all_non_playable_characters[i];
 			all_non_playable_characters[i] = nullptr;
@@ -356,15 +363,63 @@ void PlayingState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
 }
 
 void PlayingState::bossShootingEvent(const sf::Vector2f& position, const float& speed){
-	NonPlayableCharacter* new_bullet = NonPlayableCharacter::createCharacter(NonPlayableCharacterType::bullet, position, this->mapNum);
+	if (this->all_non_playable_characters.size() == 24) {
+		return;
+	}
 
-	if(speed < 0) this->all_non_playable_characters[this->all_non_playable_characters.size() - 1]->changeDirection();
+	NonPlayableCharacter* new_bullet = nullptr;
+	
+	new_bullet = NonPlayableCharacter::createCharacter(NonPlayableCharacterType::bullet, position, this->mapNum);
+	
+	if(speed < 0) new_bullet->changeDirection();
 
 	this->all_non_playable_characters.push_back(new_bullet);
 }
 
 void PlayingState::mainShootingEvent(const sf::Vector2f& position, const float& speed){
+	if (this->all_playable_characters.size() == 2) {
+		return;
+	}
 
+	PlayableCharacter* new_good_bullet = nullptr;
+
+	new_good_bullet = PlayableCharacter::createCharacter(PlayableCharacterType::good_bullet, position);
+
+	if (speed < 0) new_good_bullet->changeDirection();
+
+	this->all_playable_characters.push_back(new_good_bullet);
+}
+
+void PlayingState::mainCollectingFlowerEvent(PlayableCharacter* character){
+	if (character->canAdvanced() == true) {
+		PlayableCharacter* temp = all_playable_characters[0];
+		all_playable_characters[0] = new FireMario(temp);
+		delete temp;
+	}
+}
+
+void PlayingState::mainCollectingMushroomEvent(PlayableCharacter* character){
+	if (character->canAdvanced() == true) {
+		PlayableCharacter* temp = all_playable_characters[0];
+		all_playable_characters[0] = new BigMario(temp);
+		delete temp;
+	}
+}
+
+void PlayingState::mainCollectingStarEvent(PlayableCharacter* character){
+	if (character->canAdvanced() == true) {
+		PlayableCharacter* temp = all_playable_characters[0];
+		all_playable_characters[0] = new SuperMario(temp);
+		delete temp;
+	}
+}
+
+void PlayingState::mainBecomeSmall(PlayableCharacter* character){
+	if (character->canAdvanced() == false) {
+		PlayableCharacter* temp = all_playable_characters[0];
+		all_playable_characters[0] = new Mario(temp);
+		delete temp;
+	}
 }
 
 

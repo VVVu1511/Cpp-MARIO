@@ -13,7 +13,7 @@ public:
 	KoopaTroopa(const int& mapNum);
 
 	void move(const float& deltaTime) override;
-	void die() override;
+	void die(const std::vector<Observer*>& observers) override;
 	
 	void specificResultAfterBeingHitByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character) override;
 	virtual void specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character) override;

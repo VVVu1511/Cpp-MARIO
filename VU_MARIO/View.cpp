@@ -21,12 +21,12 @@ View::~View() {
 	
 }
 
-void View::update(std::vector<PlayableCharacter*> playable, sf::RenderWindow* window){
+void View::update(const std::vector<PlayableCharacter*>& playable, sf::RenderWindow* window){
 	float minPositionX = std::numeric_limits<float>::max();
 	PlayableCharacter* chosen_character = nullptr;
 
 	for (PlayableCharacter* character : playable) {
-		if (character->findMinForView(minPositionX)) {
+		if (character->findMinForView(minPositionX) == true) {
 			chosen_character = character;
 		}
 	}

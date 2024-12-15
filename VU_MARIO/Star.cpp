@@ -6,11 +6,11 @@ Star::Star(){
 	
 }
 
-void Star::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+void Star::beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers){
 	//sound
-	Item::beingCollectedByPlayable(observers);
+	Item::beingCollectedByPlayable(character,observers);
 	for (Observer* observer : observers) {
-			observer->collectStar();
+		observer->collectStar(character);
 	}
 }
 

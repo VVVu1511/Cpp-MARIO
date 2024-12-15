@@ -1,14 +1,16 @@
 #pragma once
-#include "Mario.h"
+#include "PlayableCharacter.h"
 
-class FireMario : public Mario{
+class FireMario : public PlayableCharacter{
 private:
 	float m_time_shoot;
 	void setTimeShoot();
+	void init();
 	void setTimeAlive();
 public:
 	FireMario();
-	void shoot(const float& deltaTime) override;
+	FireMario(PlayableCharacter* character);
+	void shoot(const float& deltaTime, const std::vector<Observer*>& observers) override;
 	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;
 };
 

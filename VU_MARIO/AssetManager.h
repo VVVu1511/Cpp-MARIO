@@ -68,6 +68,7 @@ enum class NonPlayableCharacterType {
 };
 
 enum class PlayableCharacterType {
+	good_bullet = -1,
 	small_mario = 1,
 	small_mario_disappear = 2,
 	small_super_mario = 3,
@@ -128,13 +129,13 @@ private:
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
+	sf::Color(194, 192, 93),
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(76, 82, 81),
+	sf::Color(139, 150, 149),
 	//item
 	sf::Color(1, 1, 1),
 	sf::Color(1, 1, 1),

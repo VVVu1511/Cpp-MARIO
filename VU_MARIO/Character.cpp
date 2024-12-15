@@ -12,6 +12,10 @@ bool Character::standInView(View view) {
 	return view.containObjectAt(this->m_shape.getGlobalBounds());
 }
 
+bool Character::canAdvanced(){
+	return false;
+}
+
 void Character::initVariables(const sf::Vector2f &position, const std::vector<AnimationStrategy*>& animationStrategy,const std::pair<sf::Texture*, std::vector<sf::IntRect>> &images){
 	
 	sf::Vector2f tempPos = position;
@@ -44,7 +48,7 @@ Character::~Character(){
 	
 }
 
-void Character::die() {
+void Character::die(const std::vector<Observer*>& observers) {
 
 	this->m_animation.die(0.2, m_sprite);
 	
@@ -62,7 +66,7 @@ bool Character::isDead()
 }
 
 void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
-	if (this->m_delay_dead_time > 0) {
+	if (this->m_delay_dead_time > 0 && this->canAdvanced() == true) {
 		this->m_delay_dead_time -= deltaTime;
 		this->m_animation.die(deltaTime,this->m_sprite);
 	}

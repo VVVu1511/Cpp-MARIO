@@ -1,29 +1,34 @@
 #include "Mario.h"
+#include "AssetManager.h"
+#include "KeyPressStrategy.h"
+#include "LimitedTimeStrategy.h"
 
-Mario::Mario(){}
-
-void Mario::collectGoodMushroom(){
-	
-}
-
-void Mario::collectStar(){
-	
-}
-
-void Mario::collectFlower(){
-	/*AssetManager* instance = AssetManager::getInstance();
-
-	PlayableCharacter::collectFlower();
+void Mario::init()
+{
+	AssetManager* instance = AssetManager::getInstance();
 
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> frames;
 
-	if (this->isBig) {
-		frames = instance->getPlayableCharacter(PlayableCharacterType::big_fire_mario);
-	}
+	frames = instance->getPlayableCharacter(PlayableCharacterType::small_mario);
 
-	else frames = instance->getPlayableCharacter(PlayableCharacterType::small_fire_mario);
+	AnimationStrategy* strategy = new KeyPressStrategy(frames.first, frames.second, 1 / 60);
+	AnimationStrategy* strategy2 = new LimitedTimeStrategy(frames.first, frames.second, 1 / 60);
 
-	this->m_animation.changeTexture(frames.first, frames.second);*/
+	this->m_animation.addStrategy(strategy);
+	this->m_animation.addStrategy(strategy2);
+}
+
+Mario::Mario(){
+	this->init();
+}
+
+Mario::Mario(PlayableCharacter* character) : PlayableCharacter(*character){
+	this->init();
+}
+
+bool Mario::canAdvanced()
+{
+	return true;
 }
 
 

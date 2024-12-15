@@ -8,7 +8,7 @@ void Bullet::move(){
 }
 
 Bullet::Bullet(){
-	this->m_speed = 2.f;
+	this->m_speed = 0.5f;
 
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
@@ -36,12 +36,12 @@ void Bullet::hit(NonPlayableCharacter* character, const std::vector<Observer*>& 
 {
 }
 
-void Bullet::hit(Block* block, const std::vector<Observer*>& observers)
-{
-}
+//void Bullet::hit(Block* block, const std::vector<Observer*>& observers)
+//{
+//}
 
 void Bullet::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character){
-	character->die();
+	character->die(observers);
 }
 
 bool Bullet::canBeKilledByPlayable(const sf::FloatRect& bounds)

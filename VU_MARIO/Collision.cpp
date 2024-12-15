@@ -13,7 +13,7 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 	for (PlayableCharacter* good_character : good_characters) {
 		good_character->reset();
 		for (Block* block : blocks) {
-			if (block->canInteract() && block->standInView(view)) {
+			if (block != nullptr && block->canInteract() == true && block->standInView(view)) {
 				GoodCharacterAndBlock(good_character, block, deltaTime, observers);
 			}
 		}
@@ -22,7 +22,7 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 	for (NonPlayableCharacter* bad_character : bad_characters) {
 		bad_character->reset();
 		for (Block* block : blocks) {
-			if (block->canInteract() && bad_character->standInView(view) && block->standInView(view)) {
+			if (block != nullptr && block->canInteract() == true && bad_character->standInView(view) && block->standInView(view)) {
 				BadCharacterAndBlock(bad_character, block, deltaTime, observers);
 			}
 		}
@@ -60,7 +60,7 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 		item->reset();
 		for (Block* block : blocks) {
 			if (block->canInteract() && item->standInView(view) && block->standInView(view)) {
-				ItemAndBlock(item, block, deltaTime, observers);
+				ItemAndBlock(item, block, deltaTime, observers,good_characters);
 			}
 		}
 	}
@@ -101,11 +101,11 @@ void Collision::BadCharacterAndBadCharacter(NonPlayableCharacter* bad_character,
 	}
 }
 
-void Collision::ItemAndBlock(Item* item, Block* block, const float& deltaTime, std::vector<Observer*>& observers){
+void Collision::ItemAndBlock(Item* item, Block* block, const float& deltaTime, std::vector<Observer*>& observers, const std::vector<PlayableCharacter*>& characters){
 	if (!block->isDead() && !item->isDead()) {
 		item->standOn(block,observers);
 		item->hit(block);
-		block->hit(item, observers);
+		block->hit(item, observers, characters);
 	}
 }
 

@@ -9,14 +9,8 @@ Luigi::Luigi(){}
 void Luigi::move(){
 }
 
-void Luigi::collectGoodMushroom(){
-	
-}
 
-void Luigi::collectStar(){
-	
-}
-
-void Luigi::collectFlower(){
-	
+bool Luigi::canAdvanced()
+{
+	return true;
 }

@@ -50,6 +50,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
     {
     case BlockType::ground:
     case BlockType::blue_ground:
+    case BlockType::gray_ground:
         result = new Ground;
         result->interact = true;
         break;
@@ -69,6 +70,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
     case BlockType::brick:
     case BlockType::blue_brick:
     case BlockType::light_blue_brick:
+    case BlockType::gray_brick:
         result = new Brick;
         result->interact = true;
         break;
@@ -83,6 +85,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         result->interact = true;
         break;
     case BlockType::tree:
+    case BlockType::moon:
         result = new Tree;
         result->interact = false;
         break;
@@ -219,18 +222,24 @@ void Block::hit(NonPlayableCharacter* character, const std::vector<Observer*>& o
     sf::Vector2f newm_position;
 
     if (this->m_position.y < this->m_baseGround && character->beingHitFromAbove(this->m_shape.getGlobalBounds(),newm_position)) {
-        character->die();
+        character->die(observers);
     }
 }
 
-void Block::hit(Item* item, const std::vector<Observer*>& observers){
+void Block::hit(Item* item, const std::vector<Observer*>& observers, const std::vector<PlayableCharacter*> characters){
     sf::Vector2f newPosition;
 
     if (((item->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition))
         || (item->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
         || (item->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition))) && this->isMidAir()) {
 
-        item->beingCollectedByPlayable(observers);
+        sf::Vector2f newPosition;
+        for (PlayableCharacter* character : characters) {
+            if (character->underObjectAt(this->m_shape.getGlobalBounds(), newPosition) == false) continue;
+
+            item->beingCollectedByPlayable(character,observers);  
+
+        }
     }
 }
 

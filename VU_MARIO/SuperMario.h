@@ -1,8 +1,16 @@
 #pragma once
-#include "Mario.h"
+#include "PlayableCharacter.h"
 
-class SuperMario : public Mario{
+
+class SuperMario : public PlayableCharacter{
+private:
+	void init();
 public:
-	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) override;
+	SuperMario();
+
+	SuperMario(PlayableCharacter* character);
+	void die(const std::vector<Observer*>& observers) override;
+	bool canBeKilledByNonPlayable() override;
+	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;
 };
 

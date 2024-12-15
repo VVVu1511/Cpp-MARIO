@@ -63,5 +63,9 @@ public:
 
 	void bossShootingEvent(const sf::Vector2f& position, const float& speed);
 	void mainShootingEvent(const sf::Vector2f& position, const float& speed);
+	void mainCollectingFlowerEvent(PlayableCharacter* character);
+	void mainCollectingMushroomEvent(PlayableCharacter* character);
+	void mainCollectingStarEvent(PlayableCharacter* character);
+	void mainBecomeSmall(PlayableCharacter* character);
 };
 

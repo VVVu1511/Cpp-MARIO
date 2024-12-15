@@ -39,7 +39,7 @@ void KoopaTroopa::move(const float& deltaTime){
 	}
 }
 
-void KoopaTroopa::die(){
+void KoopaTroopa::die(const std::vector<Observer*>& observers){
 	m_animation.die(0.2,this->m_sprite);
 
 	this->m_inShell = true;
@@ -71,7 +71,7 @@ void KoopaTroopa::hit(NonPlayableCharacter* character, const std::vector<Observe
 		bool right = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
 		
 		if (left == true || right == true) {
-				character->die();
+				character->die(observers);
 		}
 
 	}

@@ -7,6 +7,7 @@ enum class ItemType;
 class AssetManager;
 class Block;
 class Observer;
+class PlayableCharacter;
 class View;
 
 class Item : public WorldObject{
@@ -32,6 +33,6 @@ public:
 	virtual bool standInView(View view);
 
 	virtual void hit(Block* block);
-	virtual void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	virtual void beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers);
 	virtual void standOn(Block* block,const std::vector<Observer*>& observers);
 };

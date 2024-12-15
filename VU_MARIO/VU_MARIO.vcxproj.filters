@@ -252,6 +252,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GoodBullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll">
@@ -455,6 +458,9 @@
       <Filter>Header Files\WorldObject\NonPlayableCharacter</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GoodBullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

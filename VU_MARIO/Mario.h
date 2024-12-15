@@ -5,11 +5,11 @@
 #include <vector>
 
 class Mario : public PlayableCharacter{
-
+private:
+	void init();
 public:
 	Mario();
-	void collectGoodMushroom();
-	void collectStar();
-	void collectFlower();
+	Mario(PlayableCharacter* character);
+	bool canAdvanced() override;
 };
 

@@ -3,9 +3,10 @@
 
 class Observer;
 
+
 class Flower : public Item{
 public:
 	Flower();
-	void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	void beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers);
 };
 

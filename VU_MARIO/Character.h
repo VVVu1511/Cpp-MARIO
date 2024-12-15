@@ -28,12 +28,13 @@ public:
 
 	virtual void move(const float& deltaTime) = 0;
 
-	virtual void die() ;
+	virtual void die(const std::vector<Observer*>& observers) ;
 	virtual void reset();
 	virtual bool isDead();
 	virtual void update(const float& deltaTime, const std::vector<Observer*>& observers);
 	virtual void draw(sf::RenderWindow* window);
 	virtual bool standInView(View view);
+	virtual bool canAdvanced();
 
 	virtual void StandOn(Block* block, const std::vector<Observer*>& observers);
 };

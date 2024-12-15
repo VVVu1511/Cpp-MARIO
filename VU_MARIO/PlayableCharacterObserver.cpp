@@ -4,14 +4,13 @@
 
 PlayableCharacterObserver::PlayableCharacterObserver(){}
 
-
 void PlayableCharacterObserver::addPlayingState(PlayingState* gamestate)
 {
 }
 
 void PlayableCharacterObserver::addPlayableCharacter(PlayableCharacter* character)
 {
-	if (character) {
+	if (character != nullptr) {
 		this->characters.push_back(character);
 	}
 }
@@ -22,28 +21,16 @@ void PlayableCharacterObserver::killEnemies(){
 
 void PlayableCharacterObserver::collectCoins(){}
 
-void PlayableCharacterObserver::collectFlower(){
-	for (PlayableCharacter* character : characters) {
-		if (character) {
-			character->collectFlower();
-		}
-	}
+void PlayableCharacterObserver::collectFlower(PlayableCharacter* character){
+	
 }
 
-void PlayableCharacterObserver::collectGoodMushroom(){
-	for (PlayableCharacter* character : characters) {
-		if (character) {
-			character->collectGoodMushroom();
-		}
-	}
+void PlayableCharacterObserver::collectGoodMushroom(PlayableCharacter* character){
+	
 }
 
-void PlayableCharacterObserver::collectStar(){
-	for (PlayableCharacter* character : characters) {
-		if (character) {
-			character->collectStar();
-		}
-	}
+void PlayableCharacterObserver::collectStar(PlayableCharacter* character){
+	
 }
 
 void PlayableCharacterObserver::hitBonusBrick(const sf::Vector2f& position, ItemType type){}
@@ -57,6 +44,10 @@ void PlayableCharacterObserver::bossShooting(const sf::Vector2f& position, const
 
 void PlayableCharacterObserver::mainShooting(const sf::Vector2f& position, const float& speed){
 	
+}
+
+void PlayableCharacterObserver::mainTurnToSmall(PlayableCharacter* character){
+
 }
 
 

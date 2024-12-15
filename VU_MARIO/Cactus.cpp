@@ -43,7 +43,7 @@ bool Cactus::canBeKilledByPlayable(const sf::FloatRect& bounds)
 }
 
 void Cactus::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character){
-	character->die();
+	character->die(observers);
 }
 
 void Cactus::update(const float& deltaTime, const std::vector<Observer*>& observers){

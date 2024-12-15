@@ -5,11 +5,11 @@ Flower::Flower()
 {
 }
 
-void Flower::beingCollectedByPlayable(const std::vector<Observer*>& observers)
+void Flower::beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers)
 {
-	Item::beingCollectedByPlayable(observers);
+	Item::beingCollectedByPlayable(character,observers);
 
 	for (Observer* observer : observers) {
-		observer->collectFlower();
+		observer->collectFlower(character);
 	}
 }

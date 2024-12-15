@@ -1,11 +1,13 @@
 #pragma once
-#include "Mario.h"
+#include "PlayableCharacter.h"
 
-class BigMario : public Mario{
+class BigMario : public PlayableCharacter{
 private:
-	void turnToSmall();
+	void init();
 public:
-	void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) override;
+	BigMario();
+	BigMario(PlayableCharacter* other);
 	bool canDestroyBrick() const override;
+	void die(const std::vector<Observer*>& observers) override;
 };
 

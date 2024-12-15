@@ -19,5 +19,5 @@ public:
 	void GoodCharacterAndItem(PlayableCharacter* good_character, Item* item, const float& deltaTime, std::vector<Observer*>& observers);
 	void GoodCharacterAndBadCharacter(PlayableCharacter* good_character, NonPlayableCharacter* bad_character, const float& deltaTime, std::vector<Observer*>& observers);
 	void BadCharacterAndBadCharacter(NonPlayableCharacter* bad_character, NonPlayableCharacter* bad_character2, const float& deltaTime, std::vector<Observer*>& observers);
-	void ItemAndBlock(Item* item, Block* block, const float& deltaTime, std::vector<Observer*>& observers);
+	void ItemAndBlock(Item* item, Block* block, const float& deltaTime, std::vector<Observer*>& observers,const std::vector<PlayableCharacter*>&character);
 };

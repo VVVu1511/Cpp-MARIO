@@ -85,12 +85,12 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 	else if (right == true || left == true)
 	{
 		if (character->canKillNonPlayable(this->m_shape.getGlobalBounds())) {
-			this->die();
+			this->die(observers);
 			return;
 		}
 
 		if (this->canKillNonPlayable(character->m_shape.getGlobalBounds())) {
-			character->die();
+			character->die(observers);
 			return;
 		}
 
@@ -124,7 +124,7 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 	{
 		this->m_position = newPosition;
 		this->changeDirection();
-
+		this->m_position.x += (this->m_speed > 0) ? 1.f : -1.f;
 	}
 
 }

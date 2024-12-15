@@ -40,7 +40,7 @@ public:
 
 
 	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
-	virtual void hit(Item* item, const std::vector<Observer*>& observers);
+	virtual void hit(Item* item, const std::vector<Observer*>& observers, const std::vector<PlayableCharacter*> characters);
 
 	virtual void specificResultAfterBeingHitFromLeft(const std::vector<Observer*>& observers, const PlayableCharacter& character);
 	virtual void specificResultAfterBeingHitFromRight(const std::vector<Observer*>& observers, const PlayableCharacter& character);

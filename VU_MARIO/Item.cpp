@@ -141,7 +141,7 @@ void Item::hit(Block* block){
     }
 }
 
-void Item::beingCollectedByPlayable(const std::vector<Observer*>& observers){
+void Item::beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers){
     this->die();
 }
 

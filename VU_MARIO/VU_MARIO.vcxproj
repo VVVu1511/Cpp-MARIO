@@ -163,6 +163,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GoodBullet.cpp" />
     <ClCompile Include="GoodMushroom.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="GoodBullet.h" />
     <ClInclude Include="GoodMushroom.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="Ground.h" />

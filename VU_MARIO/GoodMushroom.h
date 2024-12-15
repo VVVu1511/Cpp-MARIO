@@ -6,6 +6,6 @@ class Observer;
 class GoodMushroom : public Item{
 public:
 	GoodMushroom();
-	void beingCollectedByPlayable(const std::vector<Observer*>& observers);
+	void beingCollectedByPlayable(PlayableCharacter* character,const std::vector<Observer*>& observers);
 };
 

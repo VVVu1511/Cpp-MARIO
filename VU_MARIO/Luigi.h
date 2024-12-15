@@ -8,8 +8,6 @@ public:
 	Luigi();
 	
 	void move();
-	void collectGoodMushroom();
-	void collectStar();
-	void collectFlower();
+	bool canAdvanced() override;
 };
 
