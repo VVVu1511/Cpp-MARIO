@@ -1,4 +1,15 @@
-﻿  PlayingState.cpp
+﻿  AssetManager.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\AssetManager.cpp(106,57): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\AssetManager.cpp(117,61): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\AssetManager.cpp(127,64): warning C4018: '>': signed/unsigned mismatch
+  GoodBullet.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GoodBullet.cpp(13,85): warning C4305: 'argument': truncation from 'double' to 'const float'
+  PlayableCharacter.cpp
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(222,90): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(222,154): warning C4305: 'argument': truncation from 'double' to 'const float'
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayableCharacter.cpp(222,216): warning C4305: 'argument': truncation from 'double' to 'const float'
+  PlayableCharacterObserver.cpp
+  PlayingState.cpp
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(35,72): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
@@ -17,9 +28,12 @@ C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tư
           [
               T=float
           ]
-C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(183,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(181,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(192,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(201,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\GameState.h(91,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\VU_MARIO\PlayingState.cpp(284,2): message : see reference to function template instantiation 'void GameState::draw<sf::Text>(sf::RenderWindow *,std::vector<sf::Text,std::allocator<sf::Text>> &)' being compiled
+  PlayingStateObserver.cpp
+  View.cpp
+  Generating Code...
   VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe

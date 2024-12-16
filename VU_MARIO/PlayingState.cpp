@@ -47,6 +47,7 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 	
 	for (unsigned int j = 0; j < height; j++) {
 		for (unsigned int i = 0; i < width; i++) {
+			
 			sf::Color pixel = readMap.getPixel(i, j);
 
 			int type = 0;
@@ -123,7 +124,7 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 		}
 	}
 
-	for (int i = 0; i < nonPlayableSize; ++i) {
+	for (int i = 0; i < nonPlayableSize; i++) {
 		NonPlayableCharacter* non_playable = all_non_playable_characters[i];
 		
 		if (non_playable != nullptr && non_playable->standInView(view)) {
@@ -132,17 +133,17 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	}
 
 
-	for (int i = 0; i < playableSize; ++i) {
+	for (int i = 0; i < playableSize; i++) {
 		PlayableCharacter* playable = all_playable_characters[i];
 
-		if (all_playable_characters[i] != nullptr) {
-			all_playable_characters[i]->update(deltaTime, observers);
+		if (playable != nullptr) {
+			playable->update(deltaTime, observers);
 		}
 	}
 	
 	collision.handleAllCollision(std::vector<PlayableCharacter*>(this->all_playable_characters.begin(),this->all_playable_characters.begin() + playableSize), std::vector<NonPlayableCharacter*>(this->all_non_playable_characters.begin(), this->all_non_playable_characters.begin() + nonPlayableSize), std::vector<Item*>(this->all_items.begin(), this->all_items.begin() + itemSize), std::vector<Block*>(this->all_blocks.begin(), this->all_blocks.begin() + blockSize), deltaTime, observers, this->view);
 	
-	view.update(this->all_playable_characters, window);
+	view.update(std::vector<PlayableCharacter*>(this->all_playable_characters.begin(), this->all_playable_characters.begin() + playableSize), window);
 }
 
 void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
@@ -167,20 +168,19 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 		}
 	}
 
-
 	for (PlayableCharacter* playable : this->all_playable_characters) {
 		if (playable != nullptr) {
 			playable->draw(window);
 		}
 	}
 
-	if (all_playable_characters.size() == 2) std::cout << '2';
-
 	view.setForWindow(window);
 }
 
 void PlayingState::temporaryCleanUp(){
 	for (int i = 0; i < all_blocks.size(); i++) {
+		if (all_blocks[i] == nullptr) continue;
+
 		if (all_blocks[i]->canBeDeleted() == true || (all_blocks[i]->standInView(this->view) == false && all_blocks[i]->canBeDeletedWhenOutOfView() == true)) {
 			delete all_blocks[i];
 			all_blocks[i] = nullptr;
@@ -304,6 +304,10 @@ PlayingState::~PlayingState(){
 void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
 	if(time == 400) this->createMap(window, observers, gameState);
 
+	if (this->mapNum == 2) {
+		window->clear(sf::Color::Black);
+	}
+
 	this->update(window, observers, deltaTime);
 	
 	this->drawMap(window, font);
@@ -396,7 +400,7 @@ void PlayingState::mainShootingEvent(const sf::Vector2f& position, const float& 
 
 	if (new_good_bullet != nullptr && speed < 0) new_good_bullet->changeDirection();
 
-	if(new_good_bullet != nullptr) this->all_playable_characters.push_back(new_good_bullet);
+	if (new_good_bullet != nullptr) this->all_playable_characters.push_back(new_good_bullet);
 }
 
 void PlayingState::mainCollectingFlowerEvent(PlayableCharacter* character){
@@ -404,6 +408,7 @@ void PlayingState::mainCollectingFlowerEvent(PlayableCharacter* character){
 		PlayableCharacter* temp = all_playable_characters[0];
 		all_playable_characters[0] = new FireMario(temp);
 		delete temp;
+		temp = nullptr;
 	}
 }
 
@@ -412,6 +417,7 @@ void PlayingState::mainCollectingMushroomEvent(PlayableCharacter* character){
 		PlayableCharacter* temp = all_playable_characters[0];
 		all_playable_characters[0] = new BigMario(temp);
 		delete temp;
+		temp = nullptr;
 	}
 }
 
@@ -420,6 +426,7 @@ void PlayingState::mainCollectingStarEvent(PlayableCharacter* character){
 		PlayableCharacter* temp = all_playable_characters[0];
 		all_playable_characters[0] = new SuperMario(temp);
 		delete temp;
+		temp = nullptr;
 	}
 }
 
@@ -428,6 +435,7 @@ void PlayingState::mainBecomeSmall(PlayableCharacter* character){
 		PlayableCharacter* temp = all_playable_characters[0];
 		all_playable_characters[0] = new Mario(temp);
 		delete temp;
+		temp = nullptr;
 	}
 }
 

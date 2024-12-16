@@ -57,18 +57,16 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 
 }
 
-void PlayableCharacter::shoot(const float& deltaTime, const std::vector<Observer*>& observers){
-	
-}
+void PlayableCharacter::shoot(const float& deltaTime, const std::vector<Observer*>& observers){}
 
 void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
 	
 	sf::Vector2f newPosition;
-	//brick
+	
 	bool bottom = block->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition);
 	bool left = block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
 	bool right = block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
-	//mario, big mario, super mario
+	
 
 	if (block->canKillPlayable() == true) {
 		if (bottom == true || left == true || right == true) {
@@ -174,6 +172,10 @@ void PlayableCharacter::becomeSmall(const std::vector<Observer*>& observers){
 	}
 }
 
+bool PlayableCharacter::canViewFollow() const{
+	return true;
+}
+
 bool PlayableCharacter::canDestroyBrick() const{
 	return false;
 }
@@ -223,20 +225,26 @@ PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterTyp
 	return result;
 }
 
-void PlayableCharacter::setCenterForView(sf::View& view){
-	/*view.setCenter(this->m_position.x, view.getCenter().y);*/
-	view.setCenter(this->m_position.x, this->m_position.y);
+void PlayableCharacter::setCenterForView(sf::View& view, sf::RenderWindow* window){
+	if (this->m_position.y > view.getSize().y) {
+		view.setCenter(this->m_position.x, view.getSize().y + 320.f);
+		window->clear(sf::Color::Black);
+		return;
+	}
+
+	view.setCenter(this->m_position.x, view.getCenter().y);
+	/*view.setCenter(this->m_position.x, this->m_position.y);*/
 }
 
 void PlayableCharacter::move(const float& deltaTime){
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		this->m_position.x -= 10.f;
+		this->m_position.x -= 5.f;
 		m_animation.moveleft(deltaTime, this->m_sprite);
 	}
 	
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		this->m_position.x += 10.f;
+		this->m_position.x += 5.f;
 		m_animation.moveright(deltaTime, this->m_sprite);
 	}
 	

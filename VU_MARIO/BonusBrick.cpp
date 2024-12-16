@@ -17,7 +17,7 @@ ItemType BonusBrick::getRandomItem(){
 		return ItemType::mushroom; 
 	}
 	
-	return ItemType::flower; 
+	return ItemType::mushroom; 
 }
 
 BonusBrick::BonusBrick(){

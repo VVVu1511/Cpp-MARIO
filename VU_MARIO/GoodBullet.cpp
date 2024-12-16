@@ -34,7 +34,7 @@ bool GoodBullet::canBeKilledByNonPlayable()
 	return false;
 }
 
-void GoodBullet::setCenterForView(sf::View& view){}
+void GoodBullet::setCenterForView(sf::View& view, sf::RenderWindow* window){}
 
 void GoodBullet::move(const float& deltaTime){
 	this->m_position.x += this->m_Vx;
@@ -57,6 +57,11 @@ void GoodBullet::standInsideView(sf::View& view) {}
 
 void GoodBullet::changeDirection(){
 	this->m_Vx *= -1;
+}
+
+bool GoodBullet::canViewFollow() const
+{
+	return false;
 }
 
 

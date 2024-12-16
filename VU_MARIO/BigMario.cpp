@@ -15,6 +15,8 @@ void BigMario::init(){
 	AnimationStrategy* strategy = new KeyPressStrategy(frames.first, frames.second, 1 / 60);
 	AnimationStrategy* strategy2 = new LimitedTimeStrategy(frames.first, frames.second, 1 / 60);
 
+	this->m_shape.setSize(sf::Vector2f(this->m_shape.getSize().x, this->m_shape.getSize().y + 32.f));
+	this->m_position.y -= 32.f;
 	this->m_animation.addStrategy(strategy);
 	this->m_animation.addStrategy(strategy2);
 }
@@ -34,6 +36,19 @@ bool BigMario::canDestroyBrick() const{
 void BigMario::die(const std::vector<Observer*>& observers){
 	for (Observer* observer : observers) {
 		observer->mainTurnToSmall(this);
+	}
+}
+
+void BigMario::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
+	sf::Vector2f newPosition;
+
+	if ((character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition))
+		|| (character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
+		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
+	{
+		for (Observer* observer : observers) {
+			observer->mainTurnToSmall(this);
+		}
 	}
 }
 

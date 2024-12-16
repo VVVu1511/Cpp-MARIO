@@ -21,6 +21,7 @@ void FireMario::init(){
 	AnimationStrategy* strategy = new KeyPressStrategy(frames.first, frames.second, 1 / 60);
 	AnimationStrategy* strategy2 = new LimitedTimeStrategy(frames.first, frames.second, 1 / 60);
 
+	this->m_shape.setSize(sf::Vector2f(32.f, 32.f));
 	this->m_animation.addStrategy(strategy);
 	this->m_animation.addStrategy(strategy2);
 }

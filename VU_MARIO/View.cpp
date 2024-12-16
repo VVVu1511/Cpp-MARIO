@@ -26,7 +26,7 @@ void View::update(const std::vector<PlayableCharacter*>& playable, sf::RenderWin
 	PlayableCharacter* chosen_character = nullptr;
 
 	for (PlayableCharacter* character : playable) {
-		if (character->findMinForView(minPositionX) == true) {
+		if (character != nullptr && character->canViewFollow() == true && character->findMinForView(minPositionX) == true) {
 			chosen_character = character;
 		}
 	}
@@ -34,8 +34,9 @@ void View::update(const std::vector<PlayableCharacter*>& playable, sf::RenderWin
 	/*if (minPositionX > view.getCenter().x && chosen_character != nullptr) {
 		chosen_character->setCenterForView(view);
 	}*/
+	
 
-	chosen_character->setCenterForView(view);
+	chosen_character->setCenterForView(view,window);
 
 	for (PlayableCharacter* character : playable) {
 		character->standInsideView(view);

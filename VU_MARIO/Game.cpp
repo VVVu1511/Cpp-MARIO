@@ -33,6 +33,8 @@ void Game::run(){
 	
     AssetManager::getInstance();
 
+    window->setFramerateLimit(60);
+
     while (window->isOpen()) {
         
        /* this->chooseState();*/

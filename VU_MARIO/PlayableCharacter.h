@@ -16,7 +16,7 @@ public:
 	PlayableCharacter(const PlayableCharacter& other);
 	static PlayableCharacter* createCharacter(const PlayableCharacterType &type,const sf::Vector2f position);
 
-	virtual void setCenterForView(sf::View& view);
+	virtual void setCenterForView(sf::View& view,sf::RenderWindow* window);
 	void move(const float& deltaTime) override;
 	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;
 	void die(const std::vector<Observer*>& observers) override;
@@ -30,6 +30,8 @@ public:
 	virtual bool canBeKilledByNonPlayable();
 	virtual void changeDirection();
 	virtual void becomeSmall(const std::vector<Observer*>& observers);
+	virtual bool canViewFollow() const;
+	
 
 	virtual bool canDestroyBrick() const;
 
