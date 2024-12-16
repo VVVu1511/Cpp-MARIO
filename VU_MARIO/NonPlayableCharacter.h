@@ -26,5 +26,6 @@ public:
 	virtual bool canKillNonPlayable(const sf::FloatRect& bounds);
 	virtual bool canBeKilledByPlayable(const sf::FloatRect& bounds);
 	virtual void shoot(const float& deltaTime, const std::vector<Observer*>& observers);
+	
 };
 

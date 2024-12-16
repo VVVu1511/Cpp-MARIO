@@ -24,7 +24,7 @@ void Boss::shoot(const float& deltaTime, const std::vector<Observer*>& observers
 		return;
 	}
 
-	this->m_shooting_delay_time = 0.5;
+	this->m_shooting_delay_time = 2;
 
 	for (Observer* observer : observers) {
 		observer->bossShooting(this->m_position,this->m_speed);

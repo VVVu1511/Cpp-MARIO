@@ -20,5 +20,6 @@ public:
 	virtual bool beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
 	virtual bool underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const;
 	virtual bool canBeDeleted() const;
+	virtual bool canBeDeletedWhenOutOfView() const;
 };
 

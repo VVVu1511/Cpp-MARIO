@@ -5,11 +5,13 @@
 
 GoodBullet::GoodBullet(){
 	this->m_Vx = 1.f;
+
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
 	image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::main_fire);
 
 	AnimationStrategy* strategy = new AutomaticStrategy(image.first, image.second, 1.0 / 60);
+
 
 	this->m_animation.addStrategy(strategy);
 }

@@ -210,7 +210,7 @@ PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterTyp
 		result = new GoodBullet;
 	}
 
-	if (result)
+	if (result != nullptr)
 	{
 		std::pair<sf::Texture*, std::vector<sf::IntRect>> images = { nullptr,{} };
 		

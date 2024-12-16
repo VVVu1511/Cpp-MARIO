@@ -8,15 +8,20 @@ void Bullet::move(){
 }
 
 Bullet::Bullet(){
-	this->m_speed = 0.5f;
+	this->m_speed = 3.f;
 
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
 	image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::boss_fire);
 
+	sf::Vector2f size((float)image.second[0].width, (float)image.second[0].height);
+
+	this->setSize(size);
+
 	AnimationStrategy* strategy = new AutomaticStrategy(image.first, image.second, 1.0 / 60);
 
 	this->m_animation.addStrategy(strategy);
+
 }
 
 bool Bullet::canKillPlayable(const sf::FloatRect& bounds){
@@ -32,21 +37,25 @@ void Bullet::update(const float& deltaTime, const std::vector<Observer*>& observ
 	this->m_shape.setPosition(this->m_position);
 }
 
-void Bullet::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers)
-{
-}
-
-//void Bullet::hit(Block* block, const std::vector<Observer*>& observers)
-//{
-//}
-
 void Bullet::specificResultAfterBeingStoodOnByPlayable(const std::vector<Observer*>& observers, PlayableCharacter* character){
 	character->die(observers);
 }
 
-bool Bullet::canBeKilledByPlayable(const sf::FloatRect& bounds)
-{
+bool Bullet::canBeKilledByPlayable(const sf::FloatRect& bounds){
 	return false;
+}
+
+void Bullet::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
+
+}
+
+void Bullet::hit(Block* block, const std::vector<Observer*>& observers){
+
+}
+
+bool Bullet::canBeDeletedWhenOutOfView() const
+{
+	return true;
 }
 
 void Bullet::direction(const float& speed){

@@ -5,11 +5,11 @@
 #include "LimitedTimeStrategy.h"
 
 void FireMario::setTimeShoot(){
-	this->m_time_shoot = 0.f;
+	this->m_time_shoot = 1.f;
 }
 
 void FireMario::init(){
-	this->setTimeShoot();
+	this->m_time_shoot = 0.f;
 	this->setTimeAlive();
 
 	AssetManager* instance = AssetManager::getInstance();
@@ -48,9 +48,9 @@ void FireMario::shoot(const float& deltaTime, const std::vector<Observer*>& obse
 		for (Observer* observer : observers) {
 			observer->mainShooting(this->m_position, this->m_Vx);
 		}
+		
+		this->setTimeShoot();
 	}
-
-	this->setTimeShoot();
 }
 
 void FireMario::update(const float& deltaTime, const std::vector<Observer*>& observers){

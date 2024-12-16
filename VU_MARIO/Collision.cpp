@@ -6,10 +6,9 @@
 #include "PlayableCharacter.h"
 #include "NonPlayableCharacter.h"
 #include "Character.h"
-
+#include <iostream>
 
 void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characters, std::vector<NonPlayableCharacter*> bad_characters, std::vector<Item*> items, std::vector<Block*> blocks, const float& deltaTime, std::vector<Observer*>& observers,View view){
-	
 	for (PlayableCharacter* good_character : good_characters) {
 		good_character->reset();
 		for (Block* block : blocks) {
