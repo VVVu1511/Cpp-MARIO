@@ -273,6 +273,7 @@ void PlayableCharacter::update(const float& deltaTime, const std::vector<Observe
 
 void PlayableCharacter::die(const std::vector<Observer*>& observers){
 	Character::die(observers);
+	
 	this->m_alive = false;
 	this->m_position.y -= 50.f;
 }

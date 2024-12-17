@@ -27,6 +27,7 @@ private:
 	PlayableCharacterType m_mainCharacterType;
 
 	std::vector<PlayableCharacter*>all_playable_characters;
+	std::vector<PlayableCharacter*>garbage_of_playable_characters;
 	std::vector<NonPlayableCharacter*>all_non_playable_characters;
 	std::vector<Block*>all_blocks;
 	std::vector<Item*>all_items;

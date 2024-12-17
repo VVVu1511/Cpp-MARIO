@@ -96,18 +96,19 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 
 		this->m_position = newPosition;
 		
-		this->changeDirection();
-		character->changeDirection();
 		
 		if (this->m_speed < 0) {
+			this->m_position.x += 1.f;
+			character->m_position.x -= 1.f;
+		}
+
+		else {
 			this->m_position.x -= 1.f;
 			character->m_position.x += 1.f;
 		}
 
-		else {
-			this->m_position.x += 1.f;
-			character->m_position.x -= 1.f;
-		}
+		this->changeDirection();
+		character->changeDirection();
 
 	}
 }
@@ -119,12 +120,12 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 		this->m_position = newPosition;
 	}
 
-	else if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition)) == true
-		|| (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) == true)
+	else if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) == true)
+		|| (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition) == true))
 	{
 		this->m_position = newPosition;
+		this->m_position.x += (this->m_speed > 0) ? -1.f : 1.f;
 		this->changeDirection();
-		this->m_position.x += (this->m_speed > 0) ? 1.f : -1.f;
 	}
 
 }
@@ -150,6 +151,11 @@ bool NonPlayableCharacter::canBeKilledByPlayable(const sf::FloatRect& bounds){
 }
 
 void NonPlayableCharacter::shoot(const float& deltaTime, const std::vector<Observer*>& observers){}
+
+bool NonPlayableCharacter::canAdvanced()
+{
+	return true;
+}
 
 void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Observer*>& observers){
 	this->shoot(deltaTime, observers);

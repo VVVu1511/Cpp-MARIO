@@ -47,7 +47,7 @@ void FireMario::shoot(const float& deltaTime, const std::vector<Observer*>& obse
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)) {
 		
 		for (Observer* observer : observers) {
-			observer->mainShooting(this->m_position, this->m_Vx);
+			observer->mainShooting(this->m_position, 3.f);
 		}
 		
 		this->setTimeShoot();

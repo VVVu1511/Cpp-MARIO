@@ -6,7 +6,7 @@ private:
 	
 public:
 	GoodBullet();
-	void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
+	void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) override;
 	bool canBeKilledByNonPlayable() override;
 
 	void setCenterForView(sf::View& view,sf::RenderWindow* window) override;
@@ -18,5 +18,7 @@ public:
 	bool canViewFollow() const override;
 	
 	void collect(Item* item, const std::vector<Observer*>& observers) override;
+	void hit(Block* block, const std::vector<Observer*>& observers) override;
+	bool canBeDeletedWhenOutOfView() const override;
 };
 

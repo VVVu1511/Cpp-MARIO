@@ -6,12 +6,11 @@
 GoodBullet::GoodBullet(){
 	this->m_Vx = 1.f;
 
-	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
-
-	image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::main_fire);
+	std::pair<sf::Texture*, std::vector<sf::IntRect>> image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::main_fire);
 
 	AnimationStrategy* strategy = new AutomaticStrategy(image.first, image.second, 1.0 / 60);
 
+	this->m_shape.setSize(sf::Vector2f((float)image.second[0].getSize().x,(float) image.second[0].getSize().y));
 
 	this->m_animation.addStrategy(strategy);
 }
@@ -19,12 +18,20 @@ GoodBullet::GoodBullet(){
 void GoodBullet::collect(Item* item, const std::vector<Observer*>& observers){
 }
 
+void GoodBullet::hit(Block* block, const std::vector<Observer*>& observers){}
+
+bool GoodBullet::canBeDeletedWhenOutOfView() const
+{
+	return true;
+}
+
 void GoodBullet::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers) {
 	sf::Vector2f newPosition;
+	bool left = character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+	bool right = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
+	bool bottom = character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition);
 
-	if (character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) == true
-		|| character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition) == true
-		|| character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition) == true) {
+	if(left == true || right == true || bottom == true) {
 		character->die(observers);
 	}
 }

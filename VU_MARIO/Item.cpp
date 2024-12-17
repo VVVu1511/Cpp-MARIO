@@ -97,7 +97,7 @@ void Item::reset(){
 }
 
 void Item::changeDirection(){
-    this->m_Vx *= (-1);
+    this->m_Vx *= -1;
 }
 
 bool Item::isDead()
@@ -135,7 +135,7 @@ bool Item::standInView(View view){
 void Item::hit(Block* block){
     sf::Vector2f newPosition;
 
-    if (block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) || block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)) {
+    if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) == true) || (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition) == true)) {
         this->m_position = newPosition;
         this->changeDirection();
     }

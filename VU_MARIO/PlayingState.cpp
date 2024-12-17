@@ -207,6 +207,14 @@ void PlayingState::temporaryCleanUp(){
 			all_non_playable_characters.erase(all_non_playable_characters.begin() + i);
 		}
 	}
+
+	for (int i = 0; i < this->garbage_of_playable_characters.size(); i++) {
+		
+		delete this->garbage_of_playable_characters[i];
+		this->garbage_of_playable_characters[i] = nullptr;
+		this->garbage_of_playable_characters.erase(this->garbage_of_playable_characters.begin() + i);
+		
+	}
 }
 
 void PlayingState::ultimateCleanUp(){
@@ -228,6 +236,11 @@ void PlayingState::ultimateCleanUp(){
 	for (Item* item : all_items) {
 		delete item;
 		item = nullptr;
+	}
+
+	for (PlayableCharacter* garbage : garbage_of_playable_characters) {
+		delete garbage;
+		garbage = nullptr;
 	}
 
 	all_playable_characters.clear();
@@ -406,39 +419,38 @@ void PlayingState::mainShootingEvent(const sf::Vector2f& position, const float& 
 }
 
 void PlayingState::mainCollectingFlowerEvent(PlayableCharacter* character){
-	if (character->canAdvanced() == true) {
-		PlayableCharacter* temp = all_playable_characters[0];
-		all_playable_characters[0] = new FireMario(temp);
-		delete temp;
-		temp = nullptr;
-	}
+	
+	PlayableCharacter* temp = all_playable_characters[0];
+	all_playable_characters[0] = new FireMario(temp);
+		
+	garbage_of_playable_characters.push_back(temp);
+	
 }
 
 void PlayingState::mainCollectingMushroomEvent(PlayableCharacter* character){
-	if (character->canAdvanced() == true) {
-		PlayableCharacter* temp = all_playable_characters[0];
-		all_playable_characters[0] = new BigMario(temp);
-		delete temp;
-		temp = nullptr;
-	}
+	
+	PlayableCharacter* temp = all_playable_characters[0];
+	all_playable_characters[0] = new BigMario(temp);
+		
+	garbage_of_playable_characters.push_back(temp);
+	
 }
 
 void PlayingState::mainCollectingStarEvent(PlayableCharacter* character){
-	if (character->canAdvanced() == true) {
-		PlayableCharacter* temp = all_playable_characters[0];
-		all_playable_characters[0] = new SuperMario(temp);
-		delete temp;
-		temp = nullptr;
-	}
+	
+	PlayableCharacter* temp = all_playable_characters[0];
+	all_playable_characters[0] = new SuperMario(temp);
+		
+	garbage_of_playable_characters.push_back(temp);
 }
 
 void PlayingState::mainBecomeSmall(PlayableCharacter* character){
-	if (character->canAdvanced() == false) {
-		PlayableCharacter* temp = all_playable_characters[0];
-		all_playable_characters[0] = new Mario(temp);
-		delete temp;
-		temp = nullptr;
-	}
+
+	PlayableCharacter* temp = all_playable_characters[0];
+	all_playable_characters[0] = new Mario(temp);
+		
+	garbage_of_playable_characters.push_back(temp);
+	
 }
 
 

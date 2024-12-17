@@ -1,5 +1,5 @@
 #include "AutomaticStrategy.h"
-
+#include<iostream>
 
 AutomaticStrategy::AutomaticStrategy() : AnimationStrategy(){}
 

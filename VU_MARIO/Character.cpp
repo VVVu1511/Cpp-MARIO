@@ -28,9 +28,10 @@ void Character::initVariables(const sf::Vector2f &position, const std::vector<An
 		tempPos.y -= images.second[0].getSize().y;
 		sf::FloatRect floatRect = AssetManager::getInstance()->ToFloatRect(images.second[0]);
 		this->m_shape.setSize(sf::Vector2f(floatRect.getSize().x, floatRect.getSize().y));
+		
+		for(AnimationStrategy* strategy : animationStrategy) this->m_animation.addStrategy(strategy);
 	}
 
-	for(AnimationStrategy* strategy : animationStrategy) this->m_animation.addStrategy(strategy);
 	
 	this->m_Vx = 0;
 	this->m_Vy = 0;

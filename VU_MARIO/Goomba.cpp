@@ -19,3 +19,10 @@ Goomba::Goomba(){
 	this->setSize(size);
 
 }
+
+void Goomba::die(const std::vector<Observer*>& observers){
+	
+	this->m_shape.setSize(sf::Vector2f(this->m_shape.getSize().x, 16.f));
+
+	NonPlayableCharacter::die(observers);
+}

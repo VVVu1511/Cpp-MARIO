@@ -32,7 +32,7 @@ void Game::run(){
     ev = new sf::Event;
 	
     AssetManager::getInstance();
-
+    
     window->setFramerateLimit(60);
 
     while (window->isOpen()) {
@@ -54,6 +54,7 @@ void Game::run(){
 
         deltaTime = clock.restart().asSeconds();
        
+
         window->clear(sf::Color(92,148,252));
         
         if(this->currentState->isActive()) this->currentState->execute(window, observers, currentState, deltaTime, ev, font);

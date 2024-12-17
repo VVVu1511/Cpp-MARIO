@@ -5,7 +5,7 @@ void View::setForAttributes(std::vector<sf::Text>& texts){
 	int size = texts.size();
 
 	for (int i = 0; i < size; i++) {
-		texts[i].setPosition(texts[i].getPosition().x + view.getCenter().x - 600.f,texts[i].getPosition().y);
+		texts[i].setPosition(texts[i].getPosition().x + view.getCenter().x - 600.f,texts[i].getPosition().y + view.getCenter().y - view.getSize().y / 2);
 	}
 }
 
