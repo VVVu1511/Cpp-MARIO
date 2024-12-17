@@ -200,7 +200,6 @@ bool Block::canInteract(){
 }
 
 void Block::jump(){
-    this->m_position.y -= 10.f;
 }
 
 bool Block::connectToUnderground(){

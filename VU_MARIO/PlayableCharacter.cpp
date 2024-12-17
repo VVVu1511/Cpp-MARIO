@@ -87,14 +87,12 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		block->specificResultAfterBeingHitFromLeft(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;
-		std::cout << "h";
 	}
 
 	else if (right == true) {
 		block->specificResultAfterBeingHitFromRight(observers,*this);
 		this->m_position = newPosition;
 		this->m_Vx = 0;
-		std::cout << "h";
 	}
 
 	else {
@@ -227,7 +225,13 @@ PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterTyp
 
 void PlayableCharacter::setCenterForView(sf::View& view, sf::RenderWindow* window){
 	if (this->m_position.y > view.getSize().y) {
-		view.setCenter(this->m_position.x, view.getSize().y + 320.f);
+		view.setCenter(this->m_position.x, view.getSize().y + view.getSize().y / 2);
+		window->clear(sf::Color::Black);
+		return;
+	}
+
+	else if (this->m_position.y < view.getCenter().y - view.getSize().y / 2) {
+		view.setCenter(this->m_position.x, view.getSize().y - view.getSize().y / 2);
 		window->clear(sf::Color::Black);
 		return;
 	}

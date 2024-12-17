@@ -4,7 +4,7 @@
 #include "Observer.h"
 
 Boss::Boss(){
-	this->m_shooting_delay_time = 0.5;
+	this->m_shooting_delay_time = 0.f;
 
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
@@ -19,12 +19,12 @@ Boss::Boss(){
 }
 
 void Boss::shoot(const float& deltaTime, const std::vector<Observer*>& observers){
-	if (this->m_shooting_delay_time > 0) {
+	if (this->m_shooting_delay_time > 0.f) {
 		this->m_shooting_delay_time -= deltaTime;
 		return;
 	}
 
-	this->m_shooting_delay_time = 2;
+	this->m_shooting_delay_time = 2.f;
 
 	for (Observer* observer : observers) {
 		observer->bossShooting(this->m_position,this->m_speed);

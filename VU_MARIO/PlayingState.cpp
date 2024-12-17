@@ -49,6 +49,7 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 		for (unsigned int i = 0; i < width; i++) {
 			
 			sf::Color pixel = readMap.getPixel(i, j);
+			
 
 			int type = 0;
 			
@@ -148,7 +149,6 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 
 void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 	
-	this->drawAttributes(window, font);
 
 	for (Block* block : this->all_blocks) {
 		if (block != nullptr && block->standInView(view)) {
@@ -174,6 +174,8 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 		}
 	}
 
+	this->drawAttributes(window, font);
+	
 	view.setForWindow(window);
 }
 
