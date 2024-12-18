@@ -52,7 +52,7 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 		
 		if(character->canBeKilledByPlayable(this->m_shape.getGlobalBounds()) == true) character->die(observers);
 		
-		this->m_Vy -= (m_Vy + 10 <= 18)? 10 : 0;
+		this->m_Vy -= 7;
 
 		character->specificResultAfterBeingStoodOnByPlayable(observers,this);
 	}
@@ -85,6 +85,8 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		this->m_position = newPosition;
 
 		this->m_Vy = 0;
+
+		this->is_max_jump_speed = true;
 	}
 
 	else if (left == true) {
@@ -240,14 +242,14 @@ void PlayableCharacter::setCenterForView(sf::View& view, sf::RenderWindow* windo
 }
 
 void PlayableCharacter::move(const float& deltaTime){
-	
+	float dT = deltaTime * 60;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		m_Vx += (m_Vx > -5) ? -1.25 : 0;
+		m_Vx += (m_Vx > -5) ? -1.25 * dT : 0;
 		m_animation.moveleft(deltaTime, this->m_sprite);
 	}
 	
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		m_Vx += (m_Vx < 5) ? 1.25 : 0;
+		m_Vx += (m_Vx < 5) ? 1.25 * dT: 0;
 		m_animation.moveright(deltaTime, this->m_sprite);
 	}
 	
@@ -256,8 +258,8 @@ void PlayableCharacter::move(const float& deltaTime){
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (!is_jumping || !is_max_jump_speed)) {
-		m_Vy += -3;
-		if (m_Vy <= -15)
+		m_Vy += -3 * dT;
+		if (m_Vy <= -12)
 			this->is_max_jump_speed = true;
 		is_jumping = true;
 	}

@@ -96,7 +96,7 @@ void Character::update(const float& deltaTime, const std::vector<Observer*>& obs
 	}
 
 	if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
-		this->m_Vy += (m_Vy < 8) ? 1 : 0;
+		this->m_Vy += (m_Vy < 8) ? 0.75 * dT : 0;
 	}
 
 	else {
