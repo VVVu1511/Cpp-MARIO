@@ -3,21 +3,30 @@
 #include "Animation.h"
 #include "Observer.h"
 #include "AssetManager.h"
+#include <random>
+ItemType BonusBrick::getRandomItem()
+{
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 99);
 
-ItemType BonusBrick::getRandomItem(){
-	int randValue = rand() % 100; 
+	int randValue = dis(gen);
+	std::cout << "Random Value: " << randValue << '\n';
 
-	if (randValue > 95) {
-		return ItemType::star; 
+	if (randValue < 50) {                  // 0-49: 50% Mushroom
+		return ItemType::mushroom;
 	}
-	else if (randValue > 90) {
-		return ItemType::flower; 
+	else if (randValue < 80) {             // 50-79: 30% Fire Flower
+		return ItemType::flower;
 	}
-	else if (randValue > 85) {
-		return ItemType::mushroom; 
+	else if (randValue < 90) {             // 80-89: 10% Starman
+		return ItemType::star;
 	}
-	
-	return ItemType::star; 
+	//else if (randValue < 95) {             // 90-94: 5% 1-Up Mushroom
+	//	return ItemType::one_up_mushroom;
+	//}
+
+	return ItemType::coin;                 // 95-99: 5% Coins
 }
 
 BonusBrick::BonusBrick(){
