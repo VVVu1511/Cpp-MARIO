@@ -3,7 +3,7 @@
 
 class Goomba : public NonPlayableCharacter{
 public:
-	Goomba();
+	Goomba(const int& mapNum);
 	void die(const std::vector<Observer*>& observers) override;
 };
 

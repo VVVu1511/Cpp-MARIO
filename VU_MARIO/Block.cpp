@@ -44,6 +44,8 @@ Block::~Block(){
 
 Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
 {
+    
+
     Block* result = nullptr;
 
     switch (type)
@@ -76,6 +78,8 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         break;
     case BlockType::vertical_pipe:
     case BlockType::vertical_pipe_top:
+    case BlockType::pink_vertical_pipe:
+    case BlockType::pink_vertical_pipe_top:
         result = new VerticalPipe;
         result->interact = true;
         break;
@@ -148,7 +152,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         
         tempPos.y -= temp.second.getSize().y;
         
-        if (type == BlockType::vertical_pipe_top)
+        if (type == BlockType::vertical_pipe_top || type == BlockType::pink_vertical_pipe_top)
         {
             tempPos.x -= 4.f;
         }

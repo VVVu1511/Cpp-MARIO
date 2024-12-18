@@ -86,6 +86,7 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 	else if (left == true) {
 		block->specificResultAfterBeingHitFromLeft(observers,*this);
 		this->m_position = newPosition;
+		std::cout << "hi";
 		this->m_Vx = 0;
 	}
 
@@ -99,7 +100,6 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		this->m_Vx = 5.f;
 		this->m_Vy = 10.f;
 	}
-
 }
 
 void PlayableCharacter::StandOn(Block* block, const std::vector<Observer*>& observers){

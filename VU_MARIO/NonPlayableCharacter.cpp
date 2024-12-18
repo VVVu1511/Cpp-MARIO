@@ -26,7 +26,7 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(const NonPlayableCha
 	switch (type)
 	{
 	case NonPlayableCharacterType::goomba:
-		result = new Goomba;
+		result = new Goomba(mapNum);
 		break;
 	case NonPlayableCharacterType::koopatroopa:
 		result = new KoopaTroopa(mapNum);

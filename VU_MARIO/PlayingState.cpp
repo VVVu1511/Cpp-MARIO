@@ -17,7 +17,6 @@
 #include "GoodBullet.h"
 
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
-	
 	this->cleanObserverForEachLive(observers);
 
 	AssetManager* instance = AssetManager::getInstance();
@@ -301,7 +300,7 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 
 PlayingState::PlayingState(){
 	this->active = true;
-	this->mapNum = 1;
+	this->mapNum = 2;
 	this->m_mainCharacterType = PlayableCharacterType::small_mario;
 	this->m_attributes_text = std::vector<sf::Text>(5);
 }
@@ -319,6 +318,7 @@ PlayingState::~PlayingState(){
 void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
 	if(time == 400) this->createMap(window, observers, gameState);
 
+	
 	if (this->mapNum == 2) {
 		window->clear(sf::Color::Black);
 	}
@@ -362,7 +362,6 @@ void PlayingState::changeMap(){
 	
 	if (mapNum < 3) {
 		mapNum++;
-		this->expiredTimeOfChangingMap = 2;
 		this->restart();
 	}
 
