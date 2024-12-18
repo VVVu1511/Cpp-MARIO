@@ -1,2 +1,3 @@
-﻿  Game.cpp
-  VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Debug\VU_MARIO.exe
+﻿  Character.cpp
+D:\MARIO\VU_MARIO\Character.cpp(71,24): warning C4305: 'argument': truncation from 'double' to 'const float'
+  VU_MARIO.vcxproj -> D:\MARIO\Debug\VU_MARIO.exe

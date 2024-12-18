@@ -25,5 +25,7 @@ void Goomba::die(const std::vector<Observer*>& observers){
 	
 	this->m_shape.setSize(sf::Vector2f(this->m_shape.getSize().x, 16.f));
 
+	this->m_sprite.setScale(1, 0.5);
+
 	NonPlayableCharacter::die(observers);
 }

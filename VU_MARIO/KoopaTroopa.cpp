@@ -56,7 +56,7 @@ void KoopaTroopa::specificResultAfterBeingHitByPlayable(const std::vector<Observ
 			bool right = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
 
 			this->m_canMoveInShell = true;
-			this->m_speed = (right == true) ? -4.f : 4.f;
+			this->m_speed = (right == true) ? 4.f : -4.f;
 		}
 	}
 }
