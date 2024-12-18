@@ -26,6 +26,10 @@ void PlayableCharacter::collect(Item * item, const std::vector<Observer*>& obser
 void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers){
 	sf::Vector2f newPosition;
 
+	if (character->isDead() == true) {
+		return;
+	}
+
 	if ((character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition))
 		|| (character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
 		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))

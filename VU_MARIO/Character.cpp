@@ -63,7 +63,7 @@ void Character::reset(){
 
 bool Character::isDead()
 {
-	return this->m_delay_dead_time < 0;
+	return this->m_delay_dead_time != 0;
 }
 
 void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
