@@ -300,7 +300,7 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 
 PlayingState::PlayingState(){
 	this->active = true;
-	this->mapNum = 2;
+	this->mapNum = 1; // changing map
 	this->m_mainCharacterType = PlayableCharacterType::small_mario;
 	this->m_attributes_text = std::vector<sf::Text>(5);
 }

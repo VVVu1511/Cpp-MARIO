@@ -17,6 +17,9 @@ protected:
 	float m_Vx = 5.f;
 	float m_Vy;
 
+	bool is_jumping;
+	bool is_max_jump_speed;
+
 	void initVariables(const sf::Vector2f &position, const std::vector<AnimationStrategy*>& animationStrategy,const std::pair<sf::Texture*, std::vector<sf::IntRect>>& images);
 	bool isMidAir();
 
