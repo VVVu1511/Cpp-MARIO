@@ -14,11 +14,14 @@ class View;
 class Character : public WorldObject{
 
 protected:
-	float m_Vx = 5.f;
+	float m_Vx;
 	float m_Vy;
+	bool is_jumping = false;
+	bool is_max_jump_speed = false;
 
 	void initVariables(const sf::Vector2f &position, const std::vector<AnimationStrategy*>& animationStrategy,const std::pair<sf::Texture*, std::vector<sf::IntRect>>& images);
 	bool isMidAir();
+	void tickDownToZero(float& speed, float amount);
 
 public:
 

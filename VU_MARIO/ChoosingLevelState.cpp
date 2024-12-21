@@ -1,7 +1,7 @@
 #include "ChoosingLevelState.h"
+#include "MenuState.h"
 
-
-ChoosingLevelState::ChoosingLevelState(sf::RenderWindow* window, sf::Font& font){
+ChoosingLevelState::ChoosingLevelState(sf::RenderWindow* window, const sf::Font& font){
     this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
 
     this->m_contents = { "WORLD 1 - EASY","WORLD 2 - MEDIUM","WORLD 3 - HARD" };
@@ -19,7 +19,7 @@ void ChoosingLevelState::drawState(sf::RenderWindow* window){
 
 void ChoosingLevelState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
     this->drawState(window);
-    this->handleInputEvent(ev, font);
+    this->handleInputEvent(ev, font,window);
     view.setForWindow(window);
 }
 
@@ -32,10 +32,25 @@ GameState* ChoosingLevelState::nextState(){
     return nullptr;
 }
 
-void ChoosingLevelState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void ChoosingLevelState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
-        this->m_Input = this->findContentOfButtonClicked(mousePos, this->m_all_buttons, this->m_texts);
+        this->m_Input = findContentOfButtonClicked(mousePos, this->m_all_buttons, this->m_texts);
+
+        int mapNum = -1;
+
+        for (int i = 0; i < 3; i++) {
+            if (this->m_Input == m_contents[i]) {
+                mapNum = i + 1;
+                break;
+            }
+        }
+
+        if (mapNum != -1) {
+            this->m_nextState = new MenuState(window,font,mapNum);
+            this->active = false;
+            sf::sleep(sf::seconds(0.2));
+        }
     }
 }

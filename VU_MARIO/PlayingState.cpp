@@ -14,11 +14,16 @@
 #include "BigMario.h"
 #include "Mario.h"
 #include "Bullet.h"
+#include "MenuState.h"
 #include "GoodBullet.h"
+#include "GameOverState.h"
+#include "CongratulationState.h"
+#include "ChangingMapState.h"
 
 void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState){
 	this->cleanObserverForEachLive(observers);
-
+	
+	this->m_restart_called = false;
 	AssetManager* instance = AssetManager::getInstance();
 	
 	Observer* observer1 = new PlayingStateObserver;
@@ -49,7 +54,6 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 			
 			sf::Color pixel = readMap.getPixel(i, j);
 			
-
 			int type = 0;
 			
 			int id = instance->getID(pixel,type);
@@ -77,6 +81,7 @@ void PlayingState::createMap(sf::RenderWindow* window, std::vector<Observer*>& o
 		}	
 	}
 
+	this->isCreated = true;
 }
 
 void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& observers, const float& deltaTime){
@@ -109,26 +114,24 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	int playableSize = all_playable_characters.size();
 	
 	for (int i = 0; i < blockSize; i++) {
-		Block* block = all_blocks[i];
+		
 
-		if (block != nullptr && block->canInteract() == true && block->standInView(view) == true) {
-			block->update(deltaTime, observers);
+		if (all_blocks[i] != nullptr && all_blocks[i]->canInteract() == true) {
+			all_blocks[i]->update(deltaTime, observers);
 		}
 	}
 
 	for (int i = 0; i < itemSize; i++) {
-		Item* item = all_items[i];
+		
 
-		if (item != nullptr && item->standInView(view) == true) {
-			item->update(deltaTime, observers);
+		if (all_items[i] != nullptr) {
+			all_items[i]->update(deltaTime, observers);
 		}
 	}
 
 	for (int i = 0; i < nonPlayableSize; i++) {
-		NonPlayableCharacter* non_playable = all_non_playable_characters[i];
-		
-		if (non_playable != nullptr && non_playable->standInView(view)) {
-			non_playable->update(deltaTime, observers);
+		if (all_non_playable_characters[i] != nullptr) {
+			all_non_playable_characters[i]->update(deltaTime, observers);
 		}
 	}
 
@@ -143,26 +146,24 @@ void PlayingState::update(sf::RenderWindow* window ,std::vector<Observer*>& obse
 	
 	collision.handleAllCollision(std::vector<PlayableCharacter*>(this->all_playable_characters.begin(),this->all_playable_characters.begin() + playableSize), std::vector<NonPlayableCharacter*>(this->all_non_playable_characters.begin(), this->all_non_playable_characters.begin() + nonPlayableSize), std::vector<Item*>(this->all_items.begin(), this->all_items.begin() + itemSize), std::vector<Block*>(this->all_blocks.begin(), this->all_blocks.begin() + blockSize), deltaTime, observers, this->view);
 	
-	view.update(std::vector<PlayableCharacter*>(this->all_playable_characters.begin(), this->all_playable_characters.begin() + playableSize), window);
+	if(this->m_restart_called == false) view.update(std::vector<PlayableCharacter*>(this->all_playable_characters.begin(), this->all_playable_characters.begin() + playableSize), window);
 }
 
 void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
-	
-
 	for (Block* block : this->all_blocks) {
-		if (block != nullptr && block->standInView(view)) {
+		if (block != nullptr) {
 			block->draw(window);
 		}
 	}
 
 	for (Item* item : this->all_items) {
-		if (item != nullptr && item->standInView(view)) {
+		if (item != nullptr) {
 			item->draw(window);
 		}
 	}
 
 	for (NonPlayableCharacter* non_playable : this->all_non_playable_characters) {
-		if (non_playable != nullptr && non_playable->standInView(view)) {
+		if (non_playable != nullptr) {
 			non_playable->draw(window);
 		}
 	}
@@ -178,7 +179,7 @@ void PlayingState::drawMap(sf::RenderWindow* window, const sf::Font& font){
 	view.setForWindow(window);
 }
 
-void PlayingState::temporaryCleanUp(){
+void PlayingState::temporaryCleanUp(sf::RenderWindow* window, const sf::Font& font){
 	for (int i = 0; i < all_blocks.size(); i++) {
 		if (all_blocks[i] == nullptr) continue;
 
@@ -200,19 +201,50 @@ void PlayingState::temporaryCleanUp(){
 	}
 
 	for (int i = 0; i < this->all_non_playable_characters.size(); i++) {
-		if (all_non_playable_characters[i]->canBeDeleted() == true || (all_non_playable_characters[i]->standInView(this->view) == false && all_non_playable_characters[i]->canBeDeletedWhenOutOfView() == true)) {
+		if ((all_non_playable_characters[i]->canBeDeleted() == true) || (all_non_playable_characters[i]->standInView(this->view) == false && all_non_playable_characters[i]->canBeDeletedWhenOutOfView() == true)) {
 			delete all_non_playable_characters[i];
 			all_non_playable_characters[i] = nullptr;
 			all_non_playable_characters.erase(all_non_playable_characters.begin() + i);
 		}
 	}
 
+	for (int i = 0; i < this->all_playable_characters.size(); i++) {
+		if ((all_playable_characters[i]->canBeDeleted() == true)) {
+			delete all_playable_characters[i];
+			all_playable_characters[i] = nullptr;
+			all_playable_characters.erase(all_playable_characters.begin() + i);
+		}
+	}
+
 	for (int i = 0; i < this->garbage_of_playable_characters.size(); i++) {
-		
 		delete this->garbage_of_playable_characters[i];
 		this->garbage_of_playable_characters[i] = nullptr;
-		this->garbage_of_playable_characters.erase(this->garbage_of_playable_characters.begin() + i);
-		
+		this->garbage_of_playable_characters.erase(this->garbage_of_playable_characters.begin() + i);	
+	}
+
+	for (int i = 0; i < this->garbage_of_non_playable_characters.size(); i++) {
+
+		delete this->garbage_of_non_playable_characters[i];
+		this->garbage_of_non_playable_characters[i] = nullptr;
+		this->garbage_of_non_playable_characters.erase(this->garbage_of_non_playable_characters.begin() + i);
+	}
+
+	for (int i = 0; i < this->garbage_of_all_blocks.size(); i++) {
+
+		delete this->garbage_of_all_blocks[i];
+		this->garbage_of_all_blocks[i] = nullptr;
+		this->garbage_of_all_blocks.erase(this->garbage_of_all_blocks.begin() + i);
+	}
+
+	for (int i = 0; i < this->garbage_of_all_items.size(); i++) {
+
+		delete this->garbage_of_all_items[i];
+		this->garbage_of_all_items[i] = nullptr;
+		this->garbage_of_all_items.erase(this->garbage_of_all_items.begin() + i);
+	}
+
+	if (this->all_playable_characters.empty()) {
+		this->decreaseLives(window,font);
 	}
 }
 
@@ -300,15 +332,21 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 
 PlayingState::PlayingState(){
 	this->active = true;
-	this->mapNum = 2;
-	this->m_mainCharacterType = PlayableCharacterType::small_mario;
+	this->isCreated = false;
 	this->m_attributes_text = std::vector<sf::Text>(5);
 }
 
-PlayingState::PlayingState(const std::pair<int, PlayableCharacterType>& mapAndMainCharacter){
-	this->active = true;
+PlayingState::PlayingState(const std::pair<int, PlayableCharacterType>& mapAndMainCharacter) : PlayingState(){
 	this->mapNum = mapAndMainCharacter.first;
 	this->m_mainCharacterType = mapAndMainCharacter.second;
+}
+
+PlayingState::PlayingState(const int& coin, const int& live, const int& mapNum, const int& score, const PlayableCharacterType main){
+	this->coin = coin;
+	this->lives = live;
+	this->mapNum = mapNum;
+	this->score = score;
+	this->m_mainCharacterType = main;
 }
 
 PlayingState::~PlayingState(){
@@ -316,10 +354,10 @@ PlayingState::~PlayingState(){
 }
 
 void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>& observers, PlayingState* gameState, const float& deltaTime, const sf::Font& font){
-	if(time == 400) this->createMap(window, observers, gameState);
+	if (this->isCreated == false) this->createMap(window, observers, gameState);
 
 	
-	if (this->mapNum == 2) {
+	if (this->mapNum == 2 || this->mapNum == 3) {
 		window->clear(sf::Color::Black);
 	}
 
@@ -327,7 +365,7 @@ void PlayingState::RealExecute(sf::RenderWindow* window, std::vector<Observer*>&
 	
 	this->drawMap(window, font);
 	
-	this->temporaryCleanUp();
+	this->temporaryCleanUp(window,font);
 	
 }
 
@@ -337,6 +375,9 @@ void PlayingState::execute(sf::RenderWindow* window, std::vector<Observer*>& obs
 	this->RealExecute(window, observers, (PlayingState*)gameState, deltaTime,font);
 
 	this->time -= deltaTime;
+
+	if(this->m_changing_called == true) this->m_nextState = new ChangingMapState(m_mainCharacterType,font, score, coin, mapNum, time, lives);
+	if (this->m_congrat_called == true) this->m_nextState = new CongratulationState(window);
 }
 
 void PlayingState::addCoin(){
@@ -347,11 +388,12 @@ void PlayingState::addScore(int score){
 	this->score += score;
 }
 
-void PlayingState::decreaseLives(){
+void PlayingState::decreaseLives(sf::RenderWindow* window,const sf::Font &font){
 	this->lives--;
 	
-	if (lives <= 0) {
+	if (this->lives <= 0) {
 		this->active = false;
+		this->m_nextState = new GameOverState(window);
 		return;
 	}
 
@@ -359,22 +401,54 @@ void PlayingState::decreaseLives(){
 }
 
 void PlayingState::changeMap(){
+	this->active = false;
+	sf::sleep(sf::seconds(0.2));
 	
 	if (mapNum < 3) {
-		mapNum++;
+		this->mapNum++;
 		this->restart();
+		this->m_changing_called = true;
 	}
 
 	else {
-		this->expiredTimeOfCongratulation = 2;
+		this->m_congrat_called = true;
 	}
 }
 
 void PlayingState::restart(){
-	this->time = 400;
+	this->time = 400.f;
 	sf::sleep(sf::seconds(2));
 	this->isCreated = false;
-	this->ultimateCleanUp();
+	
+	for (Block* block : this->all_blocks) {
+		if (block != nullptr && block->standInView(view)) {
+			this->garbage_of_all_blocks.push_back(block);
+		}
+	}
+
+	for (Item* item : this->all_items) {
+		if (item != nullptr && item->standInView(view)) {
+			this->garbage_of_all_items.push_back(item);
+		}
+	}
+
+	for (NonPlayableCharacter* non_playable : this->all_non_playable_characters) {
+		if (non_playable != nullptr && non_playable->standInView(view)) {
+			this->garbage_of_non_playable_characters.push_back(non_playable);
+		}
+	}
+
+	for (PlayableCharacter* playable : this->all_playable_characters) {
+		if (playable != nullptr) {
+			this->garbage_of_playable_characters.push_back(playable);
+		}
+	}
+
+	this->all_blocks.clear();
+	this->all_items.clear();
+	this->all_playable_characters.clear();
+	this->all_non_playable_characters.clear();
+	this->m_restart_called = true;
 }
 
 bool PlayingState::isActive()
@@ -397,7 +471,7 @@ void PlayingState::drawState(sf::RenderWindow* window){
 
 }
 
-void PlayingState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void PlayingState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
 
 }
 
@@ -436,7 +510,6 @@ void PlayingState::mainCollectingMushroomEvent(PlayableCharacter* character){
 }
 
 void PlayingState::mainCollectingStarEvent(PlayableCharacter* character){
-	
 	PlayableCharacter* temp = all_playable_characters[0];
 	all_playable_characters[0] = new SuperMario(temp);
 		

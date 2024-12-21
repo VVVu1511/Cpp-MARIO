@@ -52,6 +52,8 @@ bool WorldObject::beingHitFromAbove(const sf::FloatRect& bounds, sf::Vector2f& n
             return true;
         }
     }
+
+    return false;
 }
 
 bool WorldObject::underObjectAt(const sf::FloatRect& bounds, sf::Vector2f& newPosition) const {

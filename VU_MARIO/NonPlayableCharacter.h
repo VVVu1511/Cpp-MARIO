@@ -9,6 +9,7 @@ class PlayableCharacter;
 class NonPlayableCharacter : public Character{
 
 protected:
+
 	float m_speed = 1.f;
 	virtual void setSize(const sf::Vector2f &size);
 public:
@@ -17,6 +18,7 @@ public:
 	void move(const float& deltaTime) override;
 	void update(const float& deltaTime, const std::vector<Observer*>& observers) override;
 	virtual void changeDirection();
+	void die(const std::vector<Observer*>& observers) override;
 
 	virtual void hit(NonPlayableCharacter* character, const std::vector<Observer*>& observers);
 	virtual void hit(Block* block, const std::vector<Observer*>& observers);

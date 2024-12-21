@@ -44,8 +44,6 @@ Block::~Block(){
 
 Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
 {
-    
-
     Block* result = nullptr;
 
     switch (type)
@@ -80,6 +78,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
     case BlockType::vertical_pipe_top:
     case BlockType::pink_vertical_pipe:
     case BlockType::pink_vertical_pipe_top:
+    case BlockType::pink_horizontal_pipe:
         result = new VerticalPipe;
         result->interact = true;
         break;
@@ -90,6 +89,11 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         break;
     case BlockType::tree:
     case BlockType::moon:
+    case BlockType::christmas_tree:
+    case BlockType::star:
+    case BlockType::signpost:
+    case BlockType::snow_pipe:
+    case BlockType::palm:
         result = new Tree;
         result->interact = false;
         break;
@@ -114,6 +118,7 @@ Block* Block::createBlock(const BlockType &type, const sf::Vector2f& position)
         break;
     case BlockType::stick:
     case BlockType::winter_stick:
+    case BlockType::princess:
         result = new Stick;
         result->interact = true;
         break;

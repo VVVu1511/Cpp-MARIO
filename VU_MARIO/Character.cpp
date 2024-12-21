@@ -8,6 +8,20 @@
 #include "AssetManager.h"
 #include "View.h"
 
+void Character::tickDownToZero(float& speed, float amount)
+{
+	if (speed > 0)
+	{
+		speed -= amount;
+		speed = (speed < 0) ? 0 : speed;
+	}
+	else if (speed < 0)
+	{
+		speed += amount;
+		speed = (speed > 0) ? 0 : speed;
+	}
+}
+
 bool Character::standInView(View view) {
 	return view.containObjectAt(this->m_shape.getGlobalBounds());
 }
@@ -54,7 +68,6 @@ void Character::die(const std::vector<Observer*>& observers) {
 	this->m_animation.die(0.2, m_sprite);
 	
 	this->m_delay_dead_time = 0.5;
-
 }
 
 void Character::reset(){
@@ -63,21 +76,33 @@ void Character::reset(){
 
 bool Character::isDead()
 {
-	return this->m_delay_dead_time != 0;
+	return this->m_delay_dead_time > 0;
 }
 
 void Character::update(const float& deltaTime, const std::vector<Observer*>& observers){
+	float dT = deltaTime * 60;
+	
+	tickDownToZero(m_Vx, 1 * dT);
+	
+	this->m_position.x += (abs(m_Vx * dT) > 5.f) ? (m_Vx > 0 ? 5.f : -5.f) : m_Vx * dT;
+	this->m_position.y += (abs(m_Vy * dT) > 10.f) ? (m_Vy > 0 ? 10.f : -10.f) : m_Vy * dT;
+
+	
 	if (this->m_delay_dead_time > 0 && this->canAdvanced() == true) {
 		this->m_delay_dead_time -= deltaTime;
 		this->m_animation.die(deltaTime,this->m_sprite);
 	}
 
 	if (this->m_position.y < this->m_baseGround - this->m_shape.getSize().y) {
-		this->m_position.y += 5.f;
+		this->m_Vy += (m_Vy < 8) ? 0.75 * dT : 0;
 	}
 
 	else {
 		if(this->m_position.y - this->m_baseGround < 15.f) this->m_position.y = this->m_baseGround - this->m_shape.getSize().y;
+		
+		this->m_Vy = 0;
+		is_jumping = false;
+		is_max_jump_speed = false;
 	}
 
 	if (this->m_sprite.getScale().x == -1.f) this->m_sprite.setPosition(sf::Vector2f(this->m_position.x + this->m_shape.getSize().x, this->m_position.y));

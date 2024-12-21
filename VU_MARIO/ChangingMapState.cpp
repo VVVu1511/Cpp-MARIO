@@ -1,11 +1,12 @@
 #include "ChangingMapState.h"
 #include "AssetManager.h"
+#include "PlayingState.h"
 
 ChangingMapState::ChangingMapState(){
 	this->delay_time = 2;
 }
 
-ChangingMapState::ChangingMapState(const sf::Font& font,const int& score, const int& coins, const int& mapNum, const int& time, const int& lives){
+ChangingMapState::ChangingMapState(PlayableCharacterType main, const sf::Font& font,const int& score, const int& coins, const int& mapNum, const int& time, const int& lives){
 	this->delay_time = 2;
 	
 	std::ostringstream cur_score;
@@ -60,12 +61,21 @@ ChangingMapState::ChangingMapState(const sf::Font& font,const int& score, const 
 	int sprites_size = this->m_icons.size();
 
 	setAttributes<sf::Text>(this->m_texts, this->m_contents, std::vector<sf::Color>(texts_size, sf::Color::White), font, {}, {}, {}, std::vector<int>(texts_size,30), texts_position);
+	
+	this->m_cur_coin = coins;
+	this->m_cur_lives = lives;
+	this->m_cur_main = main;
+	this->m_cur_mapNum = mapNum;
+	this->m_cur_score = score;
 }
 
 void ChangingMapState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
 	if(delay_time > 0) delay_time -= deltaTime;
 
-	else this->active = false;
+	else {
+		this->active = false;
+		this->m_nextState = new PlayingState(this->m_cur_coin,this->m_cur_lives,this->m_cur_mapNum,this->m_cur_score,this->m_cur_main);
+	}
 
 	this->drawState(window);
 
@@ -76,16 +86,11 @@ bool ChangingMapState::isActive(){
 	return this->active;
 }
 
-GameState* ChangingMapState::nextState(){
-
-	return nullptr;
-}
-
 void ChangingMapState::drawState(sf::RenderWindow* window){
 	this->draw<sf::Sprite>(window, this->m_icons);
 	this->draw<sf::Text>(window, this->m_texts);
 }
 
-void ChangingMapState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void ChangingMapState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
 
 }

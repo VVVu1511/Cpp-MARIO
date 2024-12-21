@@ -24,6 +24,7 @@ class GameState{
 protected:
 	bool active = false;
 	View view;
+	GameState* m_nextState;
 	bool isCreated = false;
 	float delay_time;
 
@@ -37,12 +38,12 @@ protected:
 
 public:
 	GameState();
-	virtual ~GameState() = default;
+	virtual ~GameState();
 	virtual void execute(sf::RenderWindow* window,std::vector<Observer*>&observers,GameState* gameState, const float& deltaTime, const sf::Event* ev,const sf::Font& font) = 0;
 	virtual bool isActive() = 0;
-	virtual GameState* nextState() = 0;
+	virtual GameState* nextState();
 	virtual void drawState(sf::RenderWindow* window) = 0;
-	virtual void handleInputEvent(const sf::Event*& ev, const sf::Font& font) = 0;
+	virtual void handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window) = 0;
 
 };
 

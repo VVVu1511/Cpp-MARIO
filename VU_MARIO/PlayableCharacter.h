@@ -10,7 +10,7 @@ class Observer;
 class PlayableCharacter : public Character{
 
 protected:
-
+	float delay_transform_time = 0.f;
 public:
 	PlayableCharacter();
 	PlayableCharacter(const PlayableCharacter& other);

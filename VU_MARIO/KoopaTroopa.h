@@ -8,6 +8,7 @@ class KoopaTroopa : public NonPlayableCharacter{
 private:
 	bool m_inShell;
 	bool m_canMoveInShell;
+	float m_delay_move_time;
 	
 public:
 	KoopaTroopa(const int& mapNum);

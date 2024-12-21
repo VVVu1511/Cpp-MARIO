@@ -8,6 +8,7 @@
 KoopaTroopa::KoopaTroopa(const int &mapNum){
 	this->m_inShell = false;
 	this->m_canMoveInShell = false;
+	this->m_delay_move_time = 1.f;
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
 	if (mapNum == 2) image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::blue_turtle);
@@ -26,11 +27,17 @@ KoopaTroopa::KoopaTroopa(const int &mapNum){
 }
 
 void KoopaTroopa::move(const float& deltaTime){
-	if (!this->m_inShell) {
+	if (this->m_inShell == false) {
 		NonPlayableCharacter::move(deltaTime);
 	}
+
 	else {
-		if (this->m_canMoveInShell) {
+		if (this->m_delay_move_time > 0) {
+			this->m_delay_move_time -= deltaTime;
+			return;
+		}
+
+		if (this->m_canMoveInShell == true) {
 			NonPlayableCharacter::move(deltaTime);
 
 		}
@@ -52,7 +59,6 @@ void KoopaTroopa::specificResultAfterBeingHitByPlayable(const std::vector<Observ
 		if (this->m_canMoveInShell == false) {
 			sf::Vector2f newPosition;
 
-			bool left = character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
 			bool right = character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
 
 			this->m_canMoveInShell = true;
@@ -91,6 +97,8 @@ bool KoopaTroopa::canKillPlayable(const sf::FloatRect& bounds){
 	if (this->m_inShell == true) {
 		if (this->m_canMoveInShell == false) return false;
 		
+		if (this->m_delay_move_time > 0) return false;
+
 		if (this->m_speed < 0 && bounds.left > this->m_position.x) return false;
 
 		if (this->m_speed > 0 && bounds.left  < this->m_position.x) return false;

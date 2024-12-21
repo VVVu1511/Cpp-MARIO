@@ -1,6 +1,7 @@
 #include "LogInState.h"
 #include "View.h"
 #include<iostream>
+#include "MenuState.h"
 
 LogInState::LogInState(){}
 
@@ -42,18 +43,13 @@ LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
 }
 
 void LogInState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){  
-    this->handleEventForInput(ev, deltaTime,window);
+    this->handleEventForInput(ev, deltaTime,window,font);
     this->drawState(window);
     this->view.setForWindow(window);
 }
 
 bool LogInState::isActive(){
 	return this->active;
-}
-
-GameState* LogInState::nextState(){
-
-    return nullptr;
 }
 
 void LogInState::handleTextInput(std::string &input, const sf::Event* ev) {
@@ -65,7 +61,7 @@ void LogInState::handleTextInput(std::string &input, const sf::Event* ev) {
     }
 }
 
-void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window){
+void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window, const sf::Font& font){
     bool canInput = false;
 
     this->m_current_time += deltaTime;
@@ -111,7 +107,7 @@ void LogInState::handleEventForInput(const sf::Event* ev, const float& deltaTime
 
     this->inputDisplay[0].setString(this->inputText[0]);
     this->inputDisplay[1].setString(std::string(this->inputText[1].size(), '*'));
-    this->handleLogInButton(ev,deltaTime);
+    this->handleLogInButton(ev,deltaTime,window,font);
     this->handleExitButton(window, ev,deltaTime);
 }
 
@@ -122,11 +118,11 @@ void LogInState::drawState(sf::RenderWindow* window){
     draw<sf::Text>(window, this->all_not_input_texts);
 }
 
-void LogInState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void LogInState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
 
 }
 
-void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime){
+void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window, const sf::Font& font){
     
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
 
@@ -145,8 +141,9 @@ void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime){
             return;
         }
 
-        if (this->checkValidInput()) {
+        if (this->checkValidInput() == true) {
             this->active = false;
+            this->m_nextState = new MenuState(window, font);
             sf::sleep(sf::seconds(0.2));
         }
 

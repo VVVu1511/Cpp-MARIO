@@ -7,6 +7,7 @@
 #include<SFML/Graphics.hpp>
 #include <iostream>
 
+
 enum class BlockType{
 	big_castle = 1,
 	ground = 2,
@@ -69,6 +70,7 @@ enum class NonPlayableCharacterType {
 
 enum class PlayableCharacterType {
 	good_bullet = -1,
+	none = -2,
 	small_mario = 1,
 	small_mario_disappear = 2,
 	small_super_mario = 3,
@@ -89,17 +91,18 @@ enum class BonusAnimation {
 	blue_turtle = 4,
 	red_turtle = 5,
 	boss_fire = 6,
+	transform_mario = 7,
 };
 
 class AssetManager {
 private:
 	const std::vector<sf::Color> all_colors = {
 	//blocks
-	sf::Color(1, 1, 1),
+	sf::Color(71,41,19),
 	sf::Color(255, 126, 0),
 	sf::Color(255, 242, 0),
 	sf::Color(156, 90, 60),
-	sf::Color(1, 1, 1),
+	sf::Color(15, 15, 15),
 	sf::Color(82,34,13),
 	sf::Color(34, 177, 76),
 	sf::Color(47,255,0),
@@ -107,46 +110,46 @@ private:
 	sf::Color(27,64,17),
 	sf::Color(0, 0, 0),
 	sf::Color(115,115,115),
-	sf::Color(1, 1, 1),
+	sf::Color(71,71,70),
 
 	sf::Color(77, 109, 243),
-	sf::Color(1, 1, 1),
+	sf::Color(29,71,50), //palm
 	sf::Color(138,40,138),
 	sf::Color(136,193,222),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(42,59,71),
+	sf::Color(25,51,71),
+	sf::Color(42,51,71),
 	sf::Color(177, 65, 175),
 	sf::Color(177, 109, 169),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(130,33,126),
+	sf::Color(82,117,130),
+	sf::Color(97,121,130),
+	sf::Color(43,95,130),
 
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(194,192,93),
-	sf::Color(1,1,1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(31,44,130),
+	sf::Color(19,15,130),
+	sf::Color(124,122,130),
+	sf::Color(130,22,49),
+	sf::Color(88,130,79),
+	sf::Color(194,192,93), //moon
+	sf::Color(47,130,14), //christmas_tree
+	sf::Color(130,64,76), //princess
+	sf::Color(130,128,13), //star
+	sf::Color(49,130,127),
+	sf::Color(227,221,227),
 	sf::Color(76, 82, 81),
-	sf::Color(139, 150, 149),
+	sf::Color(139, 150, 149), //gray brick
 	//item
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
-	sf::Color(1, 1, 1),
+	sf::Color(126, 130, 15),
+	sf::Color(130, 6, 23),
+	sf::Color(80, 130, 90),
 	sf::Color(150,141,6),
 	//nonplayable
-	sf::Color(148, 66, 137),
-	sf::Color(113, 201, 154),
-	sf::Color(153,0,48),
-	sf::Color(168,230,29),
-	sf::Color(201,127,47),
+	sf::Color(148, 66, 137),//cactus
+	sf::Color(113, 201, 154), //boss
+	sf::Color(153,0,48), //goomba
+	sf::Color(168,230,29), //koopa
+	sf::Color(201,127,47), //fire
 	//playable
 	sf::Color(237,28,36),
 	};
@@ -222,6 +225,8 @@ private:
 		{sf::IntRect(0, 0, 32, 46), sf::IntRect(32, 0, 32, 48),sf::IntRect(64, 0, 32, 28)},
 		{sf::IntRect(0, 0, 32, 48), sf::IntRect(32, 0, 32, 46),sf::IntRect(64, 0, 32, 28)},
 		{sf::IntRect(0, 0, 48, 16), sf::IntRect(48, 0, 48, 16)},
+		{sf::IntRect(0, 0, 32, 32), sf::IntRect(32, 0, 32, 32), sf::IntRect(64, 0, 32, 32),sf::IntRect(96, 0, 32, 32), sf::IntRect(128, 0, 32, 32)},
+
 	};
 	
 	const std::vector<std::string>FILE = {
@@ -255,6 +260,7 @@ private:
 		"../images/blue_turtle.png",
 		"../images/red_turtle.png",
 		"../images/boss_fire.png",
+		"../images/transform_mario.png",
 	};
 
 	

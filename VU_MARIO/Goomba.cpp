@@ -7,7 +7,7 @@ Goomba::Goomba(const int& mapNum){
 	std::pair<sf::Texture*, std::vector<sf::IntRect>> image;
 
 	if (mapNum == 1) image = AssetManager::getInstance()->getNonPlayableCharacter(NonPlayableCharacterType::goomba);
-	else if (mapNum == 2) image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::winter_goomba);
+	else if (mapNum >= 2) image = AssetManager::getInstance()->getBonusAnimation(BonusAnimation::winter_goomba);
 
 	AnimationStrategy* strategy = new AutomaticStrategy(image.first, image.second, 1.0 / 60);
 	AnimationStrategy* strategy2 = new LimitedTimeStrategy(image.first, image.second, 1.0 / 60);

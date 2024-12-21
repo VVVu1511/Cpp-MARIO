@@ -1,5 +1,5 @@
 #include "CongratulationState.h"
-
+#include "MenuState.h"
 
 CongratulationState::CongratulationState() {
 	std::string content = "CONGRATULATION";
@@ -8,6 +8,10 @@ CongratulationState::CongratulationState() {
 	text.setFillColor(sf::Color(255, 255, 255, 128));
 	this->active = true;
 	this->delay_time = 2;
+
+	this->view = View(sf::FloatRect(0, 0, 1200, 576));
+
+	this->text.setPosition(1200 / 2 - text.getGlobalBounds().width / 2, 576 / 2 - text.getGlobalBounds().height / 2);
 }
 
 CongratulationState::CongratulationState(sf::RenderWindow* window) : CongratulationState() {
@@ -17,7 +21,10 @@ CongratulationState::CongratulationState(sf::RenderWindow* window) : Congratulat
 }
 
 void CongratulationState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
-	if (this->delay_time < 0) this->active = false;
+	if (this->delay_time < 0) {
+		this->active = false;
+		this->m_nextState = new MenuState(window,font);
+	}
 
 	this->delay_time -= deltaTime;
 
@@ -33,15 +40,12 @@ bool CongratulationState::isActive(){
 	return this->active;
 }
 
-GameState* CongratulationState::nextState(){
 
-	return nullptr;
-}
 
 void CongratulationState::drawState(sf::RenderWindow* window){
 	window->draw(text);
 }
 
-void CongratulationState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void CongratulationState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
 
 }

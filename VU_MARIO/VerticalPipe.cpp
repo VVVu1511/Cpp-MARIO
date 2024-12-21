@@ -8,13 +8,13 @@ VerticalPipe::VerticalPipe(){
 	this->m_connectToUnderground = false;
 	this->m_connectToGround = false;
 
-	if (m_id == 2) {
-		this->m_connectToUnderground = true;
-	}
+	//if (m_id == 2) {
+	//	this->m_connectToUnderground = true;
+	//}
 
-	else if (m_id == 12) {
-		this->m_connectToGround = true;
-	}
+	//else if (m_id == 12) {
+	//	this->m_connectToGround = true;
+	//}
 
 
 }

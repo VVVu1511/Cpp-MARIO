@@ -5,6 +5,7 @@
 class SuperMario : public PlayableCharacter{
 private:
 	void init();
+
 public:
 	SuperMario();
 

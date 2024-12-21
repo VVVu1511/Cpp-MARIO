@@ -10,20 +10,33 @@
 
 void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characters, std::vector<NonPlayableCharacter*> bad_characters, std::vector<Item*> items, std::vector<Block*> blocks, const float& deltaTime, std::vector<Observer*>& observers,View view){
 	for (PlayableCharacter* good_character : good_characters) {
-		good_character->reset();
+		
 		if (good_character == nullptr) continue;
 
 		for (Block* block : blocks) {
-			if (block != nullptr && block->canInteract() == true && block->standInView(view)) {
+			if (block != nullptr && block->canInteract() == true) {
 				GoodCharacterAndBlock(good_character, block, deltaTime, observers);
+			}
+		}
+	}
+	
+	for (PlayableCharacter* good_character : good_characters) {
+		if (good_character == nullptr) continue;
+
+		good_character->reset();
+
+		for (Block* block : blocks) {
+			if (block != nullptr && block->canInteract() == true) {
+				good_character->StandOn(block, observers);
 			}
 		}
 	}
 
 	for (NonPlayableCharacter* bad_character : bad_characters) {
 		bad_character->reset();
+
 		for (Block* block : blocks) {
-			if (block != nullptr && block->canInteract() == true && bad_character->standInView(view) && block->standInView(view)) {
+			if (block != nullptr && block->canInteract() == true) {
 				BadCharacterAndBlock(bad_character, block, deltaTime, observers);
 			}
 		}
@@ -33,9 +46,8 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 		for (NonPlayableCharacter* bad_character : bad_characters) {
 			if (good_character == nullptr) continue;
 
-			if (bad_character->standInView(view)) {
-				GoodCharacterAndBadCharacter(good_character, bad_character, deltaTime, observers);
-			}
+			GoodCharacterAndBadCharacter(good_character, bad_character, deltaTime, observers);
+			
 		}
 	}
 	
@@ -44,9 +56,9 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 
 	for (int i = 0; i < enemies_size - 1; i++) {
 		for (int j = i + 1; j < enemies_size; j++) {
-			if (bad_characters[i]->standInView(view) && bad_characters[j]->standInView(view)) {
-				BadCharacterAndBadCharacter(bad_characters[i], bad_characters[j], deltaTime, observers);
-			}
+			
+			BadCharacterAndBadCharacter(bad_characters[i], bad_characters[j], deltaTime, observers);
+			
 		}
 	}
 	
@@ -55,9 +67,9 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 		if (good_character == nullptr) continue;
 
 		for (Item* item : items) {
-			if (item->standInView(view)) {
-				GoodCharacterAndItem(good_character, item, deltaTime, observers);
-			}
+			
+			GoodCharacterAndItem(good_character, item, deltaTime, observers);
+			
 		}
 
 	}
@@ -65,7 +77,7 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 	for (Item* item : items) {
 		item->reset();
 		for (Block* block : blocks) {
-			if (block->canInteract() && item->standInView(view) && block->standInView(view)) {
+			if (block->canInteract() == true) {
 				ItemAndBlock(item, block, deltaTime, observers,good_characters);
 			}
 		}
@@ -76,7 +88,6 @@ void Collision::handleAllCollision(std::vector<PlayableCharacter*> good_characte
 void Collision::GoodCharacterAndBlock(PlayableCharacter* good_character, Block* block, const float& deltaTime, std::vector<Observer*>& observers){
 	if (good_character != nullptr &&  !block->isDead() && !good_character->isDead()) {
 		good_character->hit(block, observers);
-		good_character->StandOn(block,observers);
 	}
 }
 
@@ -97,7 +108,7 @@ void Collision::GoodCharacterAndItem(PlayableCharacter* good_character, Item* it
 void Collision::GoodCharacterAndBadCharacter(PlayableCharacter* good_character, NonPlayableCharacter* bad_character, const float& deltaTime, std::vector<Observer*>& observers){
 	if (good_character != nullptr && !good_character->isDead() && !bad_character->isDead()) {
 		good_character->standOn(bad_character, observers);
-		if(!bad_character->isDead()) good_character->hit(bad_character, observers);
+		if(bad_character->isDead() == false) good_character->hit(bad_character, observers);
 	}
 }
 

@@ -14,6 +14,16 @@ std::string GameState::findContentOfButtonClicked(const sf::Vector2f& mousePos, 
 
 GameState::GameState(){
 	this->active = true;
+    this->m_nextState = nullptr;
+}
+
+GameState::~GameState(){
+    delete this->m_nextState;
+}
+
+GameState* GameState::nextState()
+{
+    return this->m_nextState;
 }
 
 

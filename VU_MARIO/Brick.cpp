@@ -6,7 +6,7 @@ Brick::Brick()
 }
 
 void Brick::jump(){
-    this->m_position.y -= 20.f;
+    this->m_position.y -= 6.f;
 }
 
 void Brick::specificResultAfterBeingHitFromBottom(const std::vector<Observer*>& observers, const PlayableCharacter& character){

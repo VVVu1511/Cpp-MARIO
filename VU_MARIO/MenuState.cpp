@@ -1,9 +1,12 @@
 #include "MenuState.h"
 #include <iostream>
 #include "AssetManager.h"
+#include "PlayingState.h"
+#include "ChoosingCharacterState.h"
+#include "ChoosingLevelState.h"
 
-std::string MenuState::m_characterInput = "";
-std::string MenuState::m_levelInput = "";
+int MenuState::m_levelInput = -1;
+PlayableCharacterType MenuState::m_characterInput = PlayableCharacterType::none;
 
 void MenuState::drawState(sf::RenderWindow* window){
     window->draw(this->m_menu_frames);
@@ -11,7 +14,7 @@ void MenuState::drawState(sf::RenderWindow* window){
     this->draw<sf::Text>(window, this->m_menu_texts);
 }
 
-void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
+void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
 
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
@@ -24,11 +27,15 @@ void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
         else if (this->m_menu_all_buttons[1].getGlobalBounds().contains(mousePos)) {
             this->m_menu_all_buttons[1].setFillColor(CLICKED_COLOR);
             this->active = false;
+            this->m_nextState = new ChoosingLevelState(window,font);
+            sf::sleep(sf::seconds(0.2));
         }
 
         else if (this->m_menu_all_buttons[2].getGlobalBounds().contains(mousePos)) {
             this->m_menu_all_buttons[2].setFillColor(CLICKED_COLOR);
             this->active = false;
+            this->m_nextState = new ChoosingCharacterState(window, font);
+            sf::sleep(sf::seconds(0.2));
         }
     }
 
@@ -71,15 +78,20 @@ void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){
 }
 
 void MenuState::handlePlayButton() {
-    if (this->m_characterInput != "" && this->m_levelInput != "") this->active = false;
+    if (m_characterInput != PlayableCharacterType::none && m_levelInput != -1) {
+        this->active = false;
+        std::pair<int, PlayableCharacterType> mapNum_and_character;
+        mapNum_and_character.first = this->m_levelInput;
+        mapNum_and_character.second = this->m_characterInput;
+        this->m_nextState = new PlayingState(mapNum_and_character);
+        sf::sleep(sf::seconds(0.2));
+    }
 }
 
-MenuState::MenuState(sf::RenderWindow* window, sf::Font& font){
+MenuState::MenuState(sf::RenderWindow* window, const sf::Font& font){
     this->active = true;
     this->m_buttonCharacterClicked = false;
     this->m_buttonLevelClicked = false;
-    this->m_levelInput = "";
-    this->m_characterInput = "";
     
     this->view = View(sf::FloatRect(0, 0,window->getSize().x, window->getSize().y));
 
@@ -95,8 +107,17 @@ MenuState::MenuState(sf::RenderWindow* window, sf::Font& font){
 
 }
 
+MenuState::MenuState(sf::RenderWindow* window, const sf::Font& font, const int& mapNum) : MenuState(window,font){
+    this->m_levelInput = mapNum;
+}
+
+MenuState::MenuState(sf::RenderWindow* window, const sf::Font& font, PlayableCharacterType type) : MenuState(window,font){
+    this->m_characterInput = type;
+}
+
 void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
-    this->handleInputEvent(ev,font);
+
+    this->handleInputEvent(ev,font,window);
     
     this->drawState(window);
     
@@ -107,8 +128,6 @@ bool MenuState::isActive(){
     return this->active;
 }
 
-GameState* MenuState::nextState() {
-    return nullptr;
-}
+
 
 

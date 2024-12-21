@@ -19,7 +19,7 @@ private:
 	void chooseState();
 public:
 	Game();
-	
+
 	void run();
 	~Game();
 };

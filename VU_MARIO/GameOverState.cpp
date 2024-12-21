@@ -1,4 +1,5 @@
 #include "GameOverState.h"
+#include "MenuState.h"
 
 GameOverState::GameOverState(){
 	std::string content = "GAME OVER!";
@@ -19,7 +20,10 @@ GameOverState::~GameOverState(){
 
 void GameOverState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
 	
-	if (this->delay_time < 0) this->active = false;
+	if (this->delay_time < 0) {
+		this->active = false;
+		this->m_nextState = new MenuState(window, font);
+	}
 
 	this->delay_time -= deltaTime;
 	
@@ -40,4 +44,8 @@ GameState* GameOverState::nextState() {
 	return nullptr;
 }
 
-void GameOverState::handleInputEvent(const sf::Event*& ev, const sf::Font& font){}
+void GameOverState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){}
+
+void GameOverState::drawState(sf::RenderWindow* window){
+
+}

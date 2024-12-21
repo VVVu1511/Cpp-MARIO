@@ -30,10 +30,12 @@ void PlayableCharacter::hit(NonPlayableCharacter* character, const std::vector<O
 		return;
 	}
 
-	if ((character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition))
-		|| (character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition))
-		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition)))
+
+	if ((character->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition) == true)
+		|| (character->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) == true)
+		|| (character->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition) == true))
 	{
+
 		if (this->canBeKilledByNonPlayable() == false) {
 			character->die(observers);
 			return;
@@ -53,12 +55,10 @@ void PlayableCharacter::standOn(NonPlayableCharacter* character, const std::vect
 	sf::Vector2f newPosition;
 
 	if (character->beingHitFromAbove(this->m_shape.getGlobalBounds(), newPosition) == true) {
-		
 		if(character->canBeKilledByPlayable(this->m_shape.getGlobalBounds()) == true) character->die(observers);
 		
 		character->specificResultAfterBeingStoodOnByPlayable(observers,this);
 	}
-
 }
 
 void PlayableCharacter::shoot(const float& deltaTime, const std::vector<Observer*>& observers){}
@@ -85,25 +85,26 @@ void PlayableCharacter::hit(Block* block, const std::vector<Observer*>& observer
 		block->jump();
 
 		this->m_position = newPosition;
+		this->m_shape.setPosition(this->m_position);
 	}
 
 	else if (left == true) {
 		block->specificResultAfterBeingHitFromLeft(observers,*this);
-		this->m_position = newPosition;
-		std::cout << "hi";
+		this->m_position.x = newPosition.x;
 		this->m_Vx = 0;
+
+
+		this->m_shape.setPosition(this->m_position);
 	}
 
 	else if (right == true) {
 		block->specificResultAfterBeingHitFromRight(observers,*this);
-		this->m_position = newPosition;
+		this->m_position.x = newPosition.x;
 		this->m_Vx = 0;
+
+		this->m_shape.setPosition(this->m_position);
 	}
 
-	else {
-		this->m_Vx = 5.f;
-		this->m_Vy = 10.f;
-	}
 }
 
 void PlayableCharacter::StandOn(Block* block, const std::vector<Observer*>& observers){
@@ -182,7 +183,10 @@ bool PlayableCharacter::canDestroyBrick() const{
 	return false;
 }
 
-PlayableCharacter::PlayableCharacter(){}
+PlayableCharacter::PlayableCharacter(){
+	this->m_Vx = 5.f;
+	this->m_Vy = 10.f;
+}
 
 PlayableCharacter::PlayableCharacter(const PlayableCharacter& other){
 	this->m_Vx = other.m_Vx;
@@ -192,6 +196,7 @@ PlayableCharacter::PlayableCharacter(const PlayableCharacter& other){
 	this->m_position = other.m_position;
 	this->m_shape = other.m_shape;
 	this->m_sprite = other.m_sprite;
+	this->m_delay_dead_time = 0;
 }
 
 PlayableCharacter* PlayableCharacter::createCharacter(const PlayableCharacterType &type, const sf::Vector2f position)
@@ -245,27 +250,35 @@ void PlayableCharacter::setCenterForView(sf::View& view, sf::RenderWindow* windo
 }
 
 void PlayableCharacter::move(const float& deltaTime){
-	
+	float dT = deltaTime * 60;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		this->m_position.x -= 5.f;
+		m_Vx += (m_Vx > -5.f) ? -1.25f * dT : 0.f;
 		m_animation.moveleft(deltaTime, this->m_sprite);
 	}
-	
+
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		this->m_position.x += 5.f;
+		m_Vx += (m_Vx < 5.f) ? 1.25f * dT : 0.f;
 		m_animation.moveright(deltaTime, this->m_sprite);
 	}
-	
+
 	else {
 		m_animation.doNothing(this->m_sprite);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		this->m_position.y -= 10.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (!is_jumping || !is_max_jump_speed)) {
+		m_Vy += -3 * dT;
+		if (m_Vy <= -12)
+			this->is_max_jump_speed = true;
+		is_jumping = true;
+	}
+
+	else
+	{
+		this->is_max_jump_speed = true;
 	}
 
 	if (this->isMidAir()) {
-		m_animation.jump(deltaTime,this->m_sprite);
+		m_animation.jump(deltaTime, this->m_sprite);
 	}
 }
 

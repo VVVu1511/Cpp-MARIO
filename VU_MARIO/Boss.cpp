@@ -13,6 +13,7 @@ Boss::Boss(){
 	AnimationStrategy* strategy = new AutomaticStrategy(image.first, image.second, 1.0 / 60);
 
 	this->m_animation.addStrategy(strategy);
+
 	sf::Vector2f size((float)image.second[0].width, (float)image.second[0].height);
 
 	this->setSize(size);
@@ -24,7 +25,7 @@ void Boss::shoot(const float& deltaTime, const std::vector<Observer*>& observers
 		return;
 	}
 
-	this->m_shooting_delay_time = 2.f;
+	this->m_shooting_delay_time = 0.5f;
 
 	for (Observer* observer : observers) {
 		observer->bossShooting(this->m_position,this->m_speed);

@@ -38,7 +38,7 @@ NonPlayableCharacter* NonPlayableCharacter::createCharacter(const NonPlayableCha
 		result = new Boss;
 		break;
 	case NonPlayableCharacterType::fire_sequence:
-		result = new FireSequence;
+		result = new FireSequence(position,mapNum);
 		break;
 	case NonPlayableCharacterType::bullet:
 		result = new Bullet;
@@ -116,15 +116,13 @@ void NonPlayableCharacter::hit(NonPlayableCharacter* character, const std::vecto
 void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& observers){
 	sf::Vector2f newPosition;
 
-	if (block->beingHitFromBottom(this->m_shape.getGlobalBounds(), newPosition) == true) {
-		this->m_position = newPosition;
-	}
+	bool left = block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition);
+	bool right = block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition);
 
-	else if ((block->beingHitFromLeftBy(this->m_shape.getGlobalBounds(), newPosition) == true)
-		|| (block->beingHitFromRightBy(this->m_shape.getGlobalBounds(), newPosition) == true))
+	if (left == true || right == true)
 	{
-		this->m_position = newPosition;
-		this->m_position.x += (this->m_speed > 0) ? -1.f : 1.f;
+		this->m_position.x = newPosition.x;
+		
 		this->changeDirection();
 	}
 
@@ -166,5 +164,11 @@ void NonPlayableCharacter::update(const float& deltaTime, const std::vector<Obse
 }
 
 void NonPlayableCharacter::changeDirection(){
-	this->m_speed *= -1;
+	this->m_speed *= (- 1.f);
+}
+
+void NonPlayableCharacter::die(const std::vector<Observer*>& observers){
+	Character::die(observers);
+
+	this->m_sprite.setScale(1.f, -1.f);
 }
