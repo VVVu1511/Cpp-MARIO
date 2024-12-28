@@ -84,6 +84,8 @@ void Character::update(const float& deltaTime, const std::vector<Observer*>& obs
 	
 	tickDownToZero(m_Vx, 1 * dT);
 	
+	if (this->m_position.y > 1000) this->die(observers);
+
 	this->m_position.x += (abs(m_Vx * dT) > 5.f) ? (m_Vx > 0 ? 5.f : -5.f) : m_Vx * dT;
 	this->m_position.y += (abs(m_Vy * dT) > 10.f) ? (m_Vy > 0 ? 10.f : -10.f) : m_Vy * dT;
 

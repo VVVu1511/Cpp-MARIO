@@ -5,6 +5,8 @@
 #include "ChoosingCharacterState.h"
 #include "ChoosingLevelState.h"
 
+#include <iostream>
+
 int MenuState::m_levelInput = -1;
 PlayableCharacterType MenuState::m_characterInput = PlayableCharacterType::none;
 
@@ -78,6 +80,7 @@ void MenuState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf:
 }
 
 void MenuState::handlePlayButton() {
+    std::cout << "play button!!!!!!!!!!!!!\n";
     if (m_characterInput != PlayableCharacterType::none && m_levelInput != -1) {
         this->active = false;
         std::pair<int, PlayableCharacterType> mapNum_and_character;
@@ -116,6 +119,8 @@ MenuState::MenuState(sf::RenderWindow* window, const sf::Font& font, PlayableCha
 }
 
 void MenuState::execute(sf::RenderWindow* window, std::vector<Observer*>& observers, GameState* gameState, const float& deltaTime, const sf::Event* ev, const sf::Font& font){
+
+    std::cout << "level chosen:         " << this->m_levelInput << "\n";
 
     this->handleInputEvent(ev,font,window);
     

@@ -1,7 +1,7 @@
-﻿  main.cpp
+﻿  NonPlayableCharacter.cpp
   Generating code
-  0 of 1789 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 1879 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  VU_MARIO.vcxproj -> C:\Users\Admin\OneDrive - VNU-HCMUS\HK1 - Year2\Lập trình hướng đối tượng\Thực hành\Mario_Bros\MarioClone\MARIO\Release\VU_MARIO.exe
+  VU_MARIO.vcxproj -> D:\MARIO\Release\VU_MARIO.exe

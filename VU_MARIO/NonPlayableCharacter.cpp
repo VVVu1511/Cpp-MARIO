@@ -14,6 +14,8 @@
 #include "Boss.h"
 #include "Bullet.h"
 
+#include <iostream>
+
 void NonPlayableCharacter::setSize(const sf::Vector2f& size) {
 	this->m_shape.setSize(size);
 }
@@ -122,7 +124,7 @@ void NonPlayableCharacter::hit(Block* block, const std::vector<Observer*>& obser
 	if (left == true || right == true)
 	{
 		this->m_position.x = newPosition.x;
-		
+
 		this->changeDirection();
 	}
 

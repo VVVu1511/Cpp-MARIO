@@ -1,5 +1,10 @@
 #include "ChoosingLevelState.h"
 #include "MenuState.h"
+#include "PlayingState.h"
+#include "PlayableCharacter.h"
+#include "AssetManager.h"
+
+#include <iostream>
 
 ChoosingLevelState::ChoosingLevelState(sf::RenderWindow* window, const sf::Font& font){
     this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
@@ -29,7 +34,7 @@ bool ChoosingLevelState::isActive(){
 
 GameState* ChoosingLevelState::nextState(){
 
-    return nullptr;
+    return m_nextState;
 }
 
 void ChoosingLevelState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
@@ -47,10 +52,12 @@ void ChoosingLevelState::handleInputEvent(const sf::Event*& ev, const sf::Font& 
             }
         }
 
-        if (mapNum != -1) {
-            this->m_nextState = new MenuState(window,font,mapNum);
+        std::cout << "mapNum:           " << mapNum << "\n";
+
+        if (mapNum != -1)
+        {
+            this->m_nextState = new MenuState(window, font, mapNum);
             this->active = false;
-            sf::sleep(sf::seconds(0.2));
         }
     }
 }

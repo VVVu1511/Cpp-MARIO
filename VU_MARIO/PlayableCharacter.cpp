@@ -267,7 +267,7 @@ void PlayableCharacter::move(const float& deltaTime){
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (!is_jumping || !is_max_jump_speed)) {
 		m_Vy += -3 * dT;
-		if (m_Vy <= -12)
+		if (m_Vy <= -15)
 			this->is_max_jump_speed = true;
 		is_jumping = true;
 	}

@@ -14,6 +14,8 @@ void Game::chooseState(){
     GameState* temp = this->currentState;
     this->currentState = this->currentState->nextState();
 
+    std::cout << "currentState after chooseState: " << currentState << "\n";
+
     delete temp;
 }
 
@@ -54,6 +56,8 @@ void Game::run(){
         window->clear(sf::Color(92,148,252));
         
         this->chooseState();
+
+        std::cout << "this->currentState = " << this->currentState << "\n";
  
         this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 

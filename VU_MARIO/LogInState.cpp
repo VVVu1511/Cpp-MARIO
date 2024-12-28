@@ -3,13 +3,15 @@
 #include<iostream>
 #include "MenuState.h"
 
+#include <iostream>
+
 LogInState::LogInState(){}
 
 LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
-    this->valid_username = { "123" };
+    this->valid_username = { "" };
     this->m_delay_log_in = 0;
     this->m_logInClicked = 0;
-    this->valid_password = { "123" };
+    this->valid_password = { "" };
     this->active = true;
     this->view = View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     this->max_chars = 40;
@@ -143,7 +145,9 @@ void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, 
 
         if (this->checkValidInput() == true) {
             this->active = false;
+            std::cout << "login success??\n";
             this->m_nextState = new MenuState(window, font);
+            std::cout << "login success??, menustate = " << this->m_nextState << "\n";
             sf::sleep(sf::seconds(0.2));
         }
 
