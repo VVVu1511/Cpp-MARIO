@@ -32,13 +32,14 @@ enum class SoundType {
     menu_return = 26,
     time_passed = 27,
     world_finished = 28,
-
+	login = 29,
+	click = 30,
 };
 
 class SoundManager {
 private:
     const std::vector<std::string>soundFile = {
-        "../sounds/1up_collect.wav",
+        "../sounds/1up_collected.wav",
         "../sounds/back_to_small.wav",
         "../sounds/background_castle.wav",
         "../sounds/background_open.wav",
@@ -48,7 +49,7 @@ private:
         "../sounds/background_winter.wav",
         "../sounds/block_destroyed.wav",
         "../sounds/block_hitted.wav",
-        "../sounds/bonus_appeared.wav",
+        "../sounds/bonus_appeard.wav",
         "../sounds/bonus_collected.wav",
         "../sounds/boss_destroyed.wav",
         "../sounds/coin_sound.wav",
@@ -66,6 +67,8 @@ private:
         "../sounds/menu_return.wav",
         "../sounds/time_passed.wav",
         "../sounds/world_finished.wav",
+		"../sounds/login_sound.wav",
+        "../sounds/click.wav",
     };
 
     std::vector<sf::Sound> sounds;
@@ -82,4 +85,6 @@ public:
     static SoundManager* getInstance();
     void playSound(SoundType id);
     void stopSound(SoundType id);
+    void clear();
+    void setVolume(SoundType type, float volume);
 };

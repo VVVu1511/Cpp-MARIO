@@ -55,3 +55,21 @@ void SoundManager::playSound(SoundType id){
 void SoundManager::stopSound(SoundType id){
 	this->sounds[(int)id - 1].stop();
 }
+
+void SoundManager::clear() {
+	for (auto& sound : sounds) {
+		sound.stop();
+	}
+
+	sounds.clear();
+	soundBuffers.clear();
+
+	std::cout << "SoundManager: All sounds and buffers have been cleared." << std::endl;
+}
+
+void SoundManager::setVolume(SoundType type, float volume)
+{
+	this->sounds[(int)type - 1].setVolume(volume);
+}
+
+

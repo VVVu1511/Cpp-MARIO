@@ -1,48 +1,76 @@
-﻿  ChoosingLevelState.cpp
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         with
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:             T=unsigned int
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         ]
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         and
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:             T=float
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,81): warning C4244:         ]
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         with
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:             T=unsigned int
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         ]
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         and
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:             T=float
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(10,60): warning C4244:         ]
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,65): warning C4244:         with
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,65): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,65): warning C4244:             T=float
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,65): warning C4244:         ]
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,46): warning C4244:         with
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,46): warning C4244:         [
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,46): warning C4244:             T=float
-D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(42,46): warning C4244:         ]
-D:\MARIO\VU_MARIO\GameState.h(83,80): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
-D:\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         with
-D:\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         [
-D:\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:             _Ty=int
-D:\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         ]
-  (compiling source file 'ChoosingLevelState.cpp')
-      D:\MARIO\VU_MARIO\GameState.h(83,80):
+﻿  Game.cpp
+  LogInState.cpp
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:             T=unsigned int
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         and
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,81): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:             T=unsigned int
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         and
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(16,60): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(20,32): warning C4305: '=': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(42,23): warning C4018: '<': signed/unsigned mismatch
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(72,37): warning C4305: '+=': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,65): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,65): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,65): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,65): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,46): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,46): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,46): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(78,46): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,65): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,65): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,65): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,65): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,46): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,46): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,46): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(131,46): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(136,36): warning C4305: '=': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(151,35): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,65): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,65): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,65): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,65): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,65): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,46): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,46): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,46): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,46): warning C4244:             T=float
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(163,46): warning C4244:         ]
+D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(167,35): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
+D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         with
+D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         [
+D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:             _Ty=int
+D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80): warning C4244:         ]
+  (compiling source file 'LogInState.cpp')
+      D:\VUmario\MARIO\VU_MARIO\GameState.h(83,80):
       the template instantiation context (the oldest one first) is
-          D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(16,11):
+          D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(36,11):
           see reference to function template instantiation 'void GameState::setAttributes<sf::RectangleShape>(std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &,const std::vector<std::string,std::allocator<std::string>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const sf::Font &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &,const std::vector<sf::Color,std::allocator<sf::Color>> &,const std::vector<int,std::allocator<int>> &,const std::vector<int,std::allocator<int>> &,const std::vector<sf::Vector2f,std::allocator<sf::Vector2f>> &)' being compiled
   
-D:\MARIO\VU_MARIO\GameState.h(92,20): warning C4018: '<': signed/unsigned mismatch
-  (compiling source file 'ChoosingLevelState.cpp')
-      D:\MARIO\VU_MARIO\GameState.h(92,20):
+D:\VUmario\MARIO\VU_MARIO\GameState.h(92,20): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file 'LogInState.cpp')
+      D:\VUmario\MARIO\VU_MARIO\GameState.h(92,20):
       the template instantiation context (the oldest one first) is
-          D:\MARIO\VU_MARIO\ChoosingLevelState.cpp(21,11):
+          D:\VUmario\MARIO\VU_MARIO\LogInState.cpp(117,5):
           see reference to function template instantiation 'void GameState::draw<sf::RectangleShape>(sf::RenderWindow *,std::vector<sf::RectangleShape,std::allocator<sf::RectangleShape>> &)' being compiled
   
-  VU_MARIO.vcxproj -> D:\MARIO\Debug\VU_MARIO.exe
+  Generating Code...
+  VU_MARIO.vcxproj -> D:\VUmario\MARIO\Debug\VU_MARIO.exe

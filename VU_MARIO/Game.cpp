@@ -6,7 +6,7 @@
 #include <iostream>
 #include "GameOverState.h"
 #include "LogInState.h"
-
+#include "Sound.h"
 void Game::chooseState(){
     
     if (this->currentState->isActive() == true) return;
@@ -32,8 +32,7 @@ Game::Game(){
 
 void Game::run(){
     AssetManager::getInstance();
-    
-    window->setFramerateLimit(60);
+    window->setFramerateLimit(90);
 
     while (window->isOpen()) {
         

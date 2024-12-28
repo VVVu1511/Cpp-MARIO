@@ -43,9 +43,3 @@ public:
 	void drawState(sf::RenderWindow* window) override;
 	void handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window) override;
 };
-
-
-
-
-
-

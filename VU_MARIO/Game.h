@@ -1,25 +1,24 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Audio.hpp>
 class GameState;
 class Observer;
 enum class StateOfGame;
 
 class Game {
 private:
-	sf::Clock clock;
-	float deltaTime;
-	sf::RenderWindow* window;
-	sf::Event* ev;
-	GameState* currentState;
-	std::vector<Observer*>observers;
-	sf::Font font;
-	StateOfGame state;
+    sf::RenderWindow* window;
+    sf::Event* ev;
+    sf::Font font;
+    GameState* currentState;
+    std::vector<Observer*> observers;
+    sf::Clock clock;
+    float deltaTime;
 
-	void chooseState();
+
 public:
-	Game();
-
-	void run();
-	~Game();
+    Game();
+    ~Game();
+    void run();
+    void chooseState();
 };

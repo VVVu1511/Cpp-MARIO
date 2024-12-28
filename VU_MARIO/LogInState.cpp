@@ -2,9 +2,9 @@
 #include "View.h"
 #include<iostream>
 #include "MenuState.h"
-
-#include <iostream>
-
+#include <SFML/Audio.hpp>
+#include <bitset>
+#include "Sound.h"
 LogInState::LogInState(){}
 
 LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
@@ -39,6 +39,9 @@ LogInState::LogInState(sf::RenderWindow* window, const sf::Font& font) {
     this->setAttributes<sf::RectangleShape>(this->frames, {}, std::vector<sf::Color>(this->frames.size(), sf::Color::White), font, { sf::Vector2f(800.f, 300.f),sf::Vector2f(800.f, 100.f) }, {}, { std::vector<int>(this->frames.size(),2) }, {}, this->frames_position);
     this->setAttributes<sf::RectangleShape>(this->all_buttons, {}, std::vector<sf::Color>(this->all_buttons.size(), sf::Color::Green), font, std::vector<sf::Vector2f>(this->all_buttons.size(), sf::Vector2f(100.f, 50.f)), {}, { std::vector<int>(this->all_buttons.size(),2) }, {}, this->all_buttons_position);
 
+    SoundManager::getInstance()->setVolume(SoundType::login, 25);
+	SoundManager::getInstance()->playSound(SoundType::login);
+	
     for (int i = 0; i < inputDisplay.size(); i++) {
         this->inputText[i] = "";
     }
@@ -124,16 +127,16 @@ void LogInState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf
 
 }
 
-void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window, const sf::Font& font){
-    
+void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, sf::RenderWindow* window, const sf::Font& font) {
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
-
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
         if (this->all_buttons[0].getGlobalBounds().contains(mousePos)) {
             this->all_buttons[0].setFillColor(CLICKED_COLOR);
             this->m_logInClicked = 1;
             this->m_delay_log_in = 0.2;
+
+            SoundManager::getInstance()->playSound(SoundType::click);
         }
     }
 
@@ -149,8 +152,9 @@ void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, 
             this->m_nextState = new MenuState(window, font);
             std::cout << "login success??, menustate = " << this->m_nextState << "\n";
             sf::sleep(sf::seconds(0.2));
-        }
 
+            SoundManager::getInstance()->stopSound(SoundType::login);
+        }
         else {
             this->m_logInClicked = 0;
         }
@@ -159,12 +163,12 @@ void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, 
 
 void LogInState::handleExitButton(sf::RenderWindow* window,const sf::Event* ev, const float& deltaTime){
     if (ev->type == sf::Event::MouseButtonPressed && ev->mouseButton.button == sf::Mouse::Left) {
-
         sf::Vector2f mousePos(ev->mouseButton.x, ev->mouseButton.y);
 
         if (this->all_buttons[1].getGlobalBounds().contains(mousePos)) {
             this->all_buttons[1].setFillColor(CLICKED_COLOR);
-            sf::sleep(sf::seconds(0.2));
+            SoundManager::getInstance()->playSound(SoundType::click);
+            sf::sleep(sf::seconds(1.0));
             window->close();
         }
     }
@@ -192,12 +196,3 @@ bool LogInState::checkValidInput() {
 
     return true;
 }
-
-
-
-
-
-
-
-
-
