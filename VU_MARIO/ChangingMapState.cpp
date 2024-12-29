@@ -76,6 +76,7 @@ void ChangingMapState::execute(sf::RenderWindow* window, std::vector<Observer*>&
 
 	else {
 		this->active = false;
+		std::cout << "lives: " << this->m_cur_lives << "\n";
 		this->m_nextState = new PlayingState(this->m_cur_coin,this->m_cur_lives,this->m_cur_mapNum,this->m_cur_score,this->m_cur_main);
 	}
 

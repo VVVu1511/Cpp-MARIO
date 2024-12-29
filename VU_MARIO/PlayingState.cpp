@@ -415,6 +415,7 @@ void PlayingState::changeMap(){
 		this->mapNum++;
 		this->restart();
 		this->m_changing_called = true;
+		this->lives++;
 	}
 
 	else {
