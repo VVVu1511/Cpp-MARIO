@@ -148,9 +148,9 @@ void LogInState::handleLogInButton(const sf::Event* ev, const float& deltaTime, 
 
         if (this->checkValidInput() == true) {
             this->active = false;
-            std::cout << "login success??\n";
+            //std::cout << "login success??\n";
             this->m_nextState = new MenuState(window, font);
-            std::cout << "login success??, menustate = " << this->m_nextState << "\n";
+            //std::cout << "login success??, menustate = " << this->m_nextState << "\n";
             sf::sleep(sf::seconds(0.2));
 
             SoundManager::getInstance()->stopSound(SoundType::login);

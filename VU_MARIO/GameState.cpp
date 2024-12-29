@@ -24,7 +24,7 @@ GameState::~GameState(){
 
 GameState* GameState::nextState()
 {
-    std::cout << "returning next state: " << this->m_nextState << "\n";
+    //std::cout << "returning next state: " << this->m_nextState << "\n";
     return this->m_nextState;
 }
 

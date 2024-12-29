@@ -24,5 +24,6 @@ public:
 	bool isActive() ;
 	void drawState(sf::RenderWindow* window) ;
 	void handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window) override ;
+	GameState* nextState();
 };
 

@@ -52,7 +52,7 @@ void ChoosingLevelState::handleInputEvent(const sf::Event*& ev, const sf::Font& 
             }
         }
 
-        std::cout << "mapNum:           " << mapNum << "\n";
+        //std::cout << "mapNum:           " << mapNum << "\n";
 
         if (mapNum != -1)
         {

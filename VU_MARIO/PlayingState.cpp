@@ -317,11 +317,17 @@ void PlayingState::drawAttributes(sf::RenderWindow* window, const sf::Font& font
 	
 	setAttributes<sf::Text>(this->m_attributes_text, temp, std::vector<sf::Color>(size, sf::Color(236, 234, 226)), font, {}, {}, {}, std::vector<int>(size, 40), {});
 	
-	for (int i = 0; i < 5; i++) {
+	//for (int i = 0; i < 0; i++) { // 5
 
-		this->m_attributes_text[i].setPosition(offsetX, 30.f);
+	//	this->m_attributes_text[i].setPosition(offsetX, 30.f);
 
-		offsetX += this->m_attributes_text[i].getGlobalBounds().width + 20.f;
+	//	offsetX += this->m_attributes_text[i].getGlobalBounds().width + 20.f;
+	//}
+
+	for (auto& motherfuck : this->m_attributes_text)
+	{
+		motherfuck.setPosition(offsetX, 30);
+		offsetX += motherfuck.getGlobalBounds().width + 20;
 	}
 
 
@@ -347,6 +353,7 @@ PlayingState::PlayingState(const int& coin, const int& live, const int& mapNum, 
 	this->mapNum = mapNum;
 	this->score = score;
 	this->m_mainCharacterType = main;
+	this->m_attributes_text = std::vector<sf::Text>(5);
 }
 
 PlayingState::~PlayingState(){
@@ -464,7 +471,7 @@ void PlayingState::hitBonusBrick(const sf::Vector2f& position, ItemType type) {
 }
 
 GameState* PlayingState::nextState(){
-	return nullptr;
+	return m_nextState;
 }
 
 void PlayingState::drawState(sf::RenderWindow* window){

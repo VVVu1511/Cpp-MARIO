@@ -2,6 +2,8 @@
 #include "AssetManager.h"
 #include "PlayingState.h"
 
+#include <iostream>
+
 ChangingMapState::ChangingMapState(){
 	this->delay_time = 2;
 }
@@ -93,4 +95,10 @@ void ChangingMapState::drawState(sf::RenderWindow* window){
 
 void ChangingMapState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){
 
+}
+
+
+GameState* ChangingMapState::nextState() {
+	//std::cout << "attempting level change\n";
+	return m_nextState;
 }

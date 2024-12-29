@@ -41,7 +41,7 @@ bool GameOverState::isActive(){
 }
 
 GameState* GameOverState::nextState() {
-	return nullptr;
+	return m_nextState;
 }
 
 void GameOverState::handleInputEvent(const sf::Event*& ev, const sf::Font& font, sf::RenderWindow* window){}

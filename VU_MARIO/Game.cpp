@@ -14,7 +14,7 @@ void Game::chooseState(){
     GameState* temp = this->currentState;
     this->currentState = this->currentState->nextState();
 
-    std::cout << "currentState after chooseState: " << currentState << "\n";
+    //std::cout << "currentState after chooseState: " << currentState << "\n";
 
     delete temp;
 }
@@ -56,7 +56,7 @@ void Game::run(){
         
         this->chooseState();
 
-        std::cout << "this->currentState = " << this->currentState << "\n";
+        //std::cout << "this->currentState = " << this->currentState << "\n";
  
         this->currentState->execute(window, observers, currentState, deltaTime, ev, font);
 
